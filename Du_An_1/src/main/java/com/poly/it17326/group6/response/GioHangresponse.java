@@ -4,6 +4,7 @@
  */
 package com.poly.it17326.group6.response;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class GioHangresponse {
+public class GioHangresponse implements Serializable{
     
     private String maSP;
     private String tenSP;

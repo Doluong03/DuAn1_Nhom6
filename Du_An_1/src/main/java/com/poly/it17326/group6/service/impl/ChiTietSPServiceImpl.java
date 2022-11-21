@@ -26,5 +26,14 @@ private ChiTietSpRepository chiTietSpRepository=new ChiTietSpRepository();
         }
         return listCTR;
     }
+
+    @Override
+    public ArrayList<ChiTietSpResponse> getTimKiem(String ma) {
+        ArrayList<ChiTietSpResponse> listCTrespon= new ArrayList<>();
+        ChiTietSP c=chiTietSpRepository.getTimKiem(ma);
+        ChiTietSpResponse ctr= new ChiTietSpResponse(c);
+        listCTrespon.add(ctr);
+        return listCTrespon;
+    }
     
 }
