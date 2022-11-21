@@ -16,6 +16,5 @@ public interface ChiTietSPService {
     
     public ArrayList<ChiTietSpResponse> getAll();
     
-    
-    public ArrayList<ChiTietSpResponse> getTimKiem(String ma);
+
 }
