@@ -4,21 +4,8 @@
  */
 package com.poly.it17326.group6.view;
 
-import com.poly.it17326.group6.config.HibernateConfig;
-import com.poly.it17326.group6.domainmodel.ChiTietSP;
-import com.poly.it17326.group6.domainmodel.SanPham;
-import com.poly.it17326.group6.repository.ChiTietSpRepository;
-import com.poly.it17326.group6.response.ChiTietSpResponse;
-import com.poly.it17326.group6.response.GioHangresponse;
 import com.poly.it17326.group6.service.ChiTietSPService;
 import com.poly.it17326.group6.service.impl.ChiTietSPServiceImpl;
-import java.awt.Event;
-import java.awt.event.KeyEvent;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import org.hibernate.Session;
 
 /**
  *
