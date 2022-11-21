@@ -8,6 +8,7 @@ import com.poly.it17326.group6.response.ChiTietSpResponse;
 import com.poly.it17326.group6.response.GioHangresponse;
 import com.poly.it17326.group6.service.ChiTietSPService;
 import com.poly.it17326.group6.service.impl.ChiTietSPServiceImpl;
+import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -127,6 +128,11 @@ private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
         txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimKiemActionPerformed(evt);
+            }
+        });
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyPressed(evt);
             }
         });
 
@@ -422,6 +428,14 @@ private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
     private void txtsearchhoadonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsearchhoadonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtsearchhoadonActionPerformed
+
+    private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+           ArrayList<ChiTietSpResponse> listTimKiem = chiTietSPService.getTimKiem(txtTimKiem.getText().toString());
+            loadSP(listTimKiem);
+        }
+    }//GEN-LAST:event_txtTimKiemKeyPressed
 public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

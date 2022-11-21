@@ -4,6 +4,7 @@
  */
 package com.poly.it17326.group6.domainmodel;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ThanhPhan {
+public class ThanhPhan implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
