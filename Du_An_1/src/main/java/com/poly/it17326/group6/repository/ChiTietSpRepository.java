@@ -32,18 +32,5 @@ public class ChiTietSpRepository {
     }
 
 
-    public ChiTietSP getTimKiem(String ma) {
-        Session session = HibernateConfig.getFACTORY().openSession();
-    Query q = session.createQuery(" select ct from ChiTietSP as ct join ct.sanPham where ct.sanPham.ma like: ma");
-    q.setParameter("ma", ma);
-    return (ChiTietSP) q.getSingleResult();
-    }
-
-    public static void main(String[] args) {
-        String ma = "SP001";
-        Object listo = new ChiTietSpRepository().getTimKiem(ma);
-       
-            System.out.println(listo.toString());
-        
-    }
+  
 }
