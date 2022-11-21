@@ -4,6 +4,7 @@
  */
 package com.poly.it17326.group6.service;
 
+import com.poly.it17326.group6.domainmodel.SanPham;
 import com.poly.it17326.group6.response.ChiTietSpResponse;
 import java.util.ArrayList;
 
@@ -14,4 +15,7 @@ import java.util.ArrayList;
 public interface ChiTietSPService {
     
     public ArrayList<ChiTietSpResponse> getAll();
+    
+    
+    public ArrayList<ChiTietSpResponse> getTimKiem(String ma);
 }

@@ -5,9 +5,11 @@
 package com.poly.it17326.group6.service.impl;
 
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
+import com.poly.it17326.group6.domainmodel.SanPham;
 import com.poly.it17326.group6.repository.ChiTietSpRepository;
 import com.poly.it17326.group6.response.ChiTietSpResponse;
 import com.poly.it17326.group6.service.ChiTietSPService;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -26,5 +28,16 @@ private ChiTietSpRepository chiTietSpRepository=new ChiTietSpRepository();
         }
         return listCTR;
     }
+
+    @Override
+    public ArrayList<ChiTietSpResponse> getTimKiem(String ma) {
+        ArrayList<ChiTietSpResponse> list = new ArrayList<>();
+        ChiTietSP ct= chiTietSpRepository.getTimKiem(ma);
+        ChiTietSpResponse ctr= new ChiTietSpResponse(ct);
+         list.add(ctr);
+         return list;
+    }
+
+   
     
 }
