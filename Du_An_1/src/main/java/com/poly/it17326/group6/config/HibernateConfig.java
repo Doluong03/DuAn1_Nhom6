@@ -3,6 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.poly.it17326.group6.config;
+import com.poly.it17326.group6.domainmodel.Anh;
+import com.poly.it17326.group6.domainmodel.ChiTietSP;
+import com.poly.it17326.group6.domainmodel.LoaiSP;
+import com.poly.it17326.group6.domainmodel.NSX;
+import com.poly.it17326.group6.domainmodel.SanPham;
+import com.poly.it17326.group6.domainmodel.ThanhPhan;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -28,7 +34,12 @@ public class HibernateConfig {
         properties.put(Environment.SHOW_SQL, "true");
 
         conf.setProperties(properties);
-
+        conf.addAnnotatedClass(Anh.class);
+        conf.addAnnotatedClass(ChiTietSP.class);
+        conf.addAnnotatedClass(LoaiSP.class);
+        conf.addAnnotatedClass(SanPham.class);
+        conf.addAnnotatedClass(NSX.class);
+        conf.addAnnotatedClass(ThanhPhan.class);
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
         FACTORY = conf.buildSessionFactory(registry);
