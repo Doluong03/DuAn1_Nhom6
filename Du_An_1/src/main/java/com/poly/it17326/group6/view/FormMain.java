@@ -39,7 +39,7 @@ public class FormMain extends javax.swing.JFrame {
      lbFormBanHang.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\banHang.png"));
      lbFormSanPham.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\box.png"));
      lbFormNhanVien.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\employee.png"));
-     lbFormThongKe.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\customer.png"));
+     lbFormThongKe.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\statistics.png"));
      btnDangXuat.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\door.png"));
      btnDoiMK.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\password.png"));
      btnKetThuc.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\cancel.png"));
@@ -81,6 +81,7 @@ public class FormMain extends javax.swing.JFrame {
         jMenu5.setText("jMenu5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Quản lý cửa hàng sữa");
         setBackground(new java.awt.Color(0, 102, 102));
 
         tpBanHang.setBackground(new java.awt.Color(153, 0, 0));
