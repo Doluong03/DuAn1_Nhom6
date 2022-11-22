@@ -11,6 +11,7 @@ import com.poly.it17326.group6.service.impl.ChiTietSPServiceImpl;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
@@ -27,7 +28,7 @@ private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
     public FormBanHang() {
         initComponents();
         loadSP(chiTietSPService.getAll());
-      
+        loadIcon();
         
     }
 
@@ -67,6 +68,13 @@ private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
         loadGH(listGh);
     }
     
+    private void loadIcon(){
+        btnLamMoiGH.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\reload.png"));
+        btnXoaSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\dustbin.png"));
+        lbTimKiemSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\search.png"));
+        btntaohoadon.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\add.png"));
+        btnthanhtoan.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\pay.png"));
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -80,6 +88,7 @@ private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbSanPham = new javax.swing.JTable();
         txtTimKiem = new javax.swing.JTextField();
+        lbTimKiemSP = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbGioHang = new javax.swing.JTable();
@@ -144,7 +153,9 @@ private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbTimKiemSP, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -154,7 +165,9 @@ private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbTimKiemSP, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -182,8 +195,18 @@ private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
         jScrollPane2.setViewportView(tbGioHang);
 
         btnXoaSP.setText("Bỏ khỏi giỏ hàng");
+        btnXoaSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaSPActionPerformed(evt);
+            }
+        });
 
         btnLamMoiGH.setText("Làm mới giỏ hàng");
+        btnLamMoiGH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLamMoiGHActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -360,16 +383,15 @@ private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(86, 86, 86)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(btnthanhtoan, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(129, 129, 129))
                     .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(btntaohoadon)
                         .addGap(18, 18, 18)
-                        .addComponent(btnhuy, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnhuy, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(btnthanhtoan, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(272, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -434,6 +456,19 @@ private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
             loadSP(listTimKiem);
         }
     }//GEN-LAST:event_txtTimKiemKeyPressed
+
+    private void btnLamMoiGHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiGHActionPerformed
+        // TODO add your handling code here:
+        listGh.removeAll(listGh);
+        loadGH(listGh);
+    }//GEN-LAST:event_btnLamMoiGHActionPerformed
+
+    private void btnXoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSPActionPerformed
+        // TODO add your handling code here:
+        int index= tbGioHang.getSelectedRow();
+        listGh.remove(index);
+        loadGH(listGh);
+    }//GEN-LAST:event_btnXoaSPActionPerformed
 public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -487,6 +522,7 @@ public static void main(String args[]) {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbTimKiemSP;
     private javax.swing.JRadioButton rdAllHoadon;
     private javax.swing.JRadioButton rdChoTT;
     private javax.swing.JRadioButton rdDATT;
