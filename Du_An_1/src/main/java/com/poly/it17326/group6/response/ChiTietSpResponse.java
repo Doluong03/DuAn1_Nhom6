@@ -18,7 +18,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ChiTietSpResponse {
-    
+    private int idCTSP;
     private String anh;
     private String ma;
     private String ten;
@@ -34,6 +34,7 @@ public class ChiTietSpResponse {
         this.ten = ctsp.getSanPham().getTen();
         this.soLuongTon = ctsp.getSoLuongTon();
         this.donGia = ctsp.getDonGia();
+        this.idCTSP = ctsp.getId();
     }
     
     

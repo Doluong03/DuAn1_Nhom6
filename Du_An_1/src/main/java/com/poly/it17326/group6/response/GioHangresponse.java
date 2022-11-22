@@ -18,6 +18,7 @@ import lombok.ToString;
 @ToString
 public class GioHangresponse {
     
+    private int idCTSP;
     private String maSP;
     private String tenSP;
     private int soLuong;
@@ -31,6 +32,7 @@ public class GioHangresponse {
         this.tenSP = chiTietSP.getTen();
         this.soLuong = soluong;
         this.donGia = chiTietSP.getDonGia();
+        this.idCTSP = chiTietSP.getIdCTSP();
     }
     
     public BigDecimal getThanhTien(){

@@ -6,7 +6,9 @@ package com.poly.it17326.group6.repository;
 
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.config.HibernateConfig;
+import com.poly.it17326.group6.domainmodel.SanPham;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
 
@@ -23,10 +25,13 @@ public class ChiTietSpRepository {
         return listCTSP;
     }
     
-    public static void main(String[] args) {
-        ArrayList<ChiTietSP> list = new ChiTietSpRepository().getAll();
-        for (ChiTietSP chiTietSP : list) {
-            System.out.println(chiTietSP.toString());
-        }
-    }
+      
+    
+//    
+//    public static void main(String[] args) {
+//        List<SanPham> list = new ChiTietSpRepository().getIDSP("binchilling");
+//        int idsp = Integer.parseInt(list.get(0).toString());
+//        ArrayList<ChiTietSP> lists = new ChiTietSpRepository().getIDCTSP(idsp);
+//        System.out.println(lists);
+//    }
 }

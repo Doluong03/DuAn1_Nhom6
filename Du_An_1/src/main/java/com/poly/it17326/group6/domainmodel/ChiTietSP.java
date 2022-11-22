@@ -36,7 +36,7 @@ public class ChiTietSP {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private String id;
+    private int id;
     @ManyToOne
     @JoinColumn(name = "IdSP")
     private SanPham sanPham;

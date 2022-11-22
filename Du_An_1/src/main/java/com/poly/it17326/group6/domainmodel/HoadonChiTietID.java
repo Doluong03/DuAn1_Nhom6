@@ -4,38 +4,21 @@
  */
 package com.poly.it17326.group6.domainmodel;
 
-import javax.persistence.Column;
+import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-/**
- *
- * @author 123
- */
-@Entity
-@Table(name = "ThanhPhan")
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
-public class ThanhPhan {
+public class HoadonChiTietID implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
-    private int id;
-    @Column(name = "Ma")
-    private String ma;
-    @Column(name = "Ten")
-    private String ten;
-
+    private int IdHoaDon;
+    private int IdChiTietSP;
 }

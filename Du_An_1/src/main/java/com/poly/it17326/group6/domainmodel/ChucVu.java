@@ -4,15 +4,12 @@
  */
 package com.poly.it17326.group6.domainmodel;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,16 +19,15 @@ import lombok.ToString;
 
 /**
  *
- * @author 123
- */
-@Entity
-@Table(name = "LoaiSP")
+ * @author Hp
+ */@Entity
+@Table(name = "ChucVu")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class LoaiSP {
+public class ChucVu implements Serializable{
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
@@ -40,10 +36,4 @@ public class LoaiSP {
     private String ma;
     @Column(name = "Ten")
     private String ten;
-    @ManyToOne
-    @JoinColumn(name = "IdTP")
-    private ThanhPhan thanhPhan;
-
-
 }
-
