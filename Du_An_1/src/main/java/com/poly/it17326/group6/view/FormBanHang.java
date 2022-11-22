@@ -182,8 +182,18 @@ private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
         jScrollPane2.setViewportView(tbGioHang);
 
         btnXoaSP.setText("Bỏ khỏi giỏ hàng");
+        btnXoaSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaSPActionPerformed(evt);
+            }
+        });
 
         btnLamMoiGH.setText("Làm mới giỏ hàng");
+        btnLamMoiGH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLamMoiGHActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -434,6 +444,19 @@ private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
             loadSP(listTimKiem);
         }
     }//GEN-LAST:event_txtTimKiemKeyPressed
+
+    private void btnLamMoiGHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiGHActionPerformed
+        // TODO add your handling code here:
+        listGh.removeAll(listGh);
+        loadGH(listGh);
+    }//GEN-LAST:event_btnLamMoiGHActionPerformed
+
+    private void btnXoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSPActionPerformed
+        // TODO add your handling code here:
+        int index= tbGioHang.getSelectedRow();
+        listGh.remove(index);
+        loadGH(listGh);
+    }//GEN-LAST:event_btnXoaSPActionPerformed
 public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
