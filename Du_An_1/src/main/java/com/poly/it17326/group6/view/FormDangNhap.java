@@ -83,7 +83,6 @@ public class FormDangNhap extends javax.swing.JFrame {
         lbExit.setForeground(new java.awt.Color(255, 255, 255));
         lbExit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbExit.setText("X");
-        lbExit.setBorder(null);
         lbExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

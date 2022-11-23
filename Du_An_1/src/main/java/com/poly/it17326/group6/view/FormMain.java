@@ -292,7 +292,7 @@ public class FormMain extends javax.swing.JFrame {
         lbFormBanHang.setForeground(Color.GREEN);
         tpBanHang.removeAll();
         pnBanHang= new FormBanHang();
-        tpBanHang.addTab("Quan Ly Ban Hang", pnBanHang);
+        tpBanHang.addTab("Quản lý bán hàng", pnBanHang);
         tpBanHang.setSelectedComponent(pnBanHang); 
       
     }//GEN-LAST:event_lbFormBanHangMouseClicked
@@ -315,10 +315,14 @@ public class FormMain extends javax.swing.JFrame {
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
         // TODO add your handling code here:
+       this.setVisible(false);
+        FormDangNhap fdn= new FormDangNhap();
+        fdn.setVisible(true);
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
     private void btnKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetThucActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_btnKetThucActionPerformed
 
     private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
