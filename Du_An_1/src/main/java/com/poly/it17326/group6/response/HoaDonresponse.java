@@ -14,7 +14,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class HoaDonresponse {
-    private int id;
+    private String id;
     private String maHD;
     private Date ngayTao;
     private String tenNV;

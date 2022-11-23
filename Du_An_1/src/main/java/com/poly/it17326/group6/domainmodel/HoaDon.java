@@ -23,6 +23,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "HoaDon")
@@ -34,11 +35,11 @@ import lombok.ToString;
 public class HoaDon implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
-    private int id;
-
-    @Column(name = "Ma")
+     @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
+    @GeneratedValue(generator = "generator")
+    @Column(name = "Id", columnDefinition = "uniqueidentifier")
+    private String Id;
+   @Column(name = "Ma")
     private String MaHD;
     @Column(name = "MaKH")
     private String MaKH;

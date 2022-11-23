@@ -20,9 +20,15 @@ public interface HoaDonService {
     public ArrayList<HoaDonresponse> getListsHD();
 
     public ArrayList<HoaDon> getIDHD(String Ma);
+
+    public boolean updateHD(String Ma, BigDecimal tongtien, int IdTT);
+
+    public ArrayList<HoaDonresponse> getAllHD();
+
+    public boolean addHD();
     
-     public boolean  updateHD(String Ma,BigDecimal tongtien,int IdTT);
-     
-public ArrayList<HoaDonresponse> getAllHD();
-public boolean addHD(HoaDon hoaDon);
+    public ArrayList<HoaDonresponse> timKiemTT(int tt);
+    
+    public ArrayList<HoaDonresponse> timKiemHD(String ma);
+    
 }
