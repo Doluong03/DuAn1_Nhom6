@@ -685,6 +685,11 @@ public class FormBanHang extends javax.swing.JPanel {
         if (listGh.isEmpty()) {
             JOptionPane.showMessageDialog(this, "vui long chon san pham");
         }
+        try {
+             
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,"tien phai la so");
+        }
         
        ArrayList<HoaDon> listIDHD = hoaDonService.getIDHD(jlbMAHD.getText());
           int idhd = listIDHD.get(0).getId();
@@ -705,7 +710,7 @@ public class FormBanHang extends javax.swing.JPanel {
         }
         
         JOptionPane.showMessageDialog(this,"Thanh toan thanh cong");
-         hoaDonService.updateHD(jlbMAHD.getText(),new BigDecimal(jlbtongitenhang.getText()),2);
+         hoaDonService.updateHD(jlbMAHD.getText(),new BigDecimal(jlbtongitenhang.getText()),1);
          loadHD(listHD);
 //         lamMoi();
 

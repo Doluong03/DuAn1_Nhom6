@@ -56,14 +56,7 @@ public class HoaDonChiTiet implements Serializable {
     @Column(name = "DonGia")
     private BigDecimal DonGia;
 
-//    @ManyToMany
-//    @JoinColumn(name = "IdHoaDon")
-//    private HoaDon HoaDon;
-//    
-//    @OneToMany
-//    @JoinColumn(name = "IdChiTietSP")
-//    private ChiTietSP chiTietSP;
-    
+
 
   }      
     

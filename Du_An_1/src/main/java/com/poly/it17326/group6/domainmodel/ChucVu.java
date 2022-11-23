@@ -17,18 +17,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-/**
- *
- * @author Hp
- */@Entity
+@Entity
 @Table(name = "ChucVu")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class ChucVu implements Serializable{
-     @Id
+public class ChucVu implements Serializable {
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private int id;

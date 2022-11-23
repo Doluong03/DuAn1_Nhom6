@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,16 +55,14 @@ public class HoaDon implements Serializable {
     @Column(name = "Deleted")
     private boolean delete;
 
-    // khoa ngoai voi banng tai khoan
-    @ManyToOne
-    @JoinColumn(name = "IdTK")
+// khoa ngoai voi banng tai khoan
+    @ManyToOne(targetEntity = com.poly.it17326.group6.domainmodel.TaiKhoan.class)
+    @JoinColumn(name = "IdTK",referencedColumnName = "Id")
     private TaiKhoan taiKhoan;
    // khoa ngoai voi bang tinh trang
-    @OneToOne
-    @JoinColumn(name = "IdTT")
-    private TinhTrang tinhTrang;
-    
-    
+    @OneToOne(targetEntity = com.poly.it17326.group6.domainmodel.TinhTrang.class)
+    @JoinColumn(name = "IdTT",referencedColumnName = "Id")
+    private TinhTrang tinhTrang; 
     
     // chua maping voi vocher
 
