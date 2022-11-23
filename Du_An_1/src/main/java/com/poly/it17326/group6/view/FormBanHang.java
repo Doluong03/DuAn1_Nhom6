@@ -4,13 +4,19 @@
  */
 package com.poly.it17326.group6.view;
 
+import com.poly.it17326.group6.domainmodel.HoaDon;
 import com.poly.it17326.group6.response.ChiTietSpResponse;
 import com.poly.it17326.group6.response.GioHangresponse;
+import com.poly.it17326.group6.response.HoaDonresponse;
 import com.poly.it17326.group6.service.ChiTietSPService;
+import com.poly.it17326.group6.service.HoaDonService;
 import com.poly.it17326.group6.service.impl.ChiTietSPServiceImpl;
+import com.poly.it17326.group6.service.impl.HoaDonServecieIplm;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -22,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FormBanHang extends javax.swing.JPanel {
 private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
+private HoaDonService hoaDonService=new HoaDonServecieIplm();
     /**
      * Creates new form FormBanHang
      */
@@ -361,13 +368,15 @@ private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
                 .addContainerGap(372, Short.MAX_VALUE))
         );
 
-        btntaohoadon.setBackground(new java.awt.Color(255, 255, 255));
         btntaohoadon.setText("Tạo hóa đơn");
+        btntaohoadon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntaohoadonActionPerformed(evt);
+            }
+        });
 
-        btnhuy.setBackground(new java.awt.Color(255, 255, 255));
         btnhuy.setText("Hủy");
 
-        btnthanhtoan.setBackground(new java.awt.Color(255, 255, 255));
         btnthanhtoan.setText("Thanh toán");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -381,18 +390,18 @@ private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(86, 86, 86)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
+                        .addGap(86, 86, 86)
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addComponent(btntaohoadon)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnhuy, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(btnthanhtoan, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(272, Short.MAX_VALUE))
+                        .addGap(60, 60, 60)
+                        .addComponent(btnthanhtoan, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(btnhuy, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,17 +413,15 @@ private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(btnthanhtoan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnthanhtoan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btntaohoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnhuy, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(56, 56, 56))))
+                            .addComponent(btnhuy, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(56, 144, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -469,6 +476,40 @@ private ChiTietSPService chiTietSPService= new ChiTietSPServiceImpl();
         listGh.remove(index);
         loadGH(listGh);
     }//GEN-LAST:event_btnXoaSPActionPerformed
+private void loadHD(ArrayList<HoaDonresponse> lists) {
+        DefaultTableModel model = (DefaultTableModel) tbHoaDon.getModel();
+        model.setRowCount(0);
+        model.setColumnIdentifiers(new String[]{"id", "maHD", "ngayTao", "tenNV", "tinhtrang", "tenKH", "sdt"});
+        int i = 1;
+        for (HoaDonresponse hoaDonresponse : lists) {
+            model.addRow(new Object[]{
+                hoaDonresponse.getId(),
+                hoaDonresponse.getMaHD(),
+                hoaDonresponse.getNgayTao(),
+                hoaDonresponse.getTenNV(),
+                hoaDonresponse.trangThai(),
+                hoaDonresponse.getTenKH(),
+                hoaDonresponse.getSdt()});
+        }
+    }
+    private void btntaohoadonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntaohoadonActionPerformed
+        // TODO add your handling code here:
+                 HoaDon HoaDon = null;
+        try {
+                   
+            // TODO add your handling code here:
+            if (hoaDonService.addHD(HoaDon) == false) {
+                JOptionPane.showMessageDialog(this, "Fail");
+            } else {
+                JOptionPane.showMessageDialog(this, "Success");
+
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        loadHD(hoaDonService.getListsHD());
+       
+    }//GEN-LAST:event_btntaohoadonActionPerformed
 public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

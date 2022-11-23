@@ -6,11 +6,13 @@ package com.poly.it17326.group6.config;
 import com.poly.it17326.group6.domainmodel.Anh;
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.ChucVu;
+import com.poly.it17326.group6.domainmodel.HoaDon;
 import com.poly.it17326.group6.domainmodel.LoaiSP;
 import com.poly.it17326.group6.domainmodel.NSX;
 import com.poly.it17326.group6.domainmodel.SanPham;
 import com.poly.it17326.group6.domainmodel.TaiKhoan;
 import com.poly.it17326.group6.domainmodel.ThanhPhan;
+import com.poly.it17326.group6.domainmodel.TinhTrang;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -32,7 +34,7 @@ public class HibernateConfig {
         properties.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
         properties.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=FINALASS_GROUP6_PRO1041");
         properties.put(Environment.USER, "sa");
-        properties.put(Environment.PASS, "1");
+        properties.put(Environment.PASS, "123123");
         properties.put(Environment.SHOW_SQL, "true");
 
         conf.setProperties(properties);
@@ -44,6 +46,8 @@ public class HibernateConfig {
         conf.addAnnotatedClass(NSX.class);
         conf.addAnnotatedClass(ThanhPhan.class);
         conf.addAnnotatedClass(SanPham.class);
+                conf.addAnnotatedClass(HoaDon.class);
+conf.addAnnotatedClass(TinhTrang.class);
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
         FACTORY = conf.buildSessionFactory(registry);
