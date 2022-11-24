@@ -56,7 +56,6 @@ public class HoaDonChiTietResponsitory {
             hdct1.setTenKH("anh");
             hdct1.setTongTien(new BigDecimal(1000));
             list.add(hdct1);
-     
             HoaDonChiTiet hdct2 = new HoaDonChiTiet();
             hdct1.setDonGia(new BigDecimal(1));
             hdct1.setIdChiTietSP(1);
