@@ -72,7 +72,7 @@ public class TaiKhoan implements Serializable {
     @Column(name = "Deleted")
     private boolean delete;
 
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name = "IdCV",nullable = false)
     private ChucVu chucVu;
 }

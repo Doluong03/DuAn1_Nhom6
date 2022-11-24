@@ -37,18 +37,19 @@ public ArrayList<HoaDon> getIDHD(String Ma){
     }
 
 
-public boolean updateHD(String Ma,BigDecimal tongtien,int IdTT) {
+public boolean updateHD(String Ma, BigDecimal tongtien,int TrangThai) {
         Transaction tran = null;
         try ( Session session= HibernateConfig.getFACTORY().openSession();) {
             tran = session.beginTransaction();
             String sql = "update HoaDon \n"
                     + "set tongtien = :tongtien ,\n"
-                     +" IdTT = :IdTT \n"
+                     +" TrangThai = :TrangThai \n"
                     + "where Ma = :Ma \n";
             Query query = session.createQuery(sql);
             query.setParameter("tongtien", tongtien);
+            query.setParameter("TrangThai", TrangThai);
             query.setParameter("Ma", Ma);
-            query.setParameter("IdTT", IdTT);
+            
             query.executeUpdate();
             tran.commit();
             session.close();
@@ -64,11 +65,9 @@ public boolean updateHD(String Ma,BigDecimal tongtien,int IdTT) {
  
 //     
 //     public static void main(String[] args) {
-//        ArrayList<HoaDon> s = new HoaDonRepository().getIDHD("hd02");
-//          for (HoaDon hoaDon : s) {
-//               int sa = hoaDon.getId();
-//               System.out.println(sa);
-//         }
+//       HoaDonRepository s = new HoaDonRepository();
+//         s.updateHD("hd01",new BigDecimal(100), 1);
+//          
 //    }
-  
+//  
 }

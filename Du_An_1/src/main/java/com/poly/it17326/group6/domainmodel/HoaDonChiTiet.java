@@ -25,7 +25,7 @@ import lombok.ToString;
 
 @Entity
 @IdClass(HoadonChiTietID.class)
-//@Table(name = "HoaDonChiTiet")
+@Table(name = "HoaDonChiTiet")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -56,7 +56,14 @@ public class HoaDonChiTiet implements Serializable {
     @Column(name = "DonGia")
     private BigDecimal DonGia;
 
-
+//    @ManyToOne
+//    @JoinColumn(name = "IdTK")
+//    private TaiKhoan taiKhoan;
+//    
+//    @ManyToOne
+//    @JoinColumn(name = "IdHoaDon")
+//    private HoaDon hoaDon;
+ 
 
   }      
     

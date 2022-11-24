@@ -54,16 +54,18 @@ public class HoaDon implements Serializable {
     private Date updateAt;
     @Column(name = "Deleted")
     private boolean delete;
+    @Column(name = "TrangThai")
+    private int TrangThai;
 
 // khoa ngoai voi banng tai khoan
     @ManyToOne(targetEntity = com.poly.it17326.group6.domainmodel.TaiKhoan.class)
     @JoinColumn(name = "IdTK",referencedColumnName = "Id")
     private TaiKhoan taiKhoan;
-   // khoa ngoai voi bang tinh trang
-    @OneToOne(targetEntity = com.poly.it17326.group6.domainmodel.TinhTrang.class)
-    @JoinColumn(name = "IdTT",referencedColumnName = "Id")
-    private TinhTrang tinhTrang; 
-    
+//   // khoa ngoai voi bang tinh trang
+//    @OneToOne(targetEntity = com.poly.it17326.group6.domainmodel.TinhTrang.class)
+//    @JoinColumn(name = "IdTT",referencedColumnName = "Id")
+//    private TinhTrang tinhTrang; 
+//    
     // chua maping voi vocher
 
 }

@@ -7,7 +7,9 @@ package com.poly.it17326.group6.repository;
 import com.poly.it17326.group6.config.HibernateConfig;
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -40,6 +42,34 @@ public class HoaDonChiTietResponsitory {
         }
         return false;
 
+    }
+    
+    public static void main(String[] args) {
+        HoaDonChiTietResponsitory hd = new HoaDonChiTietResponsitory();
+         List<HoaDonChiTiet> list = new ArrayList<>();
+          HoaDonChiTiet hdct1 = new HoaDonChiTiet();
+            hdct1.setDonGia(new BigDecimal(1));
+            hdct1.setIdChiTietSP(2);
+            hdct1.setIdHoaDon(1);
+            hdct1.setMaHD("hd01");
+            hdct1.setSoLuong(1);
+            hdct1.setTenKH("anh");
+            hdct1.setTongTien(new BigDecimal(1000));
+            list.add(hdct1);
+     
+            HoaDonChiTiet hdct2 = new HoaDonChiTiet();
+            hdct1.setDonGia(new BigDecimal(1));
+            hdct1.setIdChiTietSP(1);
+            hdct1.setIdHoaDon(1);
+            hdct1.setMaHD("hd01");
+            hdct1.setSoLuong(1);
+            hdct1.setTenKH("anh");
+            hdct1.setTongTien(new BigDecimal(1000));
+            list.add(hdct1);
+            
+            for (HoaDonChiTiet hoaDonChiTiet : list) {
+               hd.saveHDCT(hoaDonChiTiet);
+         }
     }
 
 }

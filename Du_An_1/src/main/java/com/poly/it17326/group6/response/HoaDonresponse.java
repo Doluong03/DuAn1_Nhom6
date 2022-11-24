@@ -30,7 +30,7 @@ public class HoaDonresponse {
         this.maHD = hd.getMaHD();
         this.ngayTao = hd.getCreateAt();
         this.tenNV = hd.getTaiKhoan().getHoTenNV();
-        this.tinhtrang = hd.getTinhTrang().getTrangThai();
+        this.tinhtrang = hd.getTrangThai();
         this.tenKH = hd.getHoTen();
         this.sdt = hd.getSdt();
     }
