@@ -33,7 +33,7 @@ public class Anh implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private String id;
+    private int id;
     @Column(name = "Ma")
     private String ma;
     @Column(name = "Ten")

@@ -5,9 +5,14 @@
 package com.poly.it17326.group6.repository;
 
 import com.poly.it17326.group6.config.HibernateConfig;
+
+import com.poly.it17326.group6.domainmodel.SanPham;
+
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
 
+
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
 
@@ -25,6 +30,18 @@ public class ChiTietSpRepository {
         return listCTSP;
     }
 
+    
+      
+    
+//    
+//    public static void main(String[] args) {
+//        List<SanPham> list = new ChiTietSpRepository().getIDSP("binchilling");
+//        int idsp = Integer.parseInt(list.get(0).toString());
+//        ArrayList<ChiTietSP> lists = new ChiTietSpRepository().getIDCTSP(idsp);
+//        System.out.println(lists);
+//    }
+
+
     public ChiTietSP getTimKiem(String ma) {
         Session session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery(" select ct from ChiTietSP as ct join ct.sanPham where ct.sanPham.ma like: ma");
@@ -32,13 +49,5 @@ public class ChiTietSpRepository {
         return  (ChiTietSP) q.getSingleResult();
     }
 
-    public static void main(String[] args) {
-//        ArrayList<ChiTietSP> list = new ChiTietSpRepository().getAll();
-//        for (ChiTietSP chiTietSP : list) {
-//            System.out.println(chiTietSP.toString());
-//        }
-String ma="SP001";
-        ChiTietSP ct= new ChiTietSpRepository().getTimKiem(ma);
-        System.out.println(ct.toString());
-    }
+
 }

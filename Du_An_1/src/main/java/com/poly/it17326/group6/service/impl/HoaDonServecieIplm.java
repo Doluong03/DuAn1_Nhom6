@@ -16,16 +16,16 @@ import java.util.List;
  *
  * @author Hp
  */
-public class HoaDonServecieIplm implements HoaDonService {
 
-    private HoaDonRepository HoaDonRepository = new HoaDonRepository();
-
+public class HoaDonServecieIplm  implements HoaDonService{
+private HoaDonRepository HoaDonRepository = new HoaDonRepository();
     @Override
     public ArrayList<HoaDonresponse> getListsHD() {
         ArrayList<HoaDon> listHD = new HoaDonRepository().getAll();
-        ArrayList<HoaDonresponse> listHDRespon = new ArrayList<>();
+           ArrayList<HoaDonresponse> listHDRespon=new ArrayList<>();
         for (HoaDon hd : listHD) {
-            HoaDonresponse hdr = new HoaDonresponse(hd);
+            HoaDonresponse hdr= new HoaDonresponse(hd);
+
             listHDRespon.add(hdr);
         }
         return listHDRespon;
@@ -37,6 +37,14 @@ public class HoaDonServecieIplm implements HoaDonService {
     }
 
     @Override
+
+    public boolean updateHD(String Ma, BigDecimal tongtien,int trangthai) {
+        return HoaDonRepository.updateHD(Ma, tongtien,trangthai);
+    }
+
+    
+    
+
     public boolean updateHD(String Ma, BigDecimal tongtien, int IdTT) {
         return HoaDonRepository.updateHD(Ma, tongtien, IdTT);
     }
@@ -71,5 +79,6 @@ public class HoaDonServecieIplm implements HoaDonService {
         }
         return listHDRespon;
     }
+
 
 }
