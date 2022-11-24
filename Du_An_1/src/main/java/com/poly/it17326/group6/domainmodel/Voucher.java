@@ -29,6 +29,7 @@ public class Voucher implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private int id;
+
     @Column(name = "Ma")
     private String ma;
 

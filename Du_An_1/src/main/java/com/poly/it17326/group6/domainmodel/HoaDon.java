@@ -24,6 +24,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import org.hibernate.annotations.GenericGenerator;
+
+
 @Entity
 @Table(name = "HoaDon")
 @AllArgsConstructor
@@ -43,7 +46,8 @@ public class HoaDon implements Serializable {
     @Column(name = "MaKH")
     private String MaKH;
     @Column(name = "HoTen")
-    private String HoTen;
+    private String HoTenkh;
+
     @Column(name = "Sdt")
     private String Sdt;
     @Column(name = "TongTien")
@@ -57,15 +61,14 @@ public class HoaDon implements Serializable {
     @Column(name = "TrangThai")
     private int TrangThai;
 
+
 // khoa ngoai voi banng tai khoan
     @ManyToOne(targetEntity = com.poly.it17326.group6.domainmodel.TaiKhoan.class)
     @JoinColumn(name = "IdTK",referencedColumnName = "Id")
     private TaiKhoan taiKhoan;
-//   // khoa ngoai voi bang tinh trang
-//    @OneToOne(targetEntity = com.poly.it17326.group6.domainmodel.TinhTrang.class)
-//    @JoinColumn(name = "IdTT",referencedColumnName = "Id")
-//    private TinhTrang tinhTrang; 
-//    
+
+ 
+
     // chua maping voi vocher
 
 }

@@ -5,6 +5,7 @@
 package com.poly.it17326.group6.domainmodel;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+
 @Entity
 @Table(name = "ChucVu")
 @AllArgsConstructor
@@ -25,6 +27,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ChucVu implements Serializable {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

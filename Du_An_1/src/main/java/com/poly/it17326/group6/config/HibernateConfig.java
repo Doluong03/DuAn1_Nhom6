@@ -6,13 +6,17 @@ import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.ChucVu;
 import com.poly.it17326.group6.domainmodel.HoaDon;
 import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
+
+
 import com.poly.it17326.group6.domainmodel.LoaiSP;
 import com.poly.it17326.group6.domainmodel.NSX;
 import com.poly.it17326.group6.domainmodel.SanPham;
 import com.poly.it17326.group6.domainmodel.TaiKhoan;
 import com.poly.it17326.group6.domainmodel.ThanhPhan;
 import com.poly.it17326.group6.domainmodel.TinhTrang;
+
 import com.poly.it17326.group6.domainmodel.Voucher;
+
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -36,20 +40,27 @@ public class HibernateConfig {
         properties.put(Environment.SHOW_SQL, "true");
 
         conf.setProperties(properties);
+        conf.addAnnotatedClass(TaiKhoan.class);
+        conf.addAnnotatedClass(ChucVu.class);
         conf.addAnnotatedClass(Anh.class);
         conf.addAnnotatedClass(ChiTietSP.class);
         conf.addAnnotatedClass(LoaiSP.class);
-        conf.addAnnotatedClass(SanPham.class);
         conf.addAnnotatedClass(NSX.class);
         conf.addAnnotatedClass(ThanhPhan.class);
+
         
         conf.addAnnotatedClass(TaiKhoan.class);
         conf.addAnnotatedClass(ChucVu.class);
         conf.addAnnotatedClass(HoaDon.class);
         conf.addAnnotatedClass(HoaDonChiTiet.class);
-//        conf.addAnnotatedClass(TinhTrang.class);
+//      conf.addAnnotatedClass(TinhTrang.class);
         conf.addAnnotatedClass(Voucher.class);
         
+
+        conf.addAnnotatedClass(SanPham.class);
+                conf.addAnnotatedClass(HoaDon.class);
+conf.addAnnotatedClass(TinhTrang.class);
+
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
         FACTORY = conf.buildSessionFactory(registry);

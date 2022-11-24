@@ -5,6 +5,10 @@
 package com.poly.it17326.group6.service;
 
 import com.poly.it17326.group6.domainmodel.HoaDon;
+
+=======
+import com.poly.it17326.group6.repository.HoaDonRepository;
+
 import com.poly.it17326.group6.response.HoaDonresponse;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -19,8 +23,20 @@ public interface HoaDonService {
     public ArrayList<HoaDonresponse> getListsHD();
 
     public ArrayList<HoaDon> getIDHD(String Ma);
-    
+
      public boolean  updateHD(String Ma, BigDecimal tongtien,int trangthai);
      
+
+
+
+ 
+
+    public ArrayList<HoaDonresponse> getAllHD();
+
+    public boolean addHD();
+    
+    public ArrayList<HoaDonresponse> timKiemTT(int tt);
+    
+    public ArrayList<HoaDonresponse> timKiemHD(String ma);
 
 }

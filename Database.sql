@@ -159,3 +159,50 @@ ALTER TABLE ChiTietSP  ADD FOREIGN KEY(IdNsx) REFERENCES Nsx(Id)
 ALTER TABLE ChiTietSP  ADD  FOREIGN KEY(IdAnh) REFERENCES Anh(Id)
 -- ChiTietSP - LoaiSP
 ALTER TABLE ChiTietSP  ADD FOREIGN KEY(IdLoaiSP) REFERENCES LoaiSP(Id)
+
+
+insert into Anh(Ma,Ten,Cover) values('A001','Canxipro_900g',1)
+insert into Anh(Ma,Ten,Cover) values('A002','AB_Grow_2_900g',1)
+insert into Anh(Ma,Ten,Cover) values('A003','Anmum_vani_800g',1)
+insert into Anh(Ma,Ten,Cover) values('A004','EnPlus_900g',1)
+go
+select*from Anh
+insert into NSX(Ma,Ten,QuocGia) values
+('NSX001','VINAMILK',N'Việt Nam'),
+('NSX002','Abbott',N'Hoa Kỳ'),
+('NSX003','Anmum ','New Zealand'),
+('NSX004','NutiFood ',N'Việt Nam')
+go
+insert into ChucVu(Ma,Ten) values ('CV1','NhanVien1')
+select *from ChucVu
+insert into TaiKhoan(email,MatKhau,IdCV) values('hiepbhph27531@gmail.com','1','79C98E51-8D3A-4770-B0B5-3566A43C02A2')
+insert into SanPham(Ma,Ten,Create_at) values 
+('SP001','CanxiPro',CONVERT (date, GETDATE())),
+('SP002','Abbott Grow',CONVERT (date, GETDATE())),
+('SP003','Anmum vani',CONVERT (date, GETDATE())),
+('SP004','EnPlus',CONVERT (date, GETDATE()))
+go
+select*from SanPham
+insert into ThanhPhan(Ma,Ten) values
+('TP001',N'Chất đạm, Protein, Vitamin B, Lactose,Carbohydrate , Kali'),
+('TP002',N'Canxi, Vitamin A,D, Phốt pho, Magie'),
+('TP003',N'Vitamin, Arginine, Axit amin, Chất đạm, Inulin, Canxi')
+go
+select * from ThanhPhan
+
+insert into LoaiSP(Ma,Ten,IdTP) values
+('LSP001',N'Sữa cho trẻ em','5624B159-F9E2-4101-8EF4-8388FC731CC0'),
+('LSP002',N'Sữa cho người lớn','389192C9-5533-40EC-A6B2-C61D9FB8AB04'),
+('LSP003',N'Sữa cho người già','2147EED6-1669-480A-AF13-D94B748836D6')
+
+select * from ThanhPhan
+select*from Anh
+select*from LoaiSP
+select*from NSX
+select*from SanPham
+
+insert into ChiTietSP (IdAnh,IdLoaiSP,IdNsx,IdSP,HSD,SoLuongTon,DonGia) values
+('57F05201-B6A0-4464-B5C2-3A5ECDEEC104','1E869C9B-CB53-44AC-A819-327B4DFDECB5','18D76D19-AEE5-4A27-BCA6-1C54C23D5079','C65FA4EE-7256-4683-84BE-52046F55A5A5','2023-11-20',20,350000),
+('69E1346A-351C-49FE-B117-43C9499BE0C1','C6CC1462-C631-4EAD-911D-586AFFE54D7D','00437F76-055A-4014-9223-633FD4A9D872','EBA235E3-6F8D-4F89-BC0A-BF0D7CC1D719','2023-6-20',15,300000),
+('4A904913-506D-4CDE-96E1-D1B3640663EB','477F23F9-04D8-4E2F-9251-626F4C523E1C','6C4CB630-232B-428F-B117-7342C7D2B121','E2A964F0-D841-49E5-BC77-CFD45987A2E4','2023-8-20',25,450000)
+

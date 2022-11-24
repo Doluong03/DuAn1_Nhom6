@@ -16,6 +16,7 @@ import java.util.List;
  *
  * @author Hp
  */
+
 public class HoaDonServecieIplm  implements HoaDonService{
 private HoaDonRepository HoaDonRepository = new HoaDonRepository();
     @Override
@@ -24,6 +25,7 @@ private HoaDonRepository HoaDonRepository = new HoaDonRepository();
            ArrayList<HoaDonresponse> listHDRespon=new ArrayList<>();
         for (HoaDon hd : listHD) {
             HoaDonresponse hdr= new HoaDonresponse(hd);
+
             listHDRespon.add(hdr);
         }
         return listHDRespon;
@@ -35,10 +37,48 @@ private HoaDonRepository HoaDonRepository = new HoaDonRepository();
     }
 
     @Override
+
     public boolean updateHD(String Ma, BigDecimal tongtien,int trangthai) {
         return HoaDonRepository.updateHD(Ma, tongtien,trangthai);
     }
 
     
     
+
+    public boolean updateHD(String Ma, BigDecimal tongtien, int IdTT) {
+        return HoaDonRepository.updateHD(Ma, tongtien, IdTT);
+    }
+
+    public boolean addHD() {
+        return HoaDonRepository.addHD();
+    }
+
+    @Override
+    public ArrayList<HoaDonresponse> timKiemTT(int tt) {
+        ArrayList<HoaDon> listHD = new HoaDonRepository().getSearch(tt);
+        ArrayList<HoaDonresponse> listHDRespon = new ArrayList<>();
+        for (HoaDon hd : listHD) {
+            HoaDonresponse hdr = new HoaDonresponse(hd);
+            listHDRespon.add(hdr);
+        }
+        return listHDRespon;
+    }
+
+    @Override
+    public ArrayList<HoaDonresponse> getAllHD() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ArrayList<HoaDonresponse> timKiemHD(String ma) {
+        ArrayList<HoaDon> listHD = new HoaDonRepository().timKiemHD(ma);
+        ArrayList<HoaDonresponse> listHDRespon = new ArrayList<>();
+        for (HoaDon hd : listHD) {
+            HoaDonresponse hdr = new HoaDonresponse(hd);
+            listHDRespon.add(hdr);
+        }
+        return listHDRespon;
+    }
+
+
 }

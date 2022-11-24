@@ -4,6 +4,7 @@
  */
 package com.poly.it17326.group6.domainmodel;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
@@ -31,7 +32,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ChiTietSP {
+public class ChiTietSP   {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

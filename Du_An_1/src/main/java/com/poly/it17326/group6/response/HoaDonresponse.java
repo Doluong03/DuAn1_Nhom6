@@ -14,7 +14,9 @@ import lombok.ToString;
 @Getter
 @ToString
 public class HoaDonresponse {
+
     private int id;
+
     private String maHD;
     private Date ngayTao;
     private String tenNV;
@@ -29,9 +31,11 @@ public class HoaDonresponse {
         this.id = hd.getId();
         this.maHD = hd.getMaHD();
         this.ngayTao = hd.getCreateAt();
+
         this.tenNV = hd.getTaiKhoan().getHoTenNV();
         this.tinhtrang = hd.getTrangThai();
         this.tenKH = hd.getHoTen();
+
         this.sdt = hd.getSdt();
     }
     
