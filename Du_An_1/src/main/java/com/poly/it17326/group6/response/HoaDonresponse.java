@@ -43,9 +43,10 @@ public class HoaDonresponse {
         if(tinhtrang==1){
             return "Đã thanh toán";
         }else if(tinhtrang==0){
-            return "chờ thanh toán";
+            return "Chờ thanh toán";
+        }else {
+            return  "Đã hủy";
         }
-        return null;
     }
     
 //    

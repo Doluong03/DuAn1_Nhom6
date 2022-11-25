@@ -34,12 +34,14 @@ import lombok.ToString;
 public class HoaDonChiTiet implements Serializable {
 
     @Id
-    @Column(name = "IdHoaDon")
-    private int IdHoaDon;
+    @ManyToOne
+    @JoinColumn(name = "IdHoaDon")
+    private HoaDon IdHoaDon;
     
     @Id
-    @Column(name = "IdChiTietSP")
-    private int IdChiTietSP;
+    @ManyToOne
+    @JoinColumn(name = "IdChiTietSP")
+    private ChiTietSP IdChiTietSP;
 
     @Column(name = "Ma")
     private String MaHD;

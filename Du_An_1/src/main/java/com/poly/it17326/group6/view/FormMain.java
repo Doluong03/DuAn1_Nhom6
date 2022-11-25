@@ -291,7 +291,7 @@ public class FormMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         lbFormBanHang.setForeground(Color.GREEN);
         tpBanHang.removeAll();
-        pnBanHang= new FormBanHang();
+        pnBanHang= new FormBanHang1();
         tpBanHang.addTab("Quản lý bán hàng", pnBanHang);
         tpBanHang.setSelectedComponent(pnBanHang); 
       

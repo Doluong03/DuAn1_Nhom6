@@ -23,7 +23,7 @@ import org.hibernate.Transaction;
 public class HoaDonRepository {
 
     Session session= HibernateConfig.getFACTORY().openSession();
-    String sql="from HoaDon";
+    String sql="from HoaDon hd order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc ";
     public ArrayList<HoaDon> getAll(){
         Query query= session.createQuery(sql);
         ArrayList<HoaDon> listHD=(ArrayList<HoaDon>) query.getResultList();
@@ -38,34 +38,37 @@ public ArrayList<HoaDon> getIDHD(String Ma){
     }
 
 
-public boolean updateHD(String Ma, BigDecimal tongtien,int TrangThai) {
+public boolean updateHD(String ma,BigDecimal tongTien , int trangThai) {
         Transaction tran = null;
+        int check=0;
         try ( Session session= HibernateConfig.getFACTORY().openSession();) {
             tran = session.beginTransaction();
-            String sql = "update HoaDon \n"
-                    + "set tongtien = :tongtien ,\n"
-                     +" TrangThai = :TrangThai \n"
-                    + "where Ma = :Ma \n";
+            String sql = "update HoaDon set tongTien = :tongtien , TrangThai = :TrangThai where MaHD = :Ma";
             Query query = session.createQuery(sql);
-            query.setParameter("tongtien", tongtien);
-            query.setParameter("TrangThai", TrangThai);
-            query.setParameter("Ma", Ma);
-            
-        }return false;
+            query.setParameter("tongtien", tongTien);
+            query.setParameter("TrangThai", trangThai);
+            query.setParameter("Ma", ma);    
+            check =query.executeUpdate();
+            tran.commit();
+        }
+        if(check!=1){
+            return true;
+        }else{
+            return false;
+        }
 }
-
-
-
-    
-
-
-
  
-     
      public static void main(String[] args) {
-       HoaDonRepository s = new HoaDonRepository();
-         
-          
+       HoaDonRepository s = new HoaDonRepository();     
+       String ma="HD11";
+       BigDecimal n= BigDecimal.valueOf(10.0);
+       int tt=1;
+        if(s.updateHD(ma, n, tt)){
+            System.out.println("ss");
+        }else{
+            System.out.println("a");
+        }
+  
     }
   
 
@@ -73,7 +76,7 @@ public boolean updateHD(String Ma, BigDecimal tongtien,int TrangThai) {
         HoaDon hd = new HoaDon();
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
             Transaction transaction = session.beginTransaction();
-            int i = (int) (getAll().size() + 1);
+            int i = (int) (getAll().size() + 2);
             Date now = new Date();
             SimpleDateFormat format = new SimpleDateFormat();
             format.applyPattern("yyyy-MM-dd");

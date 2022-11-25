@@ -5,11 +5,19 @@
 package com.poly.it17326.group6.service;
 
 import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
+import com.poly.it17326.group6.response.HoaDonCTResponse;
+import java.util.ArrayList;
 
 /**
  *
  * @author Hp
  */
 public interface HoaDonChiTietService {
+
     public boolean saveHDCT(HoaDonChiTiet hdct);
+    
+    public ArrayList<HoaDonCTResponse> getListHDCT();
+    
+    public boolean  deleteSP(String ma);
 }
+
