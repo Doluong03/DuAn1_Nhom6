@@ -845,7 +845,7 @@ public class FormBanHang extends javax.swing.JPanel {
         
                  listGh.removeAll(listGh);// xoa het gio hang
                  loadGH(listGh);
-
+                 
 
     }//GEN-LAST:event_btnthanhtoanActionPerformed
      private void lamMoi(){
