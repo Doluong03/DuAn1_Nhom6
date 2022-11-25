@@ -92,7 +92,7 @@ public class FormBanHang extends javax.swing.JPanel {
         loadIcon();
         // loadHD(hoaDonService.getListsHD());
 
-    }
+    }}
 
  
 
@@ -147,17 +147,16 @@ public class FormBanHang extends javax.swing.JPanel {
        
     }
     private void loadTextFiled(int index){
-        
         if(tbHoaDon.getRowCount()>0){
-        HoaDonresponse hoaDonresponse = listHD.get(index);
+        HoaDonresponse hoaDonresponse = listHD.get(index-1);
         jlbMAHD.setText(hoaDonresponse.getMaHD());
         jlbTENNV.setText(hoaDonresponse.getTenNV());
-        jlbTenKH.setText(hoaDonresponse.getTenKH());
+      //  jlbTenKH.setText(hoaDonresponse.getTenKH());
         jlbngaytao.setText(hoaDonresponse.getNgayTao()+"");
-        txtSDT.setText(hoaDonresponse.getSdt()+"");
+        //txtSDT.setText(hoaDonresponse.getSdt()+"");
             showJLBKH();
     }
-
+    }
 
     private void loadIcon() {
         btnLamMoiGH.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\reload.png"));
@@ -173,21 +172,21 @@ public class FormBanHang extends javax.swing.JPanel {
         String ngayTao = format.format(d);
         return ngayTao;
     }
-
-    private void loadHD(ArrayList<HoaDonresponse> lists) {
-        DefaultTableModel model = (DefaultTableModel) tbHoaDon.getModel();
-        model.setRowCount(0);
-        model.setColumnIdentifiers(new String[]{"Mã HD", "Ngày tạo", "Nhân viên", "Trạng thái"});
-        int i = 1;
-        for (HoaDonresponse hoaDonresponse : lists) {
-            model.addRow(new Object[]{
-                hoaDonresponse.getMaHD(),
-                doiNgay(hoaDonresponse.getNgayTao()),
-                hoaDonresponse.getTenNV(),
-                hoaDonresponse.trangThai()});
-        }
-
-    }
+//
+//    private void loadHD(ArrayList<HoaDonresponse> lists) {
+//        DefaultTableModel model = (DefaultTableModel) tbHoaDon.getModel();
+//        model.setRowCount(0);
+//        model.setColumnIdentifiers(new String[]{"Mã HD", "Ngày tạo", "Nhân viên", "Trạng thái"});
+//        int i = 1;
+//        for (HoaDonresponse hoaDonresponse : lists) {
+//            model.addRow(new Object[]{
+//                hoaDonresponse.getMaHD(),
+//                doiNgay(hoaDonresponse.getNgayTao()),
+//                hoaDonresponse.getTenNV(),
+//                hoaDonresponse.trangThai()});
+//        }
+//
+//    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -846,7 +845,7 @@ public class FormBanHang extends javax.swing.JPanel {
         
                  listGh.removeAll(listGh);// xoa het gio hang
                  loadGH(listGh);
-
+                 
 
     }//GEN-LAST:event_btnthanhtoanActionPerformed
      private void lamMoi(){
@@ -874,8 +873,6 @@ public class FormBanHang extends javax.swing.JPanel {
              jlbtienthua.setVisible(true);
                jlbtienthua.setText(tienthua+"");
              }
-            
-             
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Tiền phải là số");
         }
@@ -920,20 +917,20 @@ public class FormBanHang extends javax.swing.JPanel {
 
     private void rdChoTTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdChoTTMouseClicked
         // TODO add your handling code here:
-        int tt = 0;
-        loadHD(hoaDonService.timKiemTT(tt));
+//        int tt = 0;
+//        loadHD(hoaDonService.timKiemTT(tt));
     }//GEN-LAST:event_rdChoTTMouseClicked
 
     private void rdDATTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdDATTMouseClicked
-        // TODO add your handling code here:
-        int tt = 1;
-        loadHD(hoaDonService.timKiemTT(tt));
+//        // TODO add your handling code here:
+//        int tt = 1;
+//        loadHD(hoaDonService.timKiemTT(tt));
     }//GEN-LAST:event_rdDATTMouseClicked
 
     private void btnsearchhoadonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsearchhoadonActionPerformed
         // TODO add your handling code here:
-        String maHD=txtsearchhoadon.getText();
-        loadHD(hoaDonService.timKiemHD(maHD));
+//        String maHD=txtsearchhoadon.getText();
+//        loadHD(hoaDonService.timKiemHD(maHD));
     }//GEN-LAST:event_btnsearchhoadonActionPerformed
 
     public static void main(String args[]) {

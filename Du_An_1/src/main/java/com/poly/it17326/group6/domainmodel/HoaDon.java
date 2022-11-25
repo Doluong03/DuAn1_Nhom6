@@ -40,14 +40,12 @@ public class HoaDon implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private int id;
-
     @Column(name = "Ma")
     private String MaHD;
     @Column(name = "MaKH")
     private String MaKH;
     @Column(name = "HoTen")
     private String HoTenkh;
-
     @Column(name = "Sdt")
     private String Sdt;
     @Column(name = "TongTien")
