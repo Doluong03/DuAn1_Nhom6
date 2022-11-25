@@ -1,4 +1,4 @@
-﻿CREATE DATABASE FINALASS_GROUP6_PRO1041
+CREATE DATABASE FINALASS_GROUP6_PRO1041
 USE FINALASS_GROUP6_PRO1041
 GO
 
@@ -13,13 +13,8 @@ NgayKetThuc DATE DEFAULT NULL,
 PhanTram float default 0,
 )
 GO
--- TinhTrang
-CREATE TABLE TinhTrang(
-Id INT IDENTITY(1,1) PRIMARY KEY,
-Ma VARCHAR(20) UNIQUE,
-TrangThai bit default 0,
-)
-GO
+
+
 -- SanPham
 CREATE TABLE SanPham(
 Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -94,7 +89,7 @@ CREATE TABLE HoaDon(
 Id INT IDENTITY(1,1) PRIMARY KEY,
 IdTK INT,
 IdVC INT,
-IdTT INT,
+TrangThai INT  DEFAULT 0,
 Ma VARCHAR(20) UNIQUE,
 MaKH VARCHAR(20) UNIQUE,
 HoTen NVARCHAR(50) DEFAULT NULL,
@@ -125,7 +120,7 @@ GO
 CREATE TABLE HoaDonChiTiet(
 IdHoaDon int,
 IdChiTietSP int,
-Ma VARCHAR(20) UNIQUE,
+Ma VARCHAR(20) ,
 Ten NVARCHAR(30),
 SoLuong INT,
 DonGia DECIMAL(20,0) DEFAULT 0,
@@ -137,7 +132,7 @@ CONSTRAINT FK2 FOREIGN KEY(IdChiTietSP) REFERENCES ChiTietSP(Id),
 GO
 
 
---TẠO QUAN HỆ GIỮA CÁC BẢNG
+--T?O QUAN H? GI?A C�C B?NG
 --TaiKhoan - ChucVu
 ALTER TABLE TaiKhoan ADD  FOREIGN KEY (IdCV) REFERENCES ChucVu(Id)
 
@@ -145,8 +140,6 @@ ALTER TABLE TaiKhoan ADD  FOREIGN KEY (IdCV) REFERENCES ChucVu(Id)
 ALTER TABLE HoaDon  ADD FOREIGN KEY (IdTK) REFERENCES TaiKhoan(Id)
 -- HoaDon - Voucher 
 ALTER TABLE HoaDon  ADD  FOREIGN KEY (IdVC) REFERENCES Voucher(Id)
--- HoaDon - TinhTrang
-ALTER TABLE HoaDon  ADD FOREIGN KEY (IdTT) REFERENCES TinhTrang(Id)
 
 -- LoaiSP - ThanhPhan
 ALTER TABLE LoaiSP  ADD FOREIGN KEY (IdTP) REFERENCES ThanhPhan(Id)
@@ -161,48 +154,66 @@ ALTER TABLE ChiTietSP  ADD  FOREIGN KEY(IdAnh) REFERENCES Anh(Id)
 ALTER TABLE ChiTietSP  ADD FOREIGN KEY(IdLoaiSP) REFERENCES LoaiSP(Id)
 
 
-insert into Anh(Ma,Ten,Cover) values('A001','Canxipro_900g',1)
-insert into Anh(Ma,Ten,Cover) values('A002','AB_Grow_2_900g',1)
-insert into Anh(Ma,Ten,Cover) values('A003','Anmum_vani_800g',1)
-insert into Anh(Ma,Ten,Cover) values('A004','EnPlus_900g',1)
-go
-select*from Anh
-insert into NSX(Ma,Ten,QuocGia) values
-('NSX001','VINAMILK',N'Việt Nam'),
-('NSX002','Abbott',N'Hoa Kỳ'),
-('NSX003','Anmum ','New Zealand'),
-('NSX004','NutiFood ',N'Việt Nam')
-go
-insert into ChucVu(Ma,Ten) values ('CV1','NhanVien1')
-select *from ChucVu
-insert into TaiKhoan(email,MatKhau,IdCV) values('hiepbhph27531@gmail.com','1','79C98E51-8D3A-4770-B0B5-3566A43C02A2')
+
+select * from SanPham
 insert into SanPham(Ma,Ten,Create_at) values 
 ('SP001','CanxiPro',CONVERT (date, GETDATE())),
 ('SP002','Abbott Grow',CONVERT (date, GETDATE())),
 ('SP003','Anmum vani',CONVERT (date, GETDATE())),
 ('SP004','EnPlus',CONVERT (date, GETDATE()))
 go
-select*from SanPham
+
+
+insert into Anh(Ma,Ten,Cover) values('A001','Canxipro_900g',1)
+insert into Anh(Ma,Ten,Cover) values('A002','AB_Grow_2_900g',1)
+insert into Anh(Ma,Ten,Cover) values('A003','Anmum_vani_800g',1)
+insert into Anh(Ma,Ten,Cover) values('A004','EnPlus_900g',1)
+go
+
+insert into NSX(Ma,Ten,QuocGia) values
+('NSX001','VINAMILK',N'Vi?t Nam'),
+('NSX002','Abbott',N'Hoa K?'),
+('NSX003','Anmum ','New Zealand'),
+('NSX004','NutiFood ',N'Vi?t Nam')
+go
+
+
+
 insert into ThanhPhan(Ma,Ten) values
-('TP001',N'Chất đạm, Protein, Vitamin B, Lactose,Carbohydrate , Kali'),
-('TP002',N'Canxi, Vitamin A,D, Phốt pho, Magie'),
-('TP003',N'Vitamin, Arginine, Axit amin, Chất đạm, Inulin, Canxi')
+('TP001','Ch?t ??m'),
+('TP002','Canxi'),
+('TP003','Vitamin')
 go
 select * from ThanhPhan
 
 insert into LoaiSP(Ma,Ten,IdTP) values
-('LSP001',N'Sữa cho trẻ em','5624B159-F9E2-4101-8EF4-8388FC731CC0'),
-('LSP002',N'Sữa cho người lớn','389192C9-5533-40EC-A6B2-C61D9FB8AB04'),
-('LSP003',N'Sữa cho người già','2147EED6-1669-480A-AF13-D94B748836D6')
+('LSP001',N'S?a cho tr? em',1),
+('LSP002',N'S?a cho ng??i l?n',2),
+('LSP003',N'S?a cho ng??i gi�',3)
 
-select * from ThanhPhan
-select*from Anh
-select*from LoaiSP
-select*from NSX
-select*from SanPham
 
-insert into ChiTietSP (IdAnh,IdLoaiSP,IdNsx,IdSP,HSD,SoLuongTon,DonGia) values
-('57F05201-B6A0-4464-B5C2-3A5ECDEEC104','1E869C9B-CB53-44AC-A819-327B4DFDECB5','18D76D19-AEE5-4A27-BCA6-1C54C23D5079','C65FA4EE-7256-4683-84BE-52046F55A5A5','2023-11-20',20,350000),
-('69E1346A-351C-49FE-B117-43C9499BE0C1','C6CC1462-C631-4EAD-911D-586AFFE54D7D','00437F76-055A-4014-9223-633FD4A9D872','EBA235E3-6F8D-4F89-BC0A-BF0D7CC1D719','2023-6-20',15,300000),
-('4A904913-506D-4CDE-96E1-D1B3640663EB','477F23F9-04D8-4E2F-9251-626F4C523E1C','6C4CB630-232B-428F-B117-7342C7D2B121','E2A964F0-D841-49E5-BC77-CFD45987A2E4','2023-8-20',25,450000)
+
+
+
+
+
+
+ insert into ChiTietSP (IdAnh,IdLoaiSP,IdNsx,IdSP,HSD,SoLuongTon,DonGia) values
+ (1,1,1,1,'2023-11-20',20,350000),
+ (2,2,2,2,'2023-11-20',30,360000),
+ (3,3,3,3,'2022-11-20',24,350000)
+
+select * from TaiKhoan
+insert into ChucVu(Ma,Ten) values ('CV1','NhanVien1')
+insert into TaiKhoan(Ma,HoTen,GioiTinh,NgaySinh,DiaChi,Sdt,email,MatKhau,IdCV) 
+values('nv01','hiep','nam','01/10/2000','ha noi','09273313','hiepbhph27531@gmail.com','1',1)
+select * from HoaDon
+insert into HoaDon(IdTK,Ma,MaKH,HoTen,Sdt)
+values(1,'hd01','kh01','huy','018383723')
+
+insert into HoaDonChiTiet values(1,2,'hd01','anh',1,1,1111)
+select * from HoaDonChiTiet
+select * from HoaDon
+
+delete from HoaDonChiTiet
 
