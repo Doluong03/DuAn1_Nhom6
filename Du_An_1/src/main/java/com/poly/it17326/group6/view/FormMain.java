@@ -48,6 +48,8 @@ public class FormMain extends javax.swing.JFrame {
      lbLogo.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\logo.png"));
 
 }
+    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -291,7 +293,7 @@ public class FormMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         lbFormBanHang.setForeground(Color.GREEN);
         tpBanHang.removeAll();
-        pnBanHang= new FormBanHang();
+        pnBanHang= new FormBanHang1();
         tpBanHang.addTab("Quản lý bán hàng", pnBanHang);
         tpBanHang.setSelectedComponent(pnBanHang); 
       
@@ -299,6 +301,12 @@ public class FormMain extends javax.swing.JFrame {
 
     private void lbFormSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFormSanPhamMouseClicked
         // TODO add your handling code here:
+        lbFormBanHang.setForeground(Color.WHITE);
+        lbFormSanPham.setForeground(Color.GREEN);
+        tpBanHang.removeAll();
+        pnBanHang= new FormSanPham();
+        tpBanHang.addTab("Quản lý sản phẩm", pnBanHang);
+        tpBanHang.setSelectedComponent(pnBanHang); 
     }//GEN-LAST:event_lbFormSanPhamMouseClicked
 
     private void lbFormNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFormNhanVienMouseClicked

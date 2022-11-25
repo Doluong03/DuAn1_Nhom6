@@ -5,16 +5,20 @@
 package com.poly.it17326.group6.repository;
 
 import com.poly.it17326.group6.config.HibernateConfig;
+import com.poly.it17326.group6.domainmodel.Anh;
 
 import com.poly.it17326.group6.domainmodel.SanPham;
 
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
+import com.poly.it17326.group6.domainmodel.LoaiSP;
+import com.poly.it17326.group6.domainmodel.NSX;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -49,5 +53,59 @@ public class ChiTietSpRepository {
         return  (ChiTietSP) q.getSingleResult();
     }
 
+  public ChiTietSP getTimKiemLsp(String ten) {
+        Session session = HibernateConfig.getFACTORY().openSession();
+        Query q = session.createQuery(" select ct from ChiTietSP as ct join ct.sanPham where ct.loaiSP.ten like: ma");
+        q.setParameter("ma", ten);
+        return (ChiTietSP) q.getSingleResult();
+    }
+
+    public ChiTietSP addSP(ChiTietSP ctsp) {
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.save(ctsp);
+            transaction.commit();
+            return  ctsp;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+      return ctsp;
+    }
+    
+    public ChiTietSP updateSP(ChiTietSP ctsp) {
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.saveOrUpdate(ctsp);
+            transaction.commit();
+            return  ctsp;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+      return ctsp;
+    }
+
+    public ArrayList<SanPham> getListSP() {
+        Query q = session.createQuery("from SanPham");
+        ArrayList<SanPham> listSp = (ArrayList<SanPham>) q.getResultList();
+        return listSp;
+    }
+
+    public ArrayList<LoaiSP> getListLSP() {
+        Query q = session.createQuery("from LoaiSP");
+        ArrayList<LoaiSP> listLSp = (ArrayList<LoaiSP>) q.getResultList();
+        return listLSp;
+    }
+
+    public ArrayList<NSX> getListNsx() {
+        Query q = session.createQuery("from NSX");
+        ArrayList<NSX> listNsx = (ArrayList<NSX>) q.getResultList();
+        return listNsx;
+    }
+
+    public ArrayList<Anh> getListAnh() {
+        Query q = session.createQuery("from Anh");
+        ArrayList<Anh> listA = (ArrayList<Anh>) q.getResultList();
+        return listA;
+    }
 
 }
