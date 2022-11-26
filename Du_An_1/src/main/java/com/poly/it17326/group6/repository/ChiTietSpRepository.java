@@ -38,24 +38,24 @@ public class ChiTietSpRepository {
       
     
 //    
-//    public static void main(String[] args) {
-//        List<SanPham> list = new ChiTietSpRepository().getIDSP("binchilling");
-//        int idsp = Integer.parseInt(list.get(0).toString());
-//        ArrayList<ChiTietSP> lists = new ChiTietSpRepository().getIDCTSP(idsp);
-//        System.out.println(lists);
-//    }
+    public static void main(String[] args) {
+       String ma="Sữa cho trẻ em";
+       ChiTietSpRepository s = new ChiTietSpRepository();
+       
+        System.out.println(s.getTimKiemLsp(ma).toString());
+    }
 
 
     public ChiTietSP getTimKiem(String ma) {
         Session session = HibernateConfig.getFACTORY().openSession();
-        Query q = session.createQuery(" select ct from ChiTietSP as ct join ct.sanPham where ct.sanPham.ma like: ma");
+        Query q = session.createQuery(" select ct from ChiTietSP as ct join ct.sanPham sp where sp.ma = :ma");
         q.setParameter("ma", ma);
         return  (ChiTietSP) q.getSingleResult();
     }
 
   public ChiTietSP getTimKiemLsp(String ten) {
         Session session = HibernateConfig.getFACTORY().openSession();
-        Query q = session.createQuery(" select ct from ChiTietSP as ct join ct.sanPham where ct.loaiSP.ten like: ma");
+        Query q = session.createQuery(" select ct from ChiTietSP as ct join ct.loaiSP lsp where lsp.ten = :ma");
         q.setParameter("ma", ten);
         return (ChiTietSP) q.getSingleResult();
     }

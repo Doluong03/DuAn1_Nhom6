@@ -761,6 +761,8 @@ public class FormBanHang1 extends javax.swing.JPanel {
 
     private void rdDahuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdDahuyActionPerformed
         // TODO add your handling code here:
+        int tt=2;
+        loadHD( hoaDonService.timKiemTT(tt));
     }//GEN-LAST:event_rdDahuyActionPerformed
 
     private void txtsearchhoadonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsearchhoadonActionPerformed
@@ -809,20 +811,20 @@ public class FormBanHang1 extends javax.swing.JPanel {
 
     private void rdChoTTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdChoTTMouseClicked
         // TODO add your handling code here:
-//        int tt = 0;
-//        loadHD(hoaDonService.timKiemTT(tt));
+        int tt = 0;
+        loadHD(hoaDonService.timKiemTT(tt));
     }//GEN-LAST:event_rdChoTTMouseClicked
 
     private void rdDATTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdDATTMouseClicked
         // TODO add your handling code here:
-//        int tt = 1;
-//        loadHD(hoaDonService.timKiemTT(tt));
+        int tt = 1;
+        loadHD(hoaDonService.timKiemTT(tt));
     }//GEN-LAST:event_rdDATTMouseClicked
 
     private void btnsearchhoadonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsearchhoadonActionPerformed
         // TODO add your handling code here:
-//        String maHD = txtsearchhoadon.getText();
-//        loadHD(hoaDonService.timKiemHD(maHD));
+        String maHD = txtsearchhoadon.getText();
+        loadHD(hoaDonService.timKiemHD(maHD));
     }//GEN-LAST:event_btnsearchhoadonActionPerformed
 
     private void txttienkhachduaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txttienkhachduaMouseEntered

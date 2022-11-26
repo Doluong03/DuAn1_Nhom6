@@ -100,19 +100,19 @@ public boolean updateHD(String ma,BigDecimal tongTien , int trangThai) {
         }
     }
 
-//    public ArrayList<HoaDon> getSearch(int tt) {
-//        Query query = session.createQuery("select hd from HoaDon hd join hd.taiKhoan where hd.TrangThai like: ma order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc");
-//        query.setParameter("ma", tt);
-//        ArrayList<HoaDon> listSearch = (ArrayList<HoaDon>) query.getResultList();
-//        return listSearch;
-//    }
+    public ArrayList<HoaDon> getSearch(int tt) {
+        Query query = session.createQuery("select hd from HoaDon hd join hd.taiKhoan where hd.TrangThai = :ma order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc");
+        query.setParameter("ma", tt);
+        ArrayList<HoaDon> listSearch = (ArrayList<HoaDon>) query.getResultList();
+        return listSearch;
+    }
     
-//    public ArrayList<HoaDon> timKiemHD(String ma) {
-//        Query query = session.createQuery("select hd from HoaDon hd  join hd.taiKhoan where hd.MaHD like: ma order by cast (SUBSTRING(hd.MaHD,3,3) as int) asc");
-//        query.setParameter("ma", ma);
-//        ArrayList<HoaDon> listSearch = (ArrayList<HoaDon>) query.getResultList();
-//        return listSearch;
-//    }
+    public ArrayList<HoaDon> timKiemHD(String ma) {
+        Query query = session.createQuery("select hd from HoaDon hd  join hd.taiKhoan where hd.MaHD = :ma order by cast (SUBSTRING(hd.MaHD,3,3) as int) asc");
+        query.setParameter("ma", ma);
+        ArrayList<HoaDon> listSearch = (ArrayList<HoaDon>) query.getResultList();
+        return listSearch;
+    }
   
 
 }

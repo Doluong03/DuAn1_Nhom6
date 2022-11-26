@@ -15,6 +15,7 @@ import com.poly.it17326.group6.response.ChiTietSpResponse_2;
 import com.poly.it17326.group6.response.SanPhamResponse;
 import com.poly.it17326.group6.service.ChiTietSPService;
 import com.poly.it17326.group6.service.impl.ChiTietSPServiceImpl;
+import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -35,6 +36,7 @@ public class FormSanPham extends javax.swing.JPanel {
 
     private ChiTietSPService chiTietSPService = new ChiTietSPServiceImpl();
     private ChiTietSpRepository chiTietSpRepository = new ChiTietSpRepository();
+
     /**
      * Creates new form FormSanPham
      */
@@ -88,13 +90,13 @@ public class FormSanPham extends javax.swing.JPanel {
             cbAnh.addItem(A.getTen());
         }
     }
+
     private void loadCbSp() {
         cbSanPham.removeAllItems();
         for (SanPham sp : chiTietSPService.getListSp()) {
             cbSanPham.addItem(sp.getTen());
         }
     }
-
 
     private ChiTietSpResponse_2 getCtr() throws ParseException {
         ChiTietSpResponse_2 ctr = new ChiTietSpResponse_2();
@@ -117,10 +119,10 @@ public class FormSanPham extends javax.swing.JPanel {
         loadCbNsx();
         loadCbSp();
     }
-    
-    private void loadTF(int i){
+
+    private void loadTF(int i) {
         for (ChiTietSP ct : chiTietSpRepository.getAll()) {
-            if(ct.getSanPham().getMa().equals(tbSanPham.getValueAt(i, 0))){
+            if (ct.getSanPham().getMa().equals(tbSanPham.getValueAt(i, 0))) {
                 cbSanPham.setSelectedItem(ct.getSanPham().getTen());
                 cbLoaiSP.setSelectedItem(ct.getLoaiSP().getTen());
                 cbNsx.setSelectedItem(ct.getNsx().getTen());
@@ -129,17 +131,17 @@ public class FormSanPham extends javax.swing.JPanel {
                 txtHSD.setText(ct.getHsd().toString());
                 txtSoLuong.setText(String.valueOf(ct.getSoLuongTon()));
                 System.out.println(ct.getAnh().getTen());
-                lbAnhSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\"+ct.getAnh().getTen()+".jpg"));
+                lbAnhSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\" + ct.getAnh().getTen() + ".jpg"));
             }
         }
     }
-    
+
     private int getSPIdFromSelectedRow() {
         int selectedRowIndex = tbSanPham.getSelectedRow();
-        int id=0;
-        for ( ChiTietSpResponse_2 ct : chiTietSPService.getAllFSP()) {
-            if(ct.getMa().equals(tbSanPham.getValueAt(selectedRowIndex, 0))){
-                id=ct.getId();
+        int id = 0;
+        for (ChiTietSpResponse_2 ct : chiTietSPService.getAllFSP()) {
+            if (ct.getMa().equals(tbSanPham.getValueAt(selectedRowIndex, 0))) {
+                id = ct.getId();
             }
         }
         return id;
@@ -422,40 +424,42 @@ public class FormSanPham extends javax.swing.JPanel {
 
     private void tbSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSanPhamMouseClicked
         // TODO add your handling code here:
-        int index=tbSanPham.getSelectedRow();
+        int index = tbSanPham.getSelectedRow();
         loadTF(index);
     }//GEN-LAST:event_tbSanPhamMouseClicked
 
     private void txtTimKiemSPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemSPKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-              ArrayList<ChiTietSpResponse_2> listTimKiem = chiTietSPService.getTimKiemFSP(txtTimKiemSP.getText().toString());
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            ArrayList<ChiTietSpResponse_2> listTimKiem = chiTietSPService.getTimKiemFSP(txtTimKiemSP.getText().toString());
             loadSP(listTimKiem);
         }
     }//GEN-LAST:event_txtTimKiemSPKeyPressed
 
     private void cbTimKiemLSPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTimKiemLSPItemStateChanged
         // TODO add your handling code here:
-//        ArrayList<ChiTietSpResponse_2> listTimKiem = chiTietSPService.getTimKiemLsp(cbTimKiemLSP.getSelectedItem().toString());
+//             ArrayList<ChiTietSpResponse_2> listTimKiem = chiTietSPService.getTimKiemLsp(cbTimKiemLSP.getSelectedItem().toString());
 //            loadSP(listTimKiem);
+
+
     }//GEN-LAST:event_cbTimKiemLSPItemStateChanged
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-         ChiTietSpResponse_2 updatedProduct;
+        ChiTietSpResponse_2 updatedProduct;
         try {
             updatedProduct = getCtr();
-       
-        int updatedProductId = getSPIdFromSelectedRow();
-        updatedProduct.setId(updatedProductId);
-             System.out.println(updatedProduct.getId());   
-        if (chiTietSPService.updateSP(updatedProduct) != null) {
-            JOptionPane.showMessageDialog(this, "Thành công");
-            loadSP(chiTietSPService.getAllFSP());
-        } else {
-            JOptionPane.showMessageDialog(this, "Thất bại");
-        }
-         } catch (ParseException ex) {
+
+            int updatedProductId = getSPIdFromSelectedRow();
+            updatedProduct.setId(updatedProductId);
+            System.out.println(updatedProduct.getId());
+            if (chiTietSPService.updateSP(updatedProduct) != null) {
+                JOptionPane.showMessageDialog(this, "Thành công");
+                loadSP(chiTietSPService.getAllFSP());
+            } else {
+                JOptionPane.showMessageDialog(this, "Thất bại");
+            }
+        } catch (ParseException ex) {
             Logger.getLogger(FormSanPham.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnUpdateActionPerformed

@@ -31,8 +31,8 @@ public interface HoaDonService {
 
     public boolean addHD();
 
-//    public ArrayList<HoaDonresponse> timKiemTT(int tt);
+    public ArrayList<HoaDonresponse> timKiemTT(int tt);
 
-//    public ArrayList<HoaDonresponse> timKiemHD(String ma);
+    public ArrayList<HoaDonresponse> timKiemHD(String ma);
 
 }
