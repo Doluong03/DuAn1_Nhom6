@@ -36,7 +36,7 @@ public class HibernateConfig {
         properties.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
         properties.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=FINALASS_GROUP6_PRO10411");
         properties.put(Environment.USER, "sa");
-        properties.put(Environment.PASS, "1");
+        properties.put(Environment.PASS, "123123");
         properties.put(Environment.SHOW_SQL, "true");
 
         conf.setProperties(properties);
@@ -47,8 +47,6 @@ public class HibernateConfig {
         conf.addAnnotatedClass(LoaiSP.class);
         conf.addAnnotatedClass(NSX.class);
         conf.addAnnotatedClass(ThanhPhan.class);
-
-        
         conf.addAnnotatedClass(TaiKhoan.class);
         conf.addAnnotatedClass(ChucVu.class);
         conf.addAnnotatedClass(HoaDon.class);

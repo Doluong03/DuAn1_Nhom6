@@ -60,15 +60,15 @@ public boolean updateHD(String ma,BigDecimal tongTien , int trangThai) {
  
      public static void main(String[] args) {
        HoaDonRepository s = new HoaDonRepository();     
-       String ma="HD11";
-       BigDecimal n= BigDecimal.valueOf(10.0);
-       int tt=1;
-        if(s.updateHD(ma, n, tt)){
-            System.out.println("ss");
-        }else{
-            System.out.println("a");
-        }
-  
+//       String ma="HD11";
+//       BigDecimal n= BigDecimal.valueOf(10.0);
+//       int tt=1;
+//        if(s.updateHD(ma, n, tt)){
+//            System.out.println("ss");
+//        }else{
+//            System.out.println("a");
+//        }
+         System.out.println(s.getAll());
     }
   
 

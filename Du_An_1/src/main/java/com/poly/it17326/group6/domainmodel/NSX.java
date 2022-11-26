@@ -39,6 +39,5 @@ public class NSX implements Serializable {
         private String ten;
         @Column(name = "QuocGia")
         private String quocGia;
-
-    
+  
 }
