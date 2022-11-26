@@ -38,8 +38,8 @@ private HoaDonRepository HoaDonRepository = new HoaDonRepository();
 
     @Override
 
-    public boolean updateHD(String Ma, BigDecimal tongtien,int trangthai) {
-        return HoaDonRepository.updateHD(Ma, tongtien,trangthai);
+    public boolean updateHD(String Ma, BigDecimal tongtien,int trangthai, String tenKH, String sdt) {
+        return HoaDonRepository.updateHD(Ma, tongtien,trangthai,tenKH,sdt);
     }
 
     public boolean addHD() {
