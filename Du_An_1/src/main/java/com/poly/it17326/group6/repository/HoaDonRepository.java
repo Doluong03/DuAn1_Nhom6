@@ -60,20 +60,7 @@ public boolean updateHD(String ma,BigDecimal tongTien , int trangThai , String t
         }
 }
  
-     public static void main(String[] args) {
-       HoaDonRepository s = new HoaDonRepository();     
-       String ma="HD4";
-       BigDecimal n= BigDecimal.valueOf(10.0);
-       int tt=1;
-       String ten ="Luong";
-       String sdt = "0865683753";
-        if(s.updateHD(ma, n, tt,ten,sdt)){
-            System.out.println("ss");
-        }else{
-            System.out.println("a");
-        }
-  
-    }
+
   
 
     public boolean addHD() {
