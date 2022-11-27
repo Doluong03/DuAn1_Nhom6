@@ -25,7 +25,7 @@ public interface HoaDonService {
 
     public ArrayList<HoaDon> getIDHD(String Ma);
 
-    public boolean updateHD(String Ma, BigDecimal tongtien, int trangthai);
+    public boolean updateHD(String Ma, BigDecimal tongtien, int trangthai,String tenKH,String sdt);
 
     public ArrayList<HoaDonresponse> getAllHD();
 

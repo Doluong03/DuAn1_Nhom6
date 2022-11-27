@@ -11,6 +11,7 @@ import com.poly.it17326.group6.domainmodel.SanPham;
 import com.poly.it17326.group6.response.ChiTietSpResponse;
 import com.poly.it17326.group6.response.ChiTietSpResponse_2;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,25 +19,25 @@ import java.util.ArrayList;
  */
 public interface ChiTietSPService {
 
-    public ArrayList<ChiTietSpResponse> getAll();
+    public List<ChiTietSpResponse> getAll();
 
     public ArrayList<ChiTietSpResponse> getTimKiem(String ma);
 
-    public ArrayList<ChiTietSpResponse_2> getTimKiemLsp(String ten);
+    public List<ChiTietSpResponse_2> getTimKiemLsp(String ten);
 
     public ChiTietSpResponse_2 addSP(ChiTietSpResponse_2 ctsp);
 
     public ChiTietSpResponse_2 updateSP(ChiTietSpResponse_2 ctsp);
 
-    public ArrayList<SanPham> getListSp();
+    public List<SanPham> getListSp();
 
-    public ArrayList<NSX> getListNsx();
+    public List<NSX> getListNsx();
 
-    public ArrayList<LoaiSP> getListLSp();
+    public List<LoaiSP> getListLSp();
 
-    public ArrayList<Anh> getListA();
+    public List<Anh> getListA();
 
-    public ArrayList<ChiTietSpResponse_2> getAllFSP();
+    public List<ChiTietSpResponse_2> getAllFSP();
 
     public ArrayList<ChiTietSpResponse_2> getTimKiemFSP(String ma);
 }
