@@ -38,13 +38,15 @@ public ArrayList<HoaDon> getIDHD(String Ma){
     }
 
 
-public boolean updateHD(String ma,BigDecimal tongTien , int trangThai) {
+public boolean updateHD(String ma,BigDecimal tongTien , int trangThai , String tenKH, String sdt) {
         Transaction tran = null;
         int check=0;
         try ( Session session= HibernateConfig.getFACTORY().openSession();) {
             tran = session.beginTransaction();
-            String sql = "update HoaDon set tongTien = :tongtien , TrangThai = :TrangThai where MaHD = :Ma";
+            String sql = "update HoaDon set HoTenkh = :tenKH , Sdt = :sdt , tongTien = :tongtien , TrangThai = :TrangThai where MaHD = :Ma";
             Query query = session.createQuery(sql);
+            query.setParameter("tenKH", tenKH);
+            query.setParameter("sdt", sdt);
             query.setParameter("tongtien", tongTien);
             query.setParameter("TrangThai", trangThai);
             query.setParameter("Ma", ma);    
@@ -60,10 +62,12 @@ public boolean updateHD(String ma,BigDecimal tongTien , int trangThai) {
  
      public static void main(String[] args) {
        HoaDonRepository s = new HoaDonRepository();     
-       String ma="HD11";
+       String ma="HD4";
        BigDecimal n= BigDecimal.valueOf(10.0);
        int tt=1;
-        if(s.updateHD(ma, n, tt)){
+       String ten ="Luong";
+       String sdt = "0865683753";
+        if(s.updateHD(ma, n, tt,ten,sdt)){
             System.out.println("ss");
         }else{
             System.out.println("a");
