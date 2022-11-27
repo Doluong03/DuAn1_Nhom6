@@ -12,11 +12,13 @@ import com.poly.it17326.group6.domainmodel.SanPham;
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.LoaiSP;
 import com.poly.it17326.group6.domainmodel.NSX;
-
+import java.lang.ref.Cleaner;
+import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -28,32 +30,30 @@ public class ChiTietSpRepository {
 
     Session session = HibernateConfig.getFACTORY().openSession();
     String sql = "from ChiTietSP";
-    public ArrayList<ChiTietSP> getAll() {
+
+    public List<ChiTietSP> getAll() {
         Query q = session.createQuery(sql);
-        ArrayList<ChiTietSP> listCTSP = (ArrayList<ChiTietSP>) q.getResultList();
+        List<ChiTietSP> listCTSP = (List<ChiTietSP>) q.getResultList();
         return listCTSP;
     }
 
-    
-      
-    
+//      
 //    
-    public static void main(String[] args) {
-       String ma="Sữa cho trẻ em";
-       ChiTietSpRepository s = new ChiTietSpRepository();
-       
-        System.out.println(s.getTimKiemLsp(ma).toString());
-    }
-
-
+////    
+//    public static void main(String[] args) {
+//       String ma="Sữa cho trẻ em";
+//       ChiTietSpRepository s = new ChiTietSpRepository();
+//       
+//        System.out.println(s.getTimKiemLsp(ma).toString());
+//    }
     public ChiTietSP getTimKiem(String ma) {
         Session session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery(" select ct from ChiTietSP as ct join ct.sanPham sp where sp.ma = :ma");
         q.setParameter("ma", ma);
-        return  (ChiTietSP) q.getSingleResult();
+        return (ChiTietSP) q.getSingleResult();
     }
 
-  public ChiTietSP getTimKiemLsp(String ten) {
+    public ChiTietSP getTimKiemLsp(String ten) {
         Session session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery(" select ct from ChiTietSP as ct join ct.loaiSP lsp where lsp.ten = :ma");
         q.setParameter("ma", ten);
@@ -61,27 +61,27 @@ public class ChiTietSpRepository {
     }
 
     public ChiTietSP addSP(ChiTietSP ctsp) {
-        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.save(ctsp);
             transaction.commit();
-            return  ctsp;
+            return ctsp;
         } catch (Exception e) {
             e.printStackTrace();
         }
-      return ctsp;
+        return ctsp;
     }
-    
+
     public ChiTietSP updateSP(ChiTietSP ctsp) {
-        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.saveOrUpdate(ctsp);
             transaction.commit();
-            return  ctsp;
+            return ctsp;
         } catch (Exception e) {
             e.printStackTrace();
         }
-      return ctsp;
+        return ctsp;
     }
 
     public ArrayList<SanPham> getListSP() {
@@ -107,5 +107,25 @@ public class ChiTietSpRepository {
         ArrayList<Anh> listA = (ArrayList<Anh>) q.getResultList();
         return listA;
     }
+
+    public boolean updateSLSP(int id, int SoLuongTon) {
+        Transaction tran = null;
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
+            tran = session.beginTransaction();
+            String sql = "update ChiTietSP set SoLuongTon =:SoLuongTon where id = :id";
+            Query query = session.createQuery(sql);
+            query.setParameter("id", id);
+            query.setParameter("SoLuongTon", SoLuongTon);
+            query.executeUpdate();
+
+            tran.commit();
+            return true;
+        } catch (HibernateException e) {
+            e.getMessage();
+        }
+        return false;
+    }
+    
+    
 
 }

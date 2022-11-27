@@ -14,6 +14,7 @@ import com.poly.it17326.group6.response.ChiTietSpResponse;
 import com.poly.it17326.group6.response.ChiTietSpResponse_2;
 import com.poly.it17326.group6.service.ChiTietSPService;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -24,8 +25,8 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
     private ChiTietSpRepository chiTietSpRepository = new ChiTietSpRepository();
 
     @Override
-    public ArrayList<ChiTietSpResponse> getAll() {
-        ArrayList<ChiTietSP> listCt = chiTietSpRepository.getAll();
+    public List<ChiTietSpResponse> getAll() {
+       List<ChiTietSP> listCt = chiTietSpRepository.getAll();
         ArrayList<ChiTietSpResponse> listCTR = new ArrayList<>();
         for (ChiTietSP chiTietSP : listCt) {
             ChiTietSpResponse ctr = new ChiTietSpResponse(chiTietSP);
@@ -54,7 +55,7 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
 
     @Override
     public ArrayList<ChiTietSpResponse_2> getAllFSP() {
-        ArrayList<ChiTietSP> listCt = chiTietSpRepository.getAll();
+        ArrayList<ChiTietSP> listCt = (ArrayList<ChiTietSP>) chiTietSpRepository.getAll();
         ArrayList<ChiTietSpResponse_2> listCTR = new ArrayList<>();
         for (ChiTietSP chiTietSP : listCt) {
             ChiTietSpResponse_2 ctr = new ChiTietSpResponse_2(chiTietSP);
@@ -157,4 +158,11 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
         chiTietSpRepository.updateSP(ct);
         return ctr;
     }
+
+    @Override
+    public boolean updateSLSP(int id, int SoLuongTon) {
+        return chiTietSpRepository.updateSLSP(id, SoLuongTon);
+    }
+
+ 
 }

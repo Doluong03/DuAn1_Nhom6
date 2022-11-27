@@ -4,6 +4,7 @@
  */
 package com.poly.it17326.group6.view;
 
+import com.poly.it17326.group6.GetData.DataLogin;
 import com.poly.it17326.group6.domainmodel.TaiKhoan;
 import com.poly.it17326.group6.repository.TaiKhoanRepository;
 import com.poly.it17326.group6.service.TaiKhoanService;
@@ -17,7 +18,9 @@ import javax.swing.JOptionPane;
  * @author 123
  */
 public class FormDangNhap extends javax.swing.JFrame {
+
     private TaiKhoanService taiKhoanService = new TaiKhoanServiceImpl();
+
     /**
      * Creates new form FormDangNhap2
      */
@@ -192,7 +195,7 @@ public class FormDangNhap extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(458, 0, 540, 430));
 
-        lbAnhNen.setBackground(new java.awt.Color(102, 102, 255));
+        lbAnhNen.setBackground(new java.awt.Color(102, 255, 255));
         jPanel1.add(lbAnhNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 433));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 1000, 430));
@@ -222,7 +225,7 @@ public class FormDangNhap extends javax.swing.JFrame {
         txtMatKhau.setVisible(false);
         show.setEnabled(false);
         show.setVisible(false);
-        
+
     }//GEN-LAST:event_showMouseClicked
 
     private void disableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disableMouseClicked
@@ -233,7 +236,7 @@ public class FormDangNhap extends javax.swing.JFrame {
         txtHienMk.setVisible(false);
         disable.setVisible(false);
         disable.setEnabled(false);
-        
+
     }//GEN-LAST:event_disableMouseClicked
 
     private void lbIconPassWord2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbIconPassWord2MouseClicked
@@ -247,13 +250,16 @@ public class FormDangNhap extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-          String email = txtEmail.getText();
+        DataLogin dtl = new DataLogin(); // lay du lieu cho hoa don
+        String email = txtEmail.getText();
         String matkhau = txtMatKhau.getText();
 
         ArrayList<TaiKhoan> liste = taiKhoanService.getCheck(email);
         ArrayList<TaiKhoan> listmk = taiKhoanService.getCheck1(matkhau);
         if (!liste.isEmpty() && !listmk.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+            dtl.setIdTK(liste.get(0).getId());
+           
             FormMain frm = new FormMain();
             frm.setVisible(true);
             this.dispose();

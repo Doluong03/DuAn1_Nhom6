@@ -67,37 +67,11 @@ public class HoaDonChiTietResponsitory {
         }
         return false;
     }
-    public static void main(String[] args) {
-        String ma= "HD7";
-        HoaDonChiTietResponsitory s = new HoaDonChiTietResponsitory();
-        s.deleteSP(ma);
-    }
-
 //    public static void main(String[] args) {
-//        HoaDonChiTietResponsitory hd = new HoaDonChiTietResponsitory();
-//        List<HoaDonChiTiet> list = new ArrayList<>();
-//        HoaDonChiTiet hdct1 = new HoaDonChiTiet();
-//        hdct1.setDonGia(new BigDecimal(1));
-//        hdct1.setIdChiTietSP(2);
-//        hdct1.setIdHoaDon(1);
-//        hdct1.setMaHD("hd01");
-//        hdct1.setSoLuong(1);
-//        hdct1.setTenKH("anh");
-//        hdct1.setTongTien(new BigDecimal(1000));
-//        list.add(hdct1);
-//        HoaDonChiTiet hdct2 = new HoaDonChiTiet();
-//        hdct1.setDonGia(new BigDecimal(1));
-//        hdct1.setIdChiTietSP(1);
-//        hdct1.setIdHoaDon(1);
-//        hdct1.setMaHD("hd01");
-//        hdct1.setSoLuong(1);
-//        hdct1.setTenKH("anh");
-//        hdct1.setTongTien(new BigDecimal(1000));
-//        list.add(hdct1);
-//
-//        for (HoaDonChiTiet hoaDonChiTiet : list) {
-//            hd.saveHDCT(hoaDonChiTiet);
-//        }
+//        String ma= "HD7";
+//        HoaDonChiTietResponsitory s = new HoaDonChiTietResponsitory();
+//        s.deleteSP(ma);
 //    }
+
 
 }

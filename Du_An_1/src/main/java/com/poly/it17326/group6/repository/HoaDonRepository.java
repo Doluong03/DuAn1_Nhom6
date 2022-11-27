@@ -4,6 +4,7 @@
  */
 package com.poly.it17326.group6.repository;
 
+import com.poly.it17326.group6.GetData.DataLogin;
 import com.poly.it17326.group6.config.HibernateConfig;
 import com.poly.it17326.group6.domainmodel.HoaDon;
 import com.poly.it17326.group6.domainmodel.TaiKhoan;
@@ -81,8 +82,10 @@ public boolean updateHD(String ma,BigDecimal tongTien , int trangThai) {
             SimpleDateFormat format = new SimpleDateFormat();
             format.applyPattern("yyyy-MM-dd");
             String ngayTao = format.format(now);
+              
             TaiKhoan tk = new TaiKhoan();
-            tk.setId(1);
+             tk.setId(DataLogin.getIdTK());
+             
             Voucher vc = new Voucher();
             vc.setId(1);
             Date nt = new SimpleDateFormat("yyyy-MM-dd").parse(ngayTao);
