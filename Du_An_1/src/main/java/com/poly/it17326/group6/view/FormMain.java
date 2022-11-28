@@ -293,7 +293,7 @@ public class FormMain extends javax.swing.JFrame {
         lbFormKhuyenMai.setForeground(Color.WHITE);
         lbFormSanPham.setForeground(Color.WHITE);
         tpBanHang.removeAll();
-        pnBanHang = new FormBanHang1();
+        pnBanHang = new FormBanHang();
         tpBanHang.addTab("Quản lý bán hàng", pnBanHang);
         tpBanHang.setSelectedComponent(pnBanHang);
 

@@ -17,11 +17,13 @@ import org.hibernate.Transaction;
  * @author bachc
  */
 public class LoaiSanPhamResponsitory {
-       Session session=HibernateConfig.getFACTORY().openSession();
+       
     String sql="from LoaiSP ";
     public List<LoaiSP> getAll(){
+        Session session=HibernateConfig.getFACTORY().openSession();
         Query query=session.createQuery(sql);
         List<LoaiSP> listLsp=(ArrayList<LoaiSP>) query.getResultList();
+        session.close();
         return listLsp;
     }
     public Boolean addLSP(LoaiSP lsp){

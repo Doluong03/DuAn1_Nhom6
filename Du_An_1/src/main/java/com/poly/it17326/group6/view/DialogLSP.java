@@ -20,11 +20,12 @@ import javax.swing.table.DefaultTableModel;
  * @author 123
  */
 public class DialogLSP extends javax.swing.JDialog {
-private DefaultTableModel dtm=new DefaultTableModel();
-private List<LoaiSanPhamResponse> list=new ArrayList<>();
-private LoaiSanPhamService service=new LoaiSanPhamServiceImpl();
-private DefaultComboBoxModel dcbm=new DefaultComboBoxModel();
-private List<String> listCCB =new ArrayList();
+
+    private DefaultTableModel dtm = new DefaultTableModel();
+    private List<LoaiSanPhamResponse> list = new ArrayList<>();
+    private LoaiSanPhamService service = new LoaiSanPhamServiceImpl();
+    private DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+    private List<String> listCCB = new ArrayList();
 
     /**
      * Creates new form DialogLSP
@@ -32,29 +33,33 @@ private List<String> listCCB =new ArrayList();
     public DialogLSP(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-         String culums[]={"ID","Mã","Tên Loai SP","ID Thanhd phân"};
+        setLocationRelativeTo(null);
+        String culums[] = {"ID", "Mã", "Tên Loai SP", "ID Thanhd phân"};
         tblThongTin.setModel(dtm);
         cbbIdThanhPhan.setModel(dcbm);
         dtm.setColumnIdentifiers(culums);
-        list=service.getAll();
+        list = service.getAll();
         showTable(list);
-       cbbIdTP();
+        cbbIdTP();
     }
-    private void cbbIdTP(){
-       listCCB.add("1");
-       listCCB.add("2");
-       listCCB.add("3");
+
+    private void cbbIdTP() {
+        listCCB.add("1");
+        listCCB.add("2");
+        listCCB.add("3");
         for (String a : listCCB) {
             dcbm.addElement(a);
         }
     }
-      private void showTable(List<LoaiSanPhamResponse> lists){
+
+    private void showTable(List<LoaiSanPhamResponse> lists) {
         dtm.setRowCount(0);
-        for (LoaiSanPhamResponse repose1:lists) {
+        for (LoaiSanPhamResponse repose1 : lists) {
             dtm.addRow((Object[]) repose1.row());
-            
+
         }
-      }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,8 +77,6 @@ private List<String> listCCB =new ArrayList();
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        btnClear = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblThongTin = new javax.swing.JTable();
@@ -82,11 +85,14 @@ private List<String> listCCB =new ArrayList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel3.setText("Tên thành phân :");
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel3.setText("Loại sản phẩm:");
 
-        jLabel4.setText("Id Thành Phân :");
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel4.setText("Thành phần:");
 
-        jLabel5.setText("Loai San Phâm");
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel5.setText("Loại sản phẩm");
 
         txtMa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,13 +100,15 @@ private List<String> listCCB =new ArrayList();
             }
         });
 
-        btnAdd.setText("add");
+        btnAdd.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
 
+        btnUpdate.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +116,7 @@ private List<String> listCCB =new ArrayList();
             }
         });
 
+        btnDelete.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,15 +124,7 @@ private List<String> listCCB =new ArrayList();
             }
         });
 
-        jLabel1.setText("ID :");
-
-        btnClear.setText("Clear");
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
-            }
-        });
-
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel2.setText("Mã :");
 
         tblThongTin.setModel(new javax.swing.table.DefaultTableModel(
@@ -144,7 +145,13 @@ private List<String> listCCB =new ArrayList();
         });
         jScrollPane2.setViewportView(tblThongTin);
 
+        cbbIdThanhPhan.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         cbbIdThanhPhan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbIdThanhPhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbIdThanhPhanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,59 +160,64 @@ private List<String> listCCB =new ArrayList();
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbIdLSP, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbbIdThanhPhan, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(154, 154, 154)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(104, 104, 104)
+                                .addComponent(lbIdLSP, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(96, 96, 96)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbbIdThanhPhan, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnAdd)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(btnUpdate)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(btnDelete)))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 8, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
+                    .addGap(11, 11, 11)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(11, 11, 11)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4)
-                                .addComponent(btnAdd)
-                                .addComponent(jLabel3))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(12, 12, 12)
-                                    .addComponent(btnUpdate)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnDelete)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnClear))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtMa, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                                        .addComponent(txtTen))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(4, 4, 4)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(5, 5, 5)))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel3))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtMa, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                        .addComponent(txtTen))
+                    .addContainerGap(63, Short.MAX_VALUE)))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtMa, txtTen});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addComponent(jLabel5)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbIdLSP, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
+                .addGap(84, 84, 84)
                 .addComponent(cbbIdThanhPhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(486, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnAdd)
+                    .addComponent(btnDelete))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(34, 34, 34)
-                    .addComponent(jLabel1)
-                    .addGap(18, 18, 18)
+                    .addGap(68, 68, 68)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -215,15 +227,7 @@ private List<String> listCCB =new ArrayList();
                         .addComponent(jLabel3))
                     .addGap(18, 18, 18)
                     .addComponent(jLabel4)
-                    .addGap(36, 36, 36)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAdd)
-                        .addComponent(btnUpdate)
-                        .addComponent(btnDelete)
-                        .addComponent(btnClear))
-                    .addGap(18, 18, 18)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(163, Short.MAX_VALUE)))
         );
 
         pack();
@@ -236,65 +240,56 @@ private List<String> listCCB =new ArrayList();
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
 
-          LoaiSP lsp = new LoaiSP();
+        LoaiSP lsp = new LoaiSP();
         lsp.setMa(txtMa.getText());
         lsp.setTen(txtTen.getText());
-        ThanhPhan tp=new ThanhPhan();
+        ThanhPhan tp = new ThanhPhan();
         tp.setId(Integer.parseInt(cbbIdThanhPhan.getSelectedItem().toString()));
         lsp.setThanhPhan(tp);
-        
+
         if (service.addNSX(lsp)) {
             JOptionPane.showMessageDialog(this, "Them thanh cong");
-           
+
         }
-        list=service.getAll();
+        list = service.getAll();
         showTable(list);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-         LoaiSP lsp = new LoaiSP();
+        LoaiSP lsp = new LoaiSP();
         int i = tblThongTin.getSelectedRow();
         String id = tblThongTin.getValueAt(i, 0).toString();
         lsp.setId(Integer.parseInt(id));
         lsp.setMa(txtMa.getText());
         lsp.setTen(txtTen.getText());
-        ThanhPhan tp=new ThanhPhan();
+        ThanhPhan tp = new ThanhPhan();
         tp.setId(Integer.parseInt(cbbIdThanhPhan.getSelectedItem().toString()));
-         lsp.setThanhPhan(tp);
-       
+        lsp.setThanhPhan(tp);
 
         if (service.updateNSX(lsp)) {
             JOptionPane.showMessageDialog(this, "Sua thanh cong");
-            
+
         }
-        list=service.getAll();
+        list = service.getAll();
         showTable(list);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-       // TODO add your handling code here:
-       LoaiSP lsp = new LoaiSP();
+        // TODO add your handling code here:
+        LoaiSP lsp = new LoaiSP();
         int i = tblThongTin.getSelectedRow();
         String id = tblThongTin.getValueAt(i, 0).toString();
         lsp.setId(Integer.parseInt(id));
 
         if (service.delete(lsp)) {
             JOptionPane.showMessageDialog(this, "xoa thanh cong");
-            
+
         }
         list = service.getAll();
         showTable(list);
     }//GEN-LAST:event_btnDeleteActionPerformed
-
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        // TODO add your handling code here:
-        lbIdLSP.setText("");
-        txtMa.setText("");
-        txtTen.setText("");
-        cbbIdThanhPhan.setSelectedItem("");
-    }//GEN-LAST:event_btnClearActionPerformed
 
     private void tblThongTinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblThongTinMouseClicked
         // TODO add your handling code here:
@@ -305,6 +300,10 @@ private List<String> listCCB =new ArrayList();
         txtTen.setText(tblThongTin.getValueAt(index, 2).toString());
         cbbIdThanhPhan.setSelectedItem(tblThongTin.getValueAt(index, 3).toString());
     }//GEN-LAST:event_tblThongTinMouseClicked
+
+    private void cbbIdThanhPhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbIdThanhPhanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbbIdThanhPhanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -350,11 +349,9 @@ private List<String> listCCB =new ArrayList();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cbbIdThanhPhan;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

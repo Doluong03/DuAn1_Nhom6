@@ -22,18 +22,22 @@ import org.hibernate.Transaction;
  */
 public class HoaDonRepository {
 
-    Session session= HibernateConfig.getFACTORY().openSession();
+
     String sql="from HoaDon hd order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc ";
     public ArrayList<HoaDon> getAll(){
+            Session session= HibernateConfig.getFACTORY().openSession();
         Query query= session.createQuery(sql);
         ArrayList<HoaDon> listHD=(ArrayList<HoaDon>) query.getResultList();
+        session.close();
         return listHD;
     }
     // lay id hoa don
 public ArrayList<HoaDon> getIDHD(String Ma){
+        Session session= HibernateConfig.getFACTORY().openSession();
         Query query= session.createQuery("from HoaDon  where Ma = :Ma");
         query.setParameter("Ma",Ma);
         ArrayList<HoaDon> listIDHD=(ArrayList<HoaDon>) query.getResultList();
+        session.close();
         return listIDHD;
     }
 
@@ -92,16 +96,20 @@ public boolean updateHD(String ma,BigDecimal tongTien , int trangThai , String t
     }
 
     public ArrayList<HoaDon> getSearch(int tt) {
+            Session session= HibernateConfig.getFACTORY().openSession();
         Query query = session.createQuery("select hd from HoaDon hd join hd.taiKhoan where hd.TrangThai = :ma order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc");
         query.setParameter("ma", tt);
         ArrayList<HoaDon> listSearch = (ArrayList<HoaDon>) query.getResultList();
+        session.close();
         return listSearch;
     }
     
     public ArrayList<HoaDon> timKiemHD(String ma) {
+            Session session= HibernateConfig.getFACTORY().openSession();
         Query query = session.createQuery("select hd from HoaDon hd  join hd.taiKhoan where hd.MaHD = :ma order by cast (SUBSTRING(hd.MaHD,3,3) as int) asc");
         query.setParameter("ma", ma);
         ArrayList<HoaDon> listSearch = (ArrayList<HoaDon>) query.getResultList();
+        session.close();
         return listSearch;
     }
   

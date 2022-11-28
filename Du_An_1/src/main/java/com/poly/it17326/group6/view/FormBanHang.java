@@ -37,7 +37,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author 123
  */
-public class FormBanHang1 extends javax.swing.JPanel {
+public class FormBanHang extends javax.swing.JPanel {
 
     private ChiTietSPService chiTietSPService = new ChiTietSPServiceImpl();
     private HoaDonService hoaDonService = new HoaDonServecieIplm();
@@ -47,7 +47,7 @@ public class FormBanHang1 extends javax.swing.JPanel {
     /**
      * Creates new form FormBanHang
      */
-    public FormBanHang1() {
+    public FormBanHang() {
         initComponents();
         loadSP(chiTietSPService.getAll());
         loadIcon();
@@ -86,6 +86,7 @@ public class FormBanHang1 extends javax.swing.JPanel {
     ArrayList<GioHangresponse> listGh = new ArrayList<>();
 
     private void getSP(int i) {
+        int check = 0;
         GioHangresponse ghr = new GioHangresponse();
         for (ChiTietSpResponse ctr : chiTietSPService.getAll()) {
             if (ctr.getMa().equals(tbSanPham.getValueAt(i, 0).toString())) {
@@ -94,10 +95,26 @@ public class FormBanHang1 extends javax.swing.JPanel {
         }
         ghr.setMaSP(tbSanPham.getValueAt(i, 0).toString());
         ghr.setTenSP(tbSanPham.getValueAt(i, 1).toString());
-        String sl = JOptionPane.showInputDialog(this, "Nhập số lượng");
-        ghr.setSoLuong(Integer.parseInt(sl));
         BigDecimal donGia = new BigDecimal(tbSanPham.getValueAt(i, 3).toString());
         ghr.setDonGia(donGia);
+        for (GioHangresponse x : listGh) {
+            if (x.getMaSP().equals(tbSanPham.getValueAt(i, 0).toString())) {
+                JOptionPane.showMessageDialog(this, "Sản phẩm đã có trong giỏ hàng!");
+                check = JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhật lại số lượng không?", "Error", JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION);
+                if (check == JOptionPane.YES_OPTION) {
+                    String sl2 = JOptionPane.showInputDialog(this, "Nhập số lượng");
+                    x.setSoLuong(Integer.parseInt(sl2));
+                    loadGH(listGh);
+                    return;
+                } else {
+                    return;
+                }
+            } else {
+                continue;
+            }
+        }
+        String sl = JOptionPane.showInputDialog(this, "Nhập số lượng");
+        ghr.setSoLuong(Integer.parseInt(sl));
         listGh.add(ghr);
         loadGH(listGh);
     }
@@ -127,12 +144,7 @@ public class FormBanHang1 extends javax.swing.JPanel {
         return ngayTao;
     }
 
-//    private String doiTien(BigDecimal bd) {
-//        String format = "#,###.###";
-//        DecimalFormat df = new DecimalFormat(format);
-//        return df.format(bd);
-//    }
-
+//  
     private void loadHD(ArrayList<HoaDonresponse> lists) {
         DefaultTableModel model = (DefaultTableModel) tbHoaDon.getModel();
         model.setRowCount(0);
@@ -164,7 +176,7 @@ public class FormBanHang1 extends javax.swing.JPanel {
     }
 
     private void loadTextFiled(int index) {
-        System.out.println(listGh.size());
+        int check=0;
         if (tbHoaDon.getRowCount() > 0) {
             jlbMAHD.setText(tbHoaDon.getValueAt(index, 0).toString());
             jlbTENNV.setText(tbHoaDon.getValueAt(index, 2).toString());
@@ -191,14 +203,14 @@ public class FormBanHang1 extends javax.swing.JPanel {
             }
 
             ArrayList<HoaDonCTResponse> listGhct = new ArrayList<>();
+            double sum = 0;
             for (HoaDonCTResponse gh : hoaDonChiTietService.getListHDCT()) {
                 if (tbHoaDon.getValueAt(index, 0).equals(gh.getMaHD())) {
                     listGhct.add(gh);
-                    double sum = 0;
                     sum = sum + (gh.getThanhTien().doubleValue());
                     BigDecimal tt = new BigDecimal(sum);
-                    
                     jlbtongitenhang.setText(tt.toString());
+                    check=1;
                 }
                 if (listGhct.isEmpty()) {
                     loadGH(listGh);
@@ -206,6 +218,21 @@ public class FormBanHang1 extends javax.swing.JPanel {
                     loadDataHdct(listGhct);
                 }
 
+            }
+            if (tbHoaDon.getValueAt(index, 3).equals("Chờ thanh toán") && check ==1) {
+                listGh.removeAll(listGh);
+                for (HoaDonCTResponse hoaDonCTResponse : listGhct) {
+                    GioHangresponse GHupdate = new GioHangresponse();
+                    GHupdate.setMaSP(hoaDonCTResponse.getMaSP());
+                    GHupdate.setIdCTSP(hoaDonCTResponse.getIdChiTietSP());
+                    GHupdate.setDonGia(hoaDonCTResponse.getDonGia());
+                    GHupdate.setTenSP(hoaDonCTResponse.getTen());
+                    GHupdate.setSoLuong(hoaDonCTResponse.getSoLuong());
+                    listGh.add(GHupdate);
+                    loadGH(listGh);
+                }
+            } else {
+                return;
             }
         }
     }
@@ -814,7 +841,7 @@ public class FormBanHang1 extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Tạo thành công");
             }
         } catch (Exception ex) {
-            Logger.getLogger(FormBanHang1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
         }
         rdAllHoadonActionPerformed(evt);
         int x = 0;
@@ -915,8 +942,9 @@ public class FormBanHang1 extends javax.swing.JPanel {
             //System.out.println(hdct);
             listHDCT.add(hdct);
         }
-
         int check = 0;
+        HoaDonChiTietResponsitory hdrp= new HoaDonChiTietResponsitory();
+        hdrp.deleteSP(jlbMAHD.getText());
         for (HoaDonChiTiet hoaDonChiTiet : listHDCT) {
             hoaDonChiTietService.saveHDCT(hoaDonChiTiet);
             //         BigDecimal tongtien = new BigDecimal(jlbtongitenhang.getText());
@@ -975,7 +1003,7 @@ public class FormBanHang1 extends javax.swing.JPanel {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormBanHang1().setVisible(true);
+                new FormBanHang().setVisible(true);
             }
         });
     }

@@ -9,6 +9,7 @@ import com.poly.it17326.group6.repository.HoaDonChiTietResponsitory;
 import com.poly.it17326.group6.response.HoaDonCTResponse;
 import com.poly.it17326.group6.service.HoaDonChiTietService;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -24,9 +25,9 @@ public class HOaDonChiTietServiceIplm implements HoaDonChiTietService {
     }
 
     @Override
-    public ArrayList<HoaDonCTResponse> getListHDCT() {
-        ArrayList<HoaDonCTResponse> listOut = new ArrayList<>();
-        ArrayList<HoaDonChiTiet> listHd = HoaDonChiTietResponsitory.getListHDCT();
+    public List<HoaDonCTResponse> getListHDCT() {
+        List<HoaDonCTResponse> listOut = new ArrayList<>();
+        List<HoaDonChiTiet> listHd = HoaDonChiTietResponsitory.getListHDCT();
         for (HoaDonChiTiet hoaDonChiTiet : listHd) {
             HoaDonCTResponse hd = new HoaDonCTResponse(hoaDonChiTiet);
             listOut.add(hd);

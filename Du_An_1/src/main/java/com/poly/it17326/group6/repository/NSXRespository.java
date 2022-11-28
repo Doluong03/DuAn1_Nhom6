@@ -19,11 +19,13 @@ import org.hibernate.sql.Update;
  * @author bachc
  */
 public class NSXRespository {
-    Session session=HibernateConfig.getFACTORY().openSession();
+   // Session session=HibernateConfig.getFACTORY().openSession();
     String sql="from NSX nsx order by cast (SUBSTRING(nsx.ma,4,3) as int) desc";
-    public List<NSX> getAll(){
+    public ArrayList<NSX> getAll(){
+        Session session=HibernateConfig.getFACTORY().openSession();
         Query query=session.createQuery(sql);
-        List<NSX> listNsx=(ArrayList<NSX>) query.getResultList();
+        ArrayList<NSX> listNsx=(ArrayList<NSX>) query.getResultList();
+        session.close();
         return listNsx;
     }
     public Boolean addNSX(NSX nsx){
@@ -38,18 +40,22 @@ public class NSXRespository {
         return false;
         }
     }
-  public Boolean updateNSX(NSX nsx){
-         Transaction transaction = null;
-        try {
-            Session session = HibernateConfig.getFACTORY().openSession();
-            transaction = session.beginTransaction();
-            session.saveOrUpdate(nsx);
-            transaction.commit();
-            return true;
-        } catch (Exception e) {
-            System.out.println(e);
+  public NSX updateNSX(NSX nsx){
+          try (Session session = HibernateConfig.getFACTORY().openSession()) {
+            Transaction trans = session.getTransaction();
+            trans.begin();
+            try {
+                session.saveOrUpdate(nsx);
+                trans.commit();
+                session.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                trans.rollback();
+                nsx = null;
+            }
+        } finally {
+            return nsx;
         }
-        return null;
     }
   public Boolean deleteNSX(String ma){
       

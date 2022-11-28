@@ -25,18 +25,16 @@ import org.hibernate.Transaction;
  */
 public class ChiTietSpRepository {
 
-    Session session = HibernateConfig.getFACTORY().openSession();
-
     public List<ChiTietSP> getAll() {
+        Session session = HibernateConfig.getFACTORY().openSession();
         String sql = "from ChiTietSP ";
         Query q = session.createQuery(sql);
         List<ChiTietSP> listCTSP = q.getResultList();
+        session.close();
         return listCTSP;
     }
 
-
 //    
-
     public static void main(String[] args) {
         String ma = "Sữa cho trẻ em";
         ChiTietSpRepository s = new ChiTietSpRepository();
@@ -84,26 +82,34 @@ public class ChiTietSpRepository {
     }
 
     public ArrayList<SanPham> getListSP() {
+        Session session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery("from SanPham");
         ArrayList<SanPham> listSp = (ArrayList<SanPham>) q.getResultList();
+        session.close();
         return listSp;
     }
 
     public ArrayList<LoaiSP> getListLSP() {
+        Session session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery("from LoaiSP");
         ArrayList<LoaiSP> listLSp = (ArrayList<LoaiSP>) q.getResultList();
+        session.close();
         return listLSp;
     }
 
     public ArrayList<NSX> getListNsx() {
+        Session session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery("from NSX");
         ArrayList<NSX> listNsx = (ArrayList<NSX>) q.getResultList();
+        session.close();
         return listNsx;
     }
 
     public ArrayList<Anh> getListAnh() {
+        Session session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery("from Anh");
         ArrayList<Anh> listA = (ArrayList<Anh>) q.getResultList();
+        session.close();
         return listA;
     }
 

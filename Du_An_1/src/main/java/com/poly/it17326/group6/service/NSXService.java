@@ -5,7 +5,7 @@
 package com.poly.it17326.group6.service;
 
 import com.poly.it17326.group6.domainmodel.NSX;
-import com.poly.it17326.group6.response.NSXResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,9 +13,9 @@ import java.util.List;
  * @author bachc
  */
 public interface NSXService {
-    List<NSXResponse> getAll();
+    ArrayList<NSX> getAll();
     Boolean addNSX(NSX nsx);
-    Boolean updateNSX(NSX nsx);
+    NSX updateNSX(NSX nsx);
     Boolean delete(String ma);
     
 }
