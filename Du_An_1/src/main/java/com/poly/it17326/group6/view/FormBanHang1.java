@@ -4,6 +4,17 @@
  */
 package com.poly.it17326.group6.view;
 
+import com.itextpdf.kernel.color.DeviceRgb;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.VerticalAlignment;
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.HoaDon;
 import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
@@ -21,6 +32,7 @@ import com.poly.it17326.group6.service.impl.ChiTietSPServiceImpl;
 import com.poly.it17326.group6.service.impl.HOaDonChiTietServiceIplm;
 import com.poly.it17326.group6.service.impl.HoaDonServecieIplm;
 import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,7 +51,7 @@ import javax.swing.table.DefaultTableModel;
  * @author 123
  */
 public class FormBanHang1 extends javax.swing.JPanel {
-
+    
     private ChiTietSPService chiTietSPService = new ChiTietSPServiceImpl();
     private HoaDonService hoaDonService = new HoaDonServecieIplm();
     private HoaDonChiTietService hoaDonChiTietService = new HOaDonChiTietServiceIplm();
@@ -52,7 +64,7 @@ public class FormBanHang1 extends javax.swing.JPanel {
         initComponents();
         loadSP(chiTietSPService.getAll());
         loadIcon();
-
+        
     }
 
     /**
@@ -69,7 +81,7 @@ public class FormBanHang1 extends javax.swing.JPanel {
             model.addRow(new Object[]{chiTietSpResponse.getMa(), chiTietSpResponse.getTen(), chiTietSpResponse.getSoLuongTon(), chiTietSpResponse.getDonGia()});
         }
     }
-
+    
     private void loadGH(ArrayList<GioHangresponse> listS) {
         DefaultTableModel model = (DefaultTableModel) tbGioHang.getModel();
         model.setRowCount(0);
@@ -81,12 +93,12 @@ public class FormBanHang1 extends javax.swing.JPanel {
         }
         jlbtongitenhang.setVisible(true);
         jlbtongitenhang.setText(tongtien.toString());
-
+        
     }
     ArrayList<GioHangresponse> listGh = new ArrayList<>();
-
+    
     private void getSP(int i) {
-
+        
         GioHangresponse ghr = new GioHangresponse();
         for (ChiTietSpResponse ctr : chiTietSPService.getAll()) {
             if (ctr.getMa().equals(tbSanPham.getValueAt(i, 0).toString())) {
@@ -95,36 +107,36 @@ public class FormBanHang1 extends javax.swing.JPanel {
         }
         String maSp = tbSanPham.getValueAt(i, 0).toString();
         ghr.setMaSP(maSp);
-
+        
         ghr.setTenSP(tbSanPham.getValueAt(i, 1).toString());
         try {
             String sl = JOptionPane.showInputDialog(this, "Nhập số lượng");
             int soLuongTon = Integer.parseInt(tbSanPham.getValueAt(i, 2).toString())
                     - Integer.parseInt(sl);
-
+            
             if (sl == null) {
                 return;
             } else if (soLuongTon < Integer.parseInt(sl)) {
                 JOptionPane.showMessageDialog(this, "Số luọng phải lớn <= số lượng sản phẩm");
                 return;
-
+                
             } else if (Integer.parseInt(tbSanPham.getValueAt(i, 2).toString()) < 0) {
                 JOptionPane.showMessageDialog(this, "Sản phẩm đã hết ? Vui lòng chọn sản phẩm khác");
                 return;
             }
-      ArrayList<ChiTietSpResponse_2> listIDCTSP = chiTietSPService.getTimKiemLsp(tbSanPham.getValueAt(i, 0).toString());
+            ArrayList<ChiTietSpResponse_2> listIDCTSP = chiTietSPService.getTimKiemLsp(tbSanPham.getValueAt(i, 0).toString());
             int idctsp = listIDCTSP.get(0).getId();
             ghr.setSoLuong(Integer.parseInt(sl));
             chiTietSPService.updateSLSP(idctsp, soLuongTon);
             loadSP(chiTietSPService.getAll());
-
+            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Số luọng phải là chũ số");
             return;
         }
         BigDecimal donGia = new BigDecimal(tbSanPham.getValueAt(i, 3).toString());
         ghr.setDonGia(donGia);
-
+        
         ArrayList<ChiTietSpResponse_2> listMaSp = chiTietSPService.getTimKiemLsp(maSp);
         String sp = listMaSp.get(0).getMa();
         for (GioHangresponse s : listGh) {
@@ -136,16 +148,16 @@ public class FormBanHang1 extends javax.swing.JPanel {
         listGh.add(ghr);
         loadGH(listGh);
     }
-
+    
     private void loadIcon() {
         btnLamMoiGH.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\reload.png"));
         btnXoaSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\dustbin.png"));
         lbTimKiemSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\search.png"));
         btntaohoadon.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\add.png"));
         btnThanhToan.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\pay.png"));
-
+        
     }
-
+    
     private void loadDataHdct(ArrayList<HoaDonCTResponse> listGh) {
         DefaultTableModel model = (DefaultTableModel) tbGioHang.getModel();
         model.setColumnIdentifiers(new String[]{"Mã Sp", "Tên Sp", "Số Lượng", "Đơn giá", "Thành tiền"});
@@ -154,14 +166,14 @@ public class FormBanHang1 extends javax.swing.JPanel {
             model.addRow(new Object[]{ghr.getMaSP(), ghr.getTen(), ghr.getSoLuong(), ghr.getDonGia(), ghr.getThanhTien()});
         }
     }
-
+    
     private String doiNgay(Date d) {
         SimpleDateFormat format = new SimpleDateFormat();
         format.applyPattern("yyyy-MM-dd");
         String ngayTao = format.format(d);
         return ngayTao;
     }
-
+    
     private void loadHD(ArrayList<HoaDonresponse> lists) {
         DefaultTableModel model = (DefaultTableModel) tbHoaDon.getModel();
         model.setRowCount(0);
@@ -176,22 +188,22 @@ public class FormBanHang1 extends javax.swing.JPanel {
                 hoaDonresponse.trangThai()});
         }
     }
-
+    
     private void showJLBKH() { // hien thi jlb cua phan thong tin nv va kh
         jlbMAHD.setVisible(true);
         jlbTENNV.setVisible(true);
         txtTenKH.setVisible(true);
         jlbngaytao.setVisible(true);
-
+        
     }
-
+    
     private void showTTHD() { // hien thi jlb tong tien 
 
         jlbtienthua.setVisible(true);
         jlbtongitenhang.setVisible(true);
-
+        
     }
-
+    
     private void loadTextFiled(int index) {
         System.out.println(listGh.size());
         if (tbHoaDon.getRowCount() > 0) {
@@ -204,7 +216,7 @@ public class FormBanHang1 extends javax.swing.JPanel {
             } else {
                 btnThanhToan.setEnabled(false);
             }
-
+            
             ArrayList<HoaDonCTResponse> listGhct = new ArrayList<>();
             for (HoaDonCTResponse gh : hoaDonChiTietService.getListHDCT()) {
                 if (tbHoaDon.getValueAt(index, 0).equals(gh.getMaHD())) {
@@ -229,11 +241,11 @@ public class FormBanHang1 extends javax.swing.JPanel {
                 } else {
                     loadDataHdct(listGhct);
                 }
-
+                
             }
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -287,6 +299,7 @@ public class FormBanHang1 extends javax.swing.JPanel {
         txtTenKH = new javax.swing.JTextField();
         btnThanhToan = new javax.swing.JButton();
         btnHuy = new javax.swing.JButton();
+        btnxuathoadon = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -590,6 +603,13 @@ public class FormBanHang1 extends javax.swing.JPanel {
             }
         });
 
+        btnxuathoadon.setText("Export ");
+        btnxuathoadon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnxuathoadonActionPerformed(evt);
+            }
+        });
+
         jLayeredPane2.setLayer(jSeparator2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -615,6 +635,7 @@ public class FormBanHang1 extends javax.swing.JPanel {
         jLayeredPane2.setLayer(txtTenKH, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(btnThanhToan, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(btnHuy, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(btnxuathoadon, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -669,13 +690,15 @@ public class FormBanHang1 extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(btntaohoadon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(btnxuathoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnHuy)
                 .addGap(45, 45, 45))
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addGap(119, 119, 119)
                 .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLayeredPane2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnHuy, btntaohoadon});
@@ -734,7 +757,8 @@ public class FormBanHang1 extends javax.swing.JPanel {
                 .addGap(46, 46, 46)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btntaohoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnxuathoadon))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
@@ -753,7 +777,7 @@ public class FormBanHang1 extends javax.swing.JPanel {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(65, 65, 65)
                 .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(578, Short.MAX_VALUE))
+                .addContainerGap(656, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -908,7 +932,7 @@ public class FormBanHang1 extends javax.swing.JPanel {
         }
         ArrayList<HoaDon> listIDHD = hoaDonService.getIDHD(jlbMAHD.getText());
         int idhd = listIDHD.get(0).getId();
-
+        
         for (GioHangresponse gioHangresponse : listGh) {
             HoaDonChiTiet hdct = new HoaDonChiTiet();
             hdct.setMaHD(jlbMAHD.getText());
@@ -927,22 +951,22 @@ public class FormBanHang1 extends javax.swing.JPanel {
             hdct.setIdChiTietSP(ctsp);
             listHDCT.add(hdct);
         }
-
+        
         for (HoaDonChiTiet hoaDonChiTiet : listHDCT) {
             hoaDonChiTietService.saveHDCT(hoaDonChiTiet);
-
+            
         }
         if (txttienkhachdua.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Hóa đơn đã được treo");
             hoaDonService.updateHD(jlbMAHD.getText(), new BigDecimal(jlbtongitenhang.getText()), 0);
             loadHD(hoaDonService.getListsHD());
-
+            
         } else {
             JOptionPane.showMessageDialog(this, "Thanh toán thành công");
             hoaDonService.updateHD(jlbMAHD.getText(), new BigDecimal(jlbtongitenhang.getText()), 1);
             loadHD(hoaDonService.getListsHD());
         }
-
+        
         listGh.removeAll(listGh);// xoa het gio hang
         loadGH(listGh);
     }//GEN-LAST:event_btnThanhToanActionPerformed
@@ -958,6 +982,162 @@ public class FormBanHang1 extends javax.swing.JPanel {
     private void tbHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHoaDonMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_tbHoaDonMouseEntered
+
+    private void btnxuathoadonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxuathoadonActionPerformed
+        String path = "C:\\Users\\Hp\\Desktop\\du_ann1\\ "+jlbMAHD.getText()+ ".pdf"; // duowng daan
+
+      
+        float col = 280f;
+        float columnWidth[] = {col, col};
+        
+        PdfWriter writer;
+        try {
+            writer = new PdfWriter(path);
+            PdfDocument pdfDocument = new PdfDocument(writer);
+            Document doc = new Document(pdfDocument);
+            pdfDocument.setDefaultPageSize(PageSize.A4);
+            Table tb = new Table(columnWidth);
+            tb.addCell(new Cell().add("Invoice")
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setVerticalAlignment(VerticalAlignment.MIDDLE)
+                    .setMarginTop(30f)
+                    .setMarginBottom(30f)
+                    .setFontSize(30f)
+                    .setBorder(Border.NO_BORDER));
+            tb.addCell(new Cell().add("ajljkacjkba\n#23744327 \n ashcash")
+                    .setTextAlignment(TextAlignment.RIGHT)
+                    .setMarginTop(30f)
+                    .setMarginBottom(30f)
+                    .setBorder(Border.NO_BORDER)
+                    .setMarginRight(10f));
+            tb.setBackgroundColor(new DeviceRgb(63, 169, 219))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE);
+            
+            float colwidth[] = {80, 300, 100, 80};
+            Table customInforTbale = new Table(colwidth);
+            customInforTbale.addCell(new Cell(0, 4).add("Thong tin hoa don")
+                    .setBorder(Border.NO_BORDER));
+            customInforTbale.addCell(new Cell().add("Name:")
+                    .setBorder(Border.NO_BORDER));
+            customInforTbale.addCell(new Cell().add(jlbTENNV.getText())
+                    .setBorder(Border.NO_BORDER));
+            customInforTbale.addCell(new Cell().add("Invoice No:")
+                    .setBorder(Border.NO_BORDER));
+            customInforTbale.addCell(new Cell().add(jlbMAHD.getText())
+                    .setBorder(Border.NO_BORDER));
+            customInforTbale.addCell(new Cell().add("Phone :")
+                    .setBorder(Border.NO_BORDER));
+            customInforTbale.addCell(new Cell().add("093273428")
+                    .setBorder(Border.NO_BORDER));
+            customInforTbale.addCell(new Cell().add("Date :")
+                    .setBorder(Border.NO_BORDER));
+            customInforTbale.addCell(new Cell().add(jlbngaytao.getText())
+                    .setBorder(Border.NO_BORDER));
+            
+            float itemInforWidth[] = {140, 140, 140, 140, 140};
+            Table itemTbale = new Table(itemInforWidth);
+            
+            itemTbale.addCell(new Cell().add("Ma SP")
+                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setTextAlignment(TextAlignment.RIGHT));
+            itemTbale.addCell(new Cell().add("Ten SP")
+                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE));
+            itemTbale.addCell(new Cell().add("So luong")
+                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setTextAlignment(TextAlignment.RIGHT));
+            itemTbale.addCell(new Cell().add("Don gia")
+                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setTextAlignment(TextAlignment.RIGHT));
+            itemTbale.addCell(new Cell().add("Thanh tien")
+                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setTextAlignment(TextAlignment.RIGHT));
+            
+             
+            for (int i = 0; i < tbGioHang.getRowCount(); i++) {
+                
+                String maSp = tbGioHang.getValueAt(i, 0).toString();
+                String tenSp = tbGioHang.getValueAt(i, 1).toString();
+                String soluong = tbGioHang.getValueAt(i, 2).toString();
+                String dongia = tbGioHang.getValueAt(i, 3).toString();
+                String thanhtien = tbGioHang.getValueAt(i, 4).toString();
+                itemTbale.addCell(maSp).setTextAlignment(TextAlignment.CENTER);
+                itemTbale.addCell(tenSp).setTextAlignment(TextAlignment.RIGHT);
+                itemTbale.addCell(soluong).setTextAlignment(TextAlignment.RIGHT);
+                itemTbale.addCell(dongia).setTextAlignment(TextAlignment.RIGHT);
+                itemTbale.addCell(thanhtien).setTextAlignment(TextAlignment.RIGHT);
+                
+            }
+
+            itemTbale.addCell(new Cell().add("")
+                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setBorder(Border.NO_BORDER));
+            
+            itemTbale.addCell(new Cell().add("")
+                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setBorder(Border.NO_BORDER));
+            
+            itemTbale.addCell(new Cell().add("")
+                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setBorder(Border.NO_BORDER));
+            
+            itemTbale.addCell(new Cell().add("Tong tien:")
+                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setBorder(Border.NO_BORDER)
+                    .setTextAlignment(TextAlignment.RIGHT));
+            itemTbale.addCell(new Cell().add(jlbtongitenhang.getText())
+                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setBorder(Border.NO_BORDER)
+                    .setTextAlignment(TextAlignment.RIGHT));
+            
+//              itemTbale.addCell(new Cell().add("")
+//                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+//                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+//                    .setBorder(Border.NO_BORDER));
+//            
+//            itemTbale.addCell(new Cell().add("")
+//                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+//                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+//                    .setBorder(Border.NO_BORDER));
+//            
+//            itemTbale.addCell(new Cell().add("")
+//                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+//                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+//                    .setBorder(Border.NO_BORDER));
+//            
+//            itemTbale.addCell(new Cell().add("Tien thua:")
+//                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+//                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+//                    .setBorder(Border.NO_BORDER)
+//                    .setTextAlignment(TextAlignment.RIGHT));
+//            itemTbale.addCell(new Cell().add(jlbtienthua.getText())
+//                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+//                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+//                    .setBorder(Border.NO_BORDER)
+//                    .setTextAlignment(TextAlignment.RIGHT));
+            
+            
+            
+            doc.add(tb);
+            doc.add(new Paragraph("\n"));
+            doc.add(customInforTbale);
+            doc.add(new Paragraph("\n"));
+            doc.add(itemTbale);
+            doc.close();
+            System.out.println("in thanh cong");
+        } catch (FileNotFoundException ex) {
+            
+        }
+    }//GEN-LAST:event_btnxuathoadonActionPerformed
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -999,6 +1179,7 @@ public class FormBanHang1 extends javax.swing.JPanel {
     private javax.swing.JButton btnsuasdt;
     private javax.swing.JButton btntaohoadon;
     private javax.swing.JButton btnxoasdt;
+    private javax.swing.JButton btnxuathoadon;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;

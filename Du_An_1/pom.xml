@@ -11,7 +11,7 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
     <name>Du_An_1</name>
-     <dependencies>
+    <dependencies>
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -44,10 +44,20 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
-          <dependency>
-               <groupId>org.netbeans.external</groupId>
-               <artifactId>AbsoluteLayout</artifactId>
-               <version>RELEASE126</version>
-          </dependency>
-     </dependencies>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE126</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.itextpdf/itextpdf -->
+        <!-- https://mvnrepository.com/artifact/com.itextpdf/itext7-core -->
+<dependency>
+    <groupId>com.itextpdf</groupId>
+    <artifactId>itext7-core</artifactId>
+    <version>7.0.4</version>
+    <type>pom</type>
+</dependency>
+
+
+    </dependencies>
 </project>
