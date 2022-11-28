@@ -18,22 +18,23 @@ import org.hibernate.Session;
  */
 public class TaiKhoanRepository {
 
-    Session session = HibernateConfig.getFACTORY().openSession();
     String sql = "from TaiKhoan";
 
     public ArrayList<TaiKhoan> CheckUser(String email) {
+            Session session = HibernateConfig.getFACTORY().openSession();
         Query query = session.createQuery("from TaiKhoan where email = :email");
         query.setParameter("email", email);
         ArrayList<TaiKhoan> listTK = (ArrayList<TaiKhoan>) query.getResultList();
-
+        session.close();
         return listTK;
     }
 
     public ArrayList<TaiKhoan> CheckPasswork(String matkhau) {
+            Session session = HibernateConfig.getFACTORY().openSession();
         Query query = session.createQuery("from TaiKhoan where MatKhau = :MatKhau");
         query.setParameter("MatKhau", matkhau);
         ArrayList<TaiKhoan> listTK = (ArrayList<TaiKhoan>) query.getResultList();
-
+        session.close();
         return listTK;
     }
 

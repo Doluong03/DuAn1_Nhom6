@@ -25,14 +25,14 @@ public interface HoaDonService {
 
     public ArrayList<HoaDon> getIDHD(String Ma);
 
-    public boolean updateHD(String Ma, BigDecimal tongtien, int trangthai);
+    public boolean updateHD(String Ma, BigDecimal tongtien, int trangthai,String tenKH,String sdt);
 
     public ArrayList<HoaDonresponse> getAllHD();
 
     public boolean addHD();
 
-//    public ArrayList<HoaDonresponse> timKiemTT(int tt);
+    public ArrayList<HoaDonresponse> timKiemTT(int tt);
 
-//    public ArrayList<HoaDonresponse> timKiemHD(String ma);
+    public ArrayList<HoaDonresponse> timKiemHD(String ma);
 
 }

@@ -4,21 +4,18 @@
  */
 package com.poly.it17326.group6.service;
 
-import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
-import com.poly.it17326.group6.response.HoaDonCTResponse;
+import com.poly.it17326.group6.domainmodel.NSX;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author Hp
+ * @author bachc
  */
-public interface HoaDonChiTietService {
-
-    public boolean saveHDCT(HoaDonChiTiet hdct);
+public interface NSXService {
+    ArrayList<NSX> getAll();
+    Boolean addNSX(NSX nsx);
+    NSX updateNSX(NSX nsx);
+    Boolean delete(String ma);
     
-    public List<HoaDonCTResponse> getListHDCT();
-    
-    public boolean  deleteSP(String ma);
 }
-

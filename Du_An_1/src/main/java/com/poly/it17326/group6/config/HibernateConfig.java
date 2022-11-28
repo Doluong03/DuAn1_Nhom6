@@ -47,8 +47,6 @@ public class HibernateConfig {
         conf.addAnnotatedClass(LoaiSP.class);
         conf.addAnnotatedClass(NSX.class);
         conf.addAnnotatedClass(ThanhPhan.class);
-
-        
         conf.addAnnotatedClass(TaiKhoan.class);
         conf.addAnnotatedClass(ChucVu.class);
         conf.addAnnotatedClass(HoaDon.class);

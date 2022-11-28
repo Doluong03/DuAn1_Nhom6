@@ -38,40 +38,40 @@ private HoaDonRepository HoaDonRepository = new HoaDonRepository();
 
     @Override
 
-    public boolean updateHD(String Ma, BigDecimal tongtien,int trangthai) {
-        return HoaDonRepository.updateHD(Ma, tongtien,trangthai);
+    public boolean updateHD(String Ma, BigDecimal tongtien,int trangthai, String tenKH, String sdt) {
+        return HoaDonRepository.updateHD(Ma, tongtien,trangthai,tenKH,sdt);
     }
 
     public boolean addHD() {
         return HoaDonRepository.addHD();
     }
 
-//    @Override
-//    public ArrayList<HoaDonresponse> timKiemTT(int tt) {
-//        ArrayList<HoaDon> listHD = new HoaDonRepository().getSearch(tt);
-//        ArrayList<HoaDonresponse> listHDRespon = new ArrayList<>();
-//        for (HoaDon hd : listHD) {
-//            HoaDonresponse hdr = new HoaDonresponse(hd);
-//            listHDRespon.add(hdr);
-//        }
-//        return listHDRespon;
-//    }
+    @Override
+    public ArrayList<HoaDonresponse> timKiemTT(int tt) {
+        ArrayList<HoaDon> listHD = new HoaDonRepository().getSearch(tt);
+        ArrayList<HoaDonresponse> listHDRespon = new ArrayList<>();
+        for (HoaDon hd : listHD) {
+            HoaDonresponse hdr = new HoaDonresponse(hd);
+            listHDRespon.add(hdr);
+        }
+        return listHDRespon;
+    }
 
     @Override
     public ArrayList<HoaDonresponse> getAllHD() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-//    @Override
-//    public ArrayList<HoaDonresponse> timKiemHD(String ma) {
-//        ArrayList<HoaDon> listHD = new HoaDonRepository().timKiemHD(ma);
-//        ArrayList<HoaDonresponse> listHDRespon = new ArrayList<>();
-//        for (HoaDon hd : listHD) {
-//            HoaDonresponse hdr = new HoaDonresponse(hd);
-//            listHDRespon.add(hdr);
-//        }
-//        return listHDRespon;
-//    }
+    @Override
+    public ArrayList<HoaDonresponse> timKiemHD(String ma) {
+        ArrayList<HoaDon> listHD = new HoaDonRepository().timKiemHD(ma);
+        ArrayList<HoaDonresponse> listHDRespon = new ArrayList<>();
+        for (HoaDon hd : listHD) {
+            HoaDonresponse hdr = new HoaDonresponse(hd);
+            listHDRespon.add(hdr);
+        }
+        return listHDRespon;
+    }
 
 
 }

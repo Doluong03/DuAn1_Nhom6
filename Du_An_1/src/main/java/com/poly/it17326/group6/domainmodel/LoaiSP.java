@@ -32,7 +32,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class LoaiSP implements Serializable {
+public class LoaiSP  {
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
@@ -45,6 +45,8 @@ public class LoaiSP implements Serializable {
     @JoinColumn(name = "IdTP")
     private ThanhPhan thanhPhan;
 
+
+   
 
 }
 
