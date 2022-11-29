@@ -7,6 +7,7 @@ package com.poly.it17326.group6.view;
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.HoaDon;
 import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
+import com.poly.it17326.group6.domainmodel.SanPham;
 import com.poly.it17326.group6.repository.ChiTietSpRepository;
 import com.poly.it17326.group6.repository.HoaDonChiTietResponsitory;
 import com.poly.it17326.group6.response.ChiTietSpResponse;
@@ -176,7 +177,7 @@ public class FormBanHang extends javax.swing.JPanel {
     }
 
     private void loadTextFiled(int index) {
-        int check=0;
+        int check = 0;
         if (tbHoaDon.getRowCount() > 0) {
             jlbMAHD.setText(tbHoaDon.getValueAt(index, 0).toString());
             jlbTENNV.setText(tbHoaDon.getValueAt(index, 2).toString());
@@ -210,7 +211,7 @@ public class FormBanHang extends javax.swing.JPanel {
                     sum = sum + (gh.getThanhTien().doubleValue());
                     BigDecimal tt = new BigDecimal(sum);
                     jlbtongitenhang.setText(tt.toString());
-                    check=1;
+                    check = 1;
                 }
                 if (listGhct.isEmpty()) {
                     loadGH(listGh);
@@ -219,7 +220,7 @@ public class FormBanHang extends javax.swing.JPanel {
                 }
 
             }
-            if (tbHoaDon.getValueAt(index, 3).equals("Chờ thanh toán") && check ==1) {
+            if (tbHoaDon.getValueAt(index, 3).equals("Chờ thanh toán") && check == 1) {
                 listGh.removeAll(listGh);
                 for (HoaDonCTResponse hoaDonCTResponse : listGhct) {
                     GioHangresponse GHupdate = new GioHangresponse();
@@ -235,6 +236,14 @@ public class FormBanHang extends javax.swing.JPanel {
                 return;
             }
         }
+    }
+
+    private void updateSL() {
+        for (GioHangresponse gioHangresponse : listGh) {
+            int sl = gioHangresponse.getSoLuong();
+            chiTietSPService.updateSoLuong(sl, gioHangresponse.getIdCTSP());
+        }
+        loadSP(chiTietSPService.getAll());
     }
 
     @SuppressWarnings("unchecked")
@@ -781,7 +790,17 @@ public class FormBanHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         int index = tbSanPham.getSelectedRow();
         getSP(index);
-
+        List<ChiTietSpResponse> listCT = chiTietSPService.getAll();
+        for (GioHangresponse gioHangresponse : listGh) {
+            for (ChiTietSpResponse chiTietSpResponse : listCT) {
+                if (chiTietSpResponse.getMa().equals(gioHangresponse.getMaSP())) {
+                    if (gioHangresponse.getMaSP().equals(tbSanPham.getValueAt(index, 0))) {
+                        tbSanPham.setValueAt(chiTietSpResponse.getSoLuongTon() - gioHangresponse.getSoLuong(), index, 2);
+                    } else {
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_tbSanPhamMouseClicked
 
     private void tbHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHoaDonMouseClicked
@@ -943,7 +962,7 @@ public class FormBanHang extends javax.swing.JPanel {
             listHDCT.add(hdct);
         }
         int check = 0;
-        HoaDonChiTietResponsitory hdrp= new HoaDonChiTietResponsitory();
+        HoaDonChiTietResponsitory hdrp = new HoaDonChiTietResponsitory();
         hdrp.deleteSP(jlbMAHD.getText());
         for (HoaDonChiTiet hoaDonChiTiet : listHDCT) {
             hoaDonChiTietService.saveHDCT(hoaDonChiTiet);
@@ -953,8 +972,10 @@ public class FormBanHang extends javax.swing.JPanel {
             if (txttienkhachdua.getText().isEmpty()) {
                 hoaDonService.updateHD(jlbMAHD.getText(), new BigDecimal(jlbtongitenhang.getText()), 0, txtTenKH.getText(), txtSDT.getText());
                 loadHD(hoaDonService.getListsHD());
+               
             } else {
                 check = 1;
+//                chiTietSPService.updateSoLuong(ctsp);
                 hoaDonService.updateHD(jlbMAHD.getText(), new BigDecimal(jlbtongitenhang.getText()), 1, txtTenKH.getText(), txtSDT.getText());
                 loadHD(hoaDonService.getListsHD());
             }
@@ -963,6 +984,7 @@ public class FormBanHang extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Hóa đơn đã được treo");
         } else {
             JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+            updateSL();
 
         }
         listGh.removeAll(listGh);// xoa het gio hang
