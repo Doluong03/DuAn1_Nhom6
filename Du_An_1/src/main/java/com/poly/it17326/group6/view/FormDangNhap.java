@@ -17,7 +17,9 @@ import javax.swing.JOptionPane;
  * @author 123
  */
 public class FormDangNhap extends javax.swing.JFrame {
+
     private TaiKhoanService taiKhoanService = new TaiKhoanServiceImpl();
+
     /**
      * Creates new form FormDangNhap2
      */
@@ -133,7 +135,9 @@ public class FormDangNhap extends javax.swing.JFrame {
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, 225, 44));
 
         txtEmail.setFont(txtEmail.getFont());
+        txtEmail.setForeground(new java.awt.Color(255, 255, 255));
         txtEmail.setBorder(null);
+        txtEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
@@ -145,13 +149,15 @@ public class FormDangNhap extends javax.swing.JFrame {
         jLabel7.setText("___________________________________________________");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 360, 30));
 
+        txtMatKhau.setForeground(new java.awt.Color(255, 255, 255));
         txtMatKhau.setBorder(null);
+        txtMatKhau.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMatKhauActionPerformed(evt);
             }
         });
-        jPanel2.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 366, -1));
+        jPanel2.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 266, 366, 20));
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("___________________________________________________");
@@ -182,6 +188,7 @@ public class FormDangNhap extends javax.swing.JFrame {
         jPanel2.add(lbIconPassWord2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, 59, 32));
 
         txtHienMk.setFont(txtHienMk.getFont());
+        txtHienMk.setForeground(new java.awt.Color(255, 255, 255));
         txtHienMk.setBorder(null);
         txtHienMk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,7 +229,7 @@ public class FormDangNhap extends javax.swing.JFrame {
         txtMatKhau.setVisible(false);
         show.setEnabled(false);
         show.setVisible(false);
-        
+
     }//GEN-LAST:event_showMouseClicked
 
     private void disableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disableMouseClicked
@@ -233,7 +240,7 @@ public class FormDangNhap extends javax.swing.JFrame {
         txtHienMk.setVisible(false);
         disable.setVisible(false);
         disable.setEnabled(false);
-        
+
     }//GEN-LAST:event_disableMouseClicked
 
     private void lbIconPassWord2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbIconPassWord2MouseClicked
@@ -247,7 +254,7 @@ public class FormDangNhap extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-          String email = txtEmail.getText();
+        String email = txtEmail.getText();
         String matkhau = txtMatKhau.getText();
 
         ArrayList<TaiKhoan> liste = taiKhoanService.getCheck(email);
@@ -255,12 +262,12 @@ public class FormDangNhap extends javax.swing.JFrame {
         if (!liste.isEmpty() && !listmk.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
             FormMain frm = new FormMain();
+            frm.setTk(email);
             frm.setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Đăng nhập thất bại");
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

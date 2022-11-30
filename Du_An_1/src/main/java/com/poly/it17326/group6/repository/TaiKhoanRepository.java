@@ -21,18 +21,28 @@ public class TaiKhoanRepository {
     String sql = "from TaiKhoan";
 
     public ArrayList<TaiKhoan> CheckUser(String email) {
-            Session session = HibernateConfig.getFACTORY().openSession();
-        Query query = session.createQuery("from TaiKhoan where email = :email");
+        Session session = HibernateConfig.getFACTORY().openSession();
+        Query query = session.createQuery("from TaiKhoan where email = :email or ma =:ma");
         query.setParameter("email", email);
+        query.setParameter("ma", email);
         ArrayList<TaiKhoan> listTK = (ArrayList<TaiKhoan>) query.getResultList();
         session.close();
         return listTK;
     }
 
     public ArrayList<TaiKhoan> CheckPasswork(String matkhau) {
-            Session session = HibernateConfig.getFACTORY().openSession();
+        Session session = HibernateConfig.getFACTORY().openSession();
         Query query = session.createQuery("from TaiKhoan where MatKhau = :MatKhau");
         query.setParameter("MatKhau", matkhau);
+        ArrayList<TaiKhoan> listTK = (ArrayList<TaiKhoan>) query.getResultList();
+        session.close();
+        return listTK;
+    }
+    
+       public ArrayList<TaiKhoan> CheckName(String name) {
+        Session session = HibernateConfig.getFACTORY().openSession();
+        Query query = session.createQuery("from TaiKhoan where HoTenNV = :name");
+        query.setParameter("name", name);
         ArrayList<TaiKhoan> listTK = (ArrayList<TaiKhoan>) query.getResultList();
         session.close();
         return listTK;

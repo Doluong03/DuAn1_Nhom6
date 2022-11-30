@@ -19,4 +19,6 @@ public interface TaiKhoanService {
 
     public ArrayList<TaiKhoan> getCheck1(String matkhau);
 
+    public ArrayList<TaiKhoan> getCheckTen(String ten);
+
 }

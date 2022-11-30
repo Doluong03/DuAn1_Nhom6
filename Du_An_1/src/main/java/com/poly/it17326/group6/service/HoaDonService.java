@@ -29,7 +29,7 @@ public interface HoaDonService {
 
     public ArrayList<HoaDonresponse> getAllHD();
 
-    public boolean addHD();
+    public boolean addHD(int idTk);
 
     public ArrayList<HoaDonresponse> timKiemTT(int tt);
 
