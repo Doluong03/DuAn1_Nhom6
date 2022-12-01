@@ -4,11 +4,26 @@
  */
 package com.poly.it17326.group6.view;
 
+import com.poly.it17326.group6.domainmodel.Anh;
+import com.poly.it17326.group6.response.AnhResponse;
+import com.poly.it17326.group6.service.AnhService;
+import com.poly.it17326.group6.service.impl.AnhServiceImpl;
+import java.awt.Image;
+import java.io.File;
+import java.util.List;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author 123
  */
 public class DialogAnh extends javax.swing.JDialog {
+
+    AnhService anhService = new AnhServiceImpl();
 
     /**
      * Creates new form DialogAnh
@@ -16,8 +31,60 @@ public class DialogAnh extends javax.swing.JDialog {
     public DialogAnh(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        loadTable(anhService.getAll());
+    }
+    String duongdananh = null;
+
+    public void loadTable(List<AnhResponse> listA) {
+        DefaultTableModel model = (DefaultTableModel) tblBang.getModel();
+        model.setRowCount(0);
+        model.setColumnIdentifiers(new String[]{"Id", "Ma", "ten", "link"});
+        int i = 1;
+        for (AnhResponse anhResponse : listA) {
+            model.addRow(new Object[]{anhResponse.getId(), anhResponse.getMa(), anhResponse.getTen(), anhResponse.getLink()});
+
+        }
+    }
+    int index = 0;
+
+    public ImageIcon ResizeImage(String ImagePath) {
+        ImageIcon MyImage = new ImageIcon(ImagePath);
+        Image img = MyImage.getImage();
+        Image newImg = img.getScaledInstance(jlbHinh.getWidth(), jlbHinh.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImg);
+        return image;
+
     }
 
+    public void loadTF(int i) {
+        List<AnhResponse> list = anhService.getAll();
+
+        if (tblBang.getRowCount() > 0) {
+            txtMa.setText(tblBang.getValueAt(i, 1).toString());
+            txtTen.setText(tblBang.getValueAt(i, 2).toString());
+            if (tblBang.getValueAt(i, 3).toString().equals("no image")) {
+                jlbHinh.setText("no image");
+                jlbHinh.setIcon(null);
+            } else {
+                String path = "C:\\Users\\OS\\OneDrive\\Documents\\DuAn1_Nhom6\\Du_An_1\\src\\main\\java\\com\\poly\\it17326\\group6\\view\\anh\\";
+                jlbHinh.setIcon(ResizeImage(path + list.get(index).getLink()));
+//                System.out.println(path + list.get(index).getLink());
+            }
+
+        }
+    }
+      public boolean check(){
+          if (txtMa.getText().isEmpty()) {
+              JOptionPane.showMessageDialog(this,"khong de trong","loi",JOptionPane.ERROR_MESSAGE);
+              return false;
+          }
+            if (txtTen.getText().isEmpty()) {
+              JOptionPane.showMessageDialog(this,"khong de trong","loi",JOptionPane.ERROR_MESSAGE);
+              return false;
+          }
+          return true;
+      }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,21 +94,229 @@ public class DialogAnh extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblBang = new javax.swing.JTable();
+        btnThem = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtMa = new javax.swing.JTextField();
+        txtTen = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jlbHinh = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        tblBang.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblBang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBangMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblBang);
+
+        btnThem.setText("Them");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
+
+        btnSua.setText("Sua");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
+
+        btnXoa.setText("Xoa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Ma");
+
+        jLabel3.setText("Ten");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("CRUD SAN PHAM");
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jlbHinh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlbHinhMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlbHinh, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlbHinh, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jButton1.setText("New");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(btnThem)
+                        .addGap(33, 33, 33)
+                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(252, 252, 252)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnThem)
+                    .addComponent(btnXoa)
+                    .addComponent(btnSua)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        if (check()) {
+            
+        
+        Anh anh = new Anh();
+        anh.setMa(txtMa.getText());
+        anh.setTen(txtTen.getText());
+        if (duongdananh == null) {
+            anh.setLink("no image");
+        } else {
+            anh.setLink(duongdananh);
+        }
+        if (anhService.Them(anh)) {
+            JOptionPane.showMessageDialog(this, "them thanh cong");
+            loadTable(anhService.getAll());
+        } else {
+            JOptionPane.showMessageDialog(this, "them that bai");
+        }
+        }
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+
+        String Ma = txtMa.getText();
+        String Ten = txtTen.getText();
+
+        if (anhService.sua(Ma, Ten)) {
+            JOptionPane.showMessageDialog(this, "update thanh cong");
+            loadTable(anhService.getAll());
+        } else {
+            JOptionPane.showMessageDialog(this, "update that bai");
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        String Ma = txtMa.getText();
+        if (anhService.xoa(Ma)) {
+            JOptionPane.showMessageDialog(this, "Xoa thanh cong");
+            loadTable(anhService.getAll());
+        } else {
+            JOptionPane.showMessageDialog(this, "Xoa that bai");
+        }
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void jlbHinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbHinhMouseClicked
+        // TODO add your handling code here:
+
+        try {
+            JFileChooser f = new JFileChooser("C:\\Users\\OS\\OneDrive\\Documents\\DuAn1_Nhom6\\Du_An_1\\src\\main\\java\\com\\poly\\it17326\\group6\\view\\anh\\");
+            f.showOpenDialog(null);
+            File file = f.getSelectedFile();
+            Image img = ImageIO.read(file);
+            int width = jlbHinh.getWidth();
+            int height = jlbHinh.getHeight();
+            duongdananh = file.getName();
+            jlbHinh.setIcon(new ImageIcon(img.getScaledInstance(width, height, 0)));
+
+        } catch (Exception ex) {
+
+        }
+    }//GEN-LAST:event_jlbHinhMouseClicked
+
+    private void tblBangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBangMouseClicked
+        // TODO add your handling code here:
+        index = tblBang.getSelectedRow();
+        loadTF(index);
+    }//GEN-LAST:event_tblBangMouseClicked
 
     /**
      * @param args the command line arguments
@@ -69,6 +344,9 @@ public class DialogAnh extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(DialogAnh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -86,5 +364,18 @@ public class DialogAnh extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXoa;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jlbHinh;
+    private javax.swing.JTable tblBang;
+    private javax.swing.JTextField txtMa;
+    private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables
 }
