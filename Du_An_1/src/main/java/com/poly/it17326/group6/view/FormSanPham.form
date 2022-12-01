@@ -396,6 +396,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnThemAnh">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemAnhActionPerformed"/>
+          </Events>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jdcHSD">
           <Properties>

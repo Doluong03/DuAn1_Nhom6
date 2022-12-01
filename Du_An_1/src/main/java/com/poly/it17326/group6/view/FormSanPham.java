@@ -138,7 +138,7 @@ public class FormSanPham extends javax.swing.JPanel {
                 txtDonGia.setText(ct.getDonGia().toString());
                 jdcHSD.setDate(ct.getHsd());
                 txtSoLuong.setText(String.valueOf(ct.getSoLuongTon()));
-                lbAnhSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\" + ct.getAnh().getTen() + ".jpg"));
+                lbAnhSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\SanPham\\" + ct.getAnh().getTen() + ".png"));
             }
         }
     }
@@ -279,6 +279,12 @@ public class FormSanPham extends javax.swing.JPanel {
         btnThemLSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemLSPActionPerformed(evt);
+            }
+        });
+
+        btnThemAnh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemAnhActionPerformed(evt);
             }
         });
 
@@ -583,6 +589,13 @@ public class FormSanPham extends javax.swing.JPanel {
         DialogLSP dialogLSP = new DialogLSP((Frame) wd, true);
         dialogLSP.setVisible(true);
     }//GEN-LAST:event_btnThemLSPActionPerformed
+
+    private void btnThemAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemAnhActionPerformed
+        // TODO add your handling code here:
+        Window wd = SwingUtilities.windowForComponent(this);
+        DialogAnh dialogAnh = new DialogAnh((Frame) wd, true);
+        dialogAnh.setVisible(true);
+    }//GEN-LAST:event_btnThemAnhActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
