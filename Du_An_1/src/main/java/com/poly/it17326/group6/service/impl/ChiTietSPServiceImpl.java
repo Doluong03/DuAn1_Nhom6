@@ -166,4 +166,9 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
         chiTietSpRepository.updateSP(ct);
         return ctr;
     }
+
+    @Override
+    public boolean updateSoLuong( int sl,int id) {
+        return  chiTietSpRepository.updateSL(sl,id);
+    }
 }

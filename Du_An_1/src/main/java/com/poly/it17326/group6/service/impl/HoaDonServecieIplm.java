@@ -42,8 +42,9 @@ private HoaDonRepository HoaDonRepository = new HoaDonRepository();
         return HoaDonRepository.updateHD(Ma, tongtien,trangthai,tenKH,sdt);
     }
 
-    public boolean addHD() {
-        return HoaDonRepository.addHD();
+@Override
+    public boolean addHD(int idTK) {
+        return HoaDonRepository.addHD(idTK);
     }
 
     @Override
