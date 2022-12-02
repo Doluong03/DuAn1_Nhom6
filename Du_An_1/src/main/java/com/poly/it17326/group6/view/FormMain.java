@@ -4,12 +4,16 @@
  */
 package com.poly.it17326.group6.view;
 
+import com.poly.it17326.group6.domainmodel.TaiKhoan;
 import com.poly.it17326.group6.service.ChiTietSPService;
+import com.poly.it17326.group6.service.TaiKhoanService;
 import com.poly.it17326.group6.service.impl.ChiTietSPServiceImpl;
+import com.poly.it17326.group6.service.impl.TaiKhoanServiceImpl;
 import java.awt.Color;
 import java.awt.Event;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +22,7 @@ import javax.swing.ImageIcon;
 public class FormMain extends javax.swing.JFrame {
 
     private ChiTietSPService chiTietSPService = new ChiTietSPServiceImpl();
+    private TaiKhoanService taiKhoanService = new TaiKhoanServiceImpl();
 
     /**
      * Creates new form DemoBanHang
@@ -45,7 +50,15 @@ public class FormMain extends javax.swing.JFrame {
         btnKhachHang.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\learning.png"));
         btnThongKe.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\bar-chart.png"));
         lbLogo.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\logo.png"));
+    }
 
+    public void setTk(String email) {
+        int idTK = 0;
+        for (TaiKhoan tk : taiKhoanService.getCheck(email)) {
+            lbTenNV.setText(tk.getHoTenNV());
+            lbChucVu.setText(tk.getChucVu().getTen());
+            idTK = tk.getId();
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -64,6 +77,10 @@ public class FormMain extends javax.swing.JFrame {
         lbFormNhanVien = new javax.swing.JLabel();
         lbFormKhuyenMai = new javax.swing.JLabel();
         lbLogo = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lbTenNV = new javax.swing.JLabel();
+        lbChucVu = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel2 = new javax.swing.JLabel();
         btnDangXuat = new javax.swing.JButton();
@@ -106,7 +123,7 @@ public class FormMain extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 5));
 
         lbFormBanHang.setBackground(new java.awt.Color(204, 0, 153));
-        lbFormBanHang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbFormBanHang.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbFormBanHang.setForeground(new java.awt.Color(255, 255, 255));
         lbFormBanHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbFormBanHang.setText("Bán Hàng");
@@ -117,7 +134,7 @@ public class FormMain extends javax.swing.JFrame {
             }
         });
 
-        lbFormSanPham.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbFormSanPham.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbFormSanPham.setForeground(new java.awt.Color(255, 255, 255));
         lbFormSanPham.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbFormSanPham.setText("Sản Phẩm");
@@ -128,7 +145,7 @@ public class FormMain extends javax.swing.JFrame {
             }
         });
 
-        lbFormNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbFormNhanVien.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbFormNhanVien.setForeground(new java.awt.Color(255, 255, 255));
         lbFormNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbFormNhanVien.setText("Nhân viên");
@@ -139,7 +156,7 @@ public class FormMain extends javax.swing.JFrame {
             }
         });
 
-        lbFormKhuyenMai.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbFormKhuyenMai.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbFormKhuyenMai.setForeground(new java.awt.Color(255, 255, 255));
         lbFormKhuyenMai.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbFormKhuyenMai.setText("Khuyến mãi");
@@ -149,6 +166,20 @@ public class FormMain extends javax.swing.JFrame {
                 lbFormKhuyenMaiMouseClicked(evt);
             }
         });
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Chức vụ:");
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Nhân viên:");
+
+        lbTenNV.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lbTenNV.setForeground(new java.awt.Color(255, 255, 255));
+
+        lbChucVu.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lbChucVu.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -164,14 +195,32 @@ public class FormMain extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 27, Short.MAX_VALUE)
-                .addComponent(lbLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbTenNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(lbTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(lbChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addComponent(lbFormBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(lbFormSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,7 +238,7 @@ public class FormMain extends javax.swing.JFrame {
         jToolBar1.add(jLabel2);
 
         btnDangXuat.setBackground(new java.awt.Color(0, 102, 102));
-        btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDangXuat.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnDangXuat.setForeground(new java.awt.Color(255, 255, 255));
         btnDangXuat.setText("Đăng xuất");
         btnDangXuat.setFocusable(false);
@@ -204,7 +253,7 @@ public class FormMain extends javax.swing.JFrame {
         jToolBar1.add(btnDangXuat);
 
         btnDoiMK.setBackground(new java.awt.Color(0, 102, 102));
-        btnDoiMK.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDoiMK.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnDoiMK.setForeground(new java.awt.Color(255, 255, 255));
         btnDoiMK.setText("Đổi mật khẩu");
         btnDoiMK.setFocusable(false);
@@ -219,7 +268,7 @@ public class FormMain extends javax.swing.JFrame {
         jToolBar1.add(btnDoiMK);
 
         btnKetThuc.setBackground(new java.awt.Color(0, 102, 102));
-        btnKetThuc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnKetThuc.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnKetThuc.setForeground(new java.awt.Color(255, 255, 255));
         btnKetThuc.setText("Kết thúc");
         btnKetThuc.setFocusable(false);
@@ -234,7 +283,7 @@ public class FormMain extends javax.swing.JFrame {
         jToolBar1.add(btnKetThuc);
 
         btnKhachHang.setBackground(new java.awt.Color(0, 102, 102));
-        btnKhachHang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnKhachHang.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnKhachHang.setForeground(new java.awt.Color(255, 255, 255));
         btnKhachHang.setText("Khách hàng");
         btnKhachHang.setFocusable(false);
@@ -249,7 +298,7 @@ public class FormMain extends javax.swing.JFrame {
         jToolBar1.add(btnKhachHang);
 
         btnThongKe.setBackground(new java.awt.Color(0, 102, 102));
-        btnThongKe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnThongKe.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnThongKe.setForeground(new java.awt.Color(255, 255, 255));
         btnThongKe.setText("Thống kê");
         btnThongKe.setFocusable(false);
@@ -296,10 +345,11 @@ public class FormMain extends javax.swing.JFrame {
         lbFormKhuyenMai.setForeground(Color.WHITE);
         lbFormSanPham.setForeground(Color.WHITE);
         tpBanHang.removeAll();
-        pnBanHang = new FormBanHang();
+        FormBanHang fbh = new FormBanHang();
+        fbh.setTk(lbTenNV.getText());
+        pnBanHang = fbh;
         tpBanHang.addTab("Quản lý bán hàng", pnBanHang);
         tpBanHang.setSelectedComponent(pnBanHang);
-
     }//GEN-LAST:event_lbFormBanHangMouseClicked
 
     private void lbFormSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFormSanPhamMouseClicked
@@ -398,16 +448,20 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JButton btnThongKe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lbChucVu;
     private javax.swing.JLabel lbFormBanHang;
     private javax.swing.JLabel lbFormKhuyenMai;
     private javax.swing.JLabel lbFormNhanVien;
     private javax.swing.JLabel lbFormSanPham;
     private javax.swing.JLabel lbLogo;
+    private javax.swing.JLabel lbTenNV;
     private javax.swing.JPanel pnBanHang;
     private javax.swing.JTabbedPane tpBanHang;
     // End of variables declaration//GEN-END:variables

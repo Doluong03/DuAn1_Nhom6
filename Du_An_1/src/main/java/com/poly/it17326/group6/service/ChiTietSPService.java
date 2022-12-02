@@ -5,6 +5,7 @@
 package com.poly.it17326.group6.service;
 
 import com.poly.it17326.group6.domainmodel.Anh;
+import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.LoaiSP;
 import com.poly.it17326.group6.domainmodel.NSX;
 import com.poly.it17326.group6.domainmodel.SanPham;
@@ -40,4 +41,8 @@ public interface ChiTietSPService {
     public List<ChiTietSpResponse_2> getAllFSP();
 
     public ArrayList<ChiTietSpResponse_2> getTimKiemFSP(String ma);
+    
+    public boolean updateSoLuong(  int sl,int id);
+  
+   
 }

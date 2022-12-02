@@ -36,11 +36,10 @@ public class ChiTietSpRepository {
 
 //    
     public static void main(String[] args) {
-        String ma = "Sữa cho trẻ em";
         ChiTietSpRepository s = new ChiTietSpRepository();
-        for (ChiTietSP chiTietSP : s.getAll()) {
-            System.out.println(chiTietSP);
-        }
+        int sl=3;
+        int id=1;
+        s.updateSL(sl, id);
     }
 
     public ChiTietSP getTimKiem(String ma) {
@@ -113,4 +112,20 @@ public class ChiTietSpRepository {
         return listA;
     }
 
+    public boolean updateSL(int sl , int id) {
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            String sql="Update ChiTietSP  set soLuongTon = soLuongTon -:sl where id = :ma ";
+            Query q= session.createQuery(sql);
+            q.setParameter("sl",sl);
+            q.setParameter("ma", id);
+            q.executeUpdate();
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+  
 }

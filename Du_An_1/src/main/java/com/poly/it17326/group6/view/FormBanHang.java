@@ -8,6 +8,8 @@ import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.HoaDon;
 import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
 import com.poly.it17326.group6.domainmodel.Voucher;
+import com.poly.it17326.group6.domainmodel.SanPham;
+import com.poly.it17326.group6.domainmodel.TaiKhoan;
 import com.poly.it17326.group6.repository.ChiTietSpRepository;
 import com.poly.it17326.group6.repository.HoaDonChiTietResponsitory;
 import com.poly.it17326.group6.response.ChiTietSpResponse;
@@ -23,6 +25,13 @@ import com.poly.it17326.group6.service.impl.ChiTietSPServiceImpl;
 import com.poly.it17326.group6.service.impl.HOaDonChiTietServiceIplm;
 import com.poly.it17326.group6.service.impl.HoaDonServecieIplm;
 import com.poly.it17326.group6.service.impl.VoucherServiceIplm;
+
+import com.poly.it17326.group6.service.TaiKhoanService;
+import com.poly.it17326.group6.service.impl.ChiTietSPServiceImpl;
+import com.poly.it17326.group6.service.impl.HOaDonChiTietServiceIplm;
+import com.poly.it17326.group6.service.impl.HoaDonServecieIplm;
+import com.poly.it17326.group6.service.impl.TaiKhoanServiceImpl;
+
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -46,6 +55,7 @@ public class FormBanHang extends javax.swing.JPanel {
     private ChiTietSPService chiTietSPService = new ChiTietSPServiceImpl();
     private HoaDonService hoaDonService = new HoaDonServecieIplm();
     private HoaDonChiTietService hoaDonChiTietService = new HOaDonChiTietServiceIplm();
+    private TaiKhoanService taiKhoanService = new TaiKhoanServiceImpl();
     ArrayList<HoaDonresponse> listHD = hoaDonService.getListsHD();
     private VoucherService voucherService = new VoucherServiceIplm();
 
@@ -248,6 +258,21 @@ public class FormBanHang extends javax.swing.JPanel {
         }
     }
     
+    
+    private void updateSL() {
+        for (GioHangresponse gioHangresponse : listGh) {
+            int sl = gioHangresponse.getSoLuong();
+            chiTietSPService.updateSoLuong(sl, gioHangresponse.getIdCTSP());
+        }
+        loadSP(chiTietSPService.getAll());
+    }
+    int idTK;
+    public void setTk(String ten) {
+        for (TaiKhoan tk : taiKhoanService.getCheckTen(ten)) {
+            idTK=tk.getId();
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -316,8 +341,9 @@ public class FormBanHang extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 153), 2), "Sản Phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 153), 2), "Sản Phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
 
+        tbSanPham.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         tbSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -387,8 +413,9 @@ public class FormBanHang extends javax.swing.JPanel {
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 153), 2), "Giỏ hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 153), 2), "Giỏ hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
 
+        tbGioHang.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         tbGioHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -407,6 +434,7 @@ public class FormBanHang extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tbGioHang);
 
+        btnXoaSP.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnXoaSP.setText("Bỏ khỏi giỏ hàng");
         btnXoaSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -414,6 +442,7 @@ public class FormBanHang extends javax.swing.JPanel {
             }
         });
 
+        btnLamMoiGH.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnLamMoiGH.setText("Làm mới giỏ hàng");
         btnLamMoiGH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -450,8 +479,9 @@ public class FormBanHang extends javax.swing.JPanel {
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 153), 2), "Hóa đơn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 153), 2), "Hóa đơn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
 
+        tbHoaDon.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         tbHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -471,6 +501,7 @@ public class FormBanHang extends javax.swing.JPanel {
         jScrollPane3.setViewportView(tbHoaDon);
 
         buttonGroup1.add(rdAllHoadon);
+        rdAllHoadon.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         rdAllHoadon.setText("Tất cả");
         rdAllHoadon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -479,6 +510,7 @@ public class FormBanHang extends javax.swing.JPanel {
         });
 
         buttonGroup1.add(rdDahuy);
+        rdDahuy.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         rdDahuy.setText("Đã hủy");
         rdDahuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -487,6 +519,7 @@ public class FormBanHang extends javax.swing.JPanel {
         });
 
         buttonGroup1.add(rdChoTT);
+        rdChoTT.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         rdChoTT.setText("Chờ thanh toán");
         rdChoTT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -495,6 +528,7 @@ public class FormBanHang extends javax.swing.JPanel {
         });
 
         buttonGroup1.add(rdDATT);
+        rdDATT.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         rdDATT.setText("Đã thanh toán");
         rdDATT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -508,6 +542,7 @@ public class FormBanHang extends javax.swing.JPanel {
             }
         });
 
+        btnsearchhoadon.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnsearchhoadon.setText("Search");
         btnsearchhoadon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -556,28 +591,38 @@ public class FormBanHang extends javax.swing.JPanel {
         jLayeredPane2.setBackground(new java.awt.Color(255, 255, 255));
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 153), 2), "Tạo hóa đơn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel3.setText("Tên NV");
 
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel4.setText("Mã HĐ");
 
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel5.setText("Tên KH");
 
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel6.setText("SDT");
 
         btnsuasdt.setBackground(new java.awt.Color(255, 255, 255));
+        btnsuasdt.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         btnsuasdt.setText("Sửa sdt");
 
         btnxoasdt.setBackground(new java.awt.Color(255, 255, 255));
+        btnxoasdt.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         btnxoasdt.setText("xóa sdt");
 
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel7.setText("Ngày tạo");
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jLabel8.setText("Tổng tiền hàng :");
 
-        jLabel8.setText("Tổng tiền  :");
-
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel9.setText("Hình thức thanh toán");
 
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel10.setText("Tiền khách đưa");
 
+        jLabel11.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel11.setText("Tiền thừa  :");
 
         jlbtienthua.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -586,6 +631,7 @@ public class FormBanHang extends javax.swing.JPanel {
             }
         });
 
+        cbbhtThanhtoan.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         cbbhtThanhtoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbhtThanhtoanActionPerformed(evt);
@@ -603,6 +649,7 @@ public class FormBanHang extends javax.swing.JPanel {
             }
         });
 
+        btntaohoadon.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btntaohoadon.setText("Tạo hóa đơn");
         btntaohoadon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -610,6 +657,7 @@ public class FormBanHang extends javax.swing.JPanel {
             }
         });
 
+        btnThanhToan.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnThanhToan.setText("Thanh toán");
         btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -617,6 +665,7 @@ public class FormBanHang extends javax.swing.JPanel {
             }
         });
 
+        btnHuy.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnHuy.setText("Hủy");
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -874,7 +923,7 @@ public class FormBanHang extends javax.swing.JPanel {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -887,7 +936,17 @@ public class FormBanHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         int index = tbSanPham.getSelectedRow();
         getSP(index);
-
+        List<ChiTietSpResponse> listCT = chiTietSPService.getAll();
+        for (GioHangresponse gioHangresponse : listGh) {
+            for (ChiTietSpResponse chiTietSpResponse : listCT) {
+                if (chiTietSpResponse.getMa().equals(gioHangresponse.getMaSP())) {
+                    if (gioHangresponse.getMaSP().equals(tbSanPham.getValueAt(index, 0))) {
+                        tbSanPham.setValueAt(chiTietSpResponse.getSoLuongTon() - gioHangresponse.getSoLuong(), index, 2);
+                    } else {
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_tbSanPhamMouseClicked
 
     private void tbHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHoaDonMouseClicked
@@ -945,7 +1004,7 @@ public class FormBanHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         HoaDon HoaDon = null;
         try {
-            if (hoaDonService.addHD() == false) {
+            if (hoaDonService.addHD(idTK) == false) {
                 JOptionPane.showMessageDialog(this, "Fail");
             } else {
                 JOptionPane.showMessageDialog(this, "Tạo thành công");
@@ -1068,9 +1127,9 @@ public class FormBanHang extends javax.swing.JPanel {
                 hoaDonService.updateVCHHD(jlbMAHD.getText(), idvch); // update vocher
                 voucherService.updateSLVCH(txtMavch.getText(), (soluongTon - 1));
                 loadHD(hoaDonService.getListsHD());
-                
             } else {
                 check = 1;
+//                chiTietSPService.updateSoLuong(ctsp);
                 hoaDonService.updateHD(jlbMAHD.getText(), new BigDecimal(jlbtongitenhang.getText()), 1, txtTenKH.getText(), txtSDT.getText());
                 hoaDonService.updateVCHHD(jlbMAHD.getText(), idvch); // update vocher
                 loadHD(hoaDonService.getListsHD());
@@ -1080,7 +1139,7 @@ public class FormBanHang extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Hóa đơn đã được treo");
         } else {
             JOptionPane.showMessageDialog(this, "Thanh toán thành công");
-            
+            updateSL();
         }
         listGh.removeAll(listGh);// xoa het gio hang
         loadGH(listGh);

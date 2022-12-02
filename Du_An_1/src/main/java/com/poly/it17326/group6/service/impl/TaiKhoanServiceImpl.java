@@ -30,6 +30,12 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
        return taiKhoanRepository.CheckPasswork(matkhau);
     }
 
+    @Override
+    public ArrayList<TaiKhoan> getCheckTen(String ten) {
+        return taiKhoanRepository.CheckName(ten);
+    }
+
+    
   
 
    

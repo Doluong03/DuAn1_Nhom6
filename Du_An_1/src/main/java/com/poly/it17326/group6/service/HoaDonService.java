@@ -25,7 +25,7 @@ public interface HoaDonService {
 
     public boolean updateHD(String Ma, BigDecimal tongtien, int trangthai, String tenKH, String sdt);
 
-    public boolean addHD();
+    public boolean addHD(int idTk);
 
     public ArrayList<HoaDonresponse> timKiemTT(int tt);
 

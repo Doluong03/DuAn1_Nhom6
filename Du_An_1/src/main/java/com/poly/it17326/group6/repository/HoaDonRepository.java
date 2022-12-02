@@ -69,7 +69,7 @@ public boolean updateHD(String ma,BigDecimal tongTien , int trangThai , String t
 
   
 
-    public boolean addHD() {
+    public boolean addHD(int idtk) {
         HoaDon hd = new HoaDon();
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -79,7 +79,7 @@ public boolean updateHD(String ma,BigDecimal tongTien , int trangThai , String t
             format.applyPattern("yyyy-MM-dd");
             String ngayTao = format.format(now);
             TaiKhoan tk = new TaiKhoan();
-            tk.setId(1);
+            tk.setId(idtk);
             Voucher vc = new Voucher();
             vc.setId(1);
             Date nt = new SimpleDateFormat("yyyy-MM-dd").parse(ngayTao);
