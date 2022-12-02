@@ -18,19 +18,19 @@ import org.hibernate.Transaction;
  */
 public class SanPhamRepository {
 
-    private Session session = HibernateConfig.getFACTORY().openSession();
-
     private String formTable = "from SanPham sp order by cast (SUBSTRING(sp.ma,3,3) as int) desc";
 
     public List<SanPham> getAll() {
-        Session session = HibernateConfig.getFACTORY().openSession();
-        Query query = session.createQuery(formTable);
-        List<SanPham> listOut= query.getResultList();
-        session.close();
-        return listOut;
-    }
+     
+    Session session = HibernateConfig.getFACTORY().openSession();
+    Query query = session.createQuery(formTable);
+    List<SanPham> listOut = query.getResultList();
 
-    public Boolean add(SanPham sanPham) {
+    session.close ();
+    return listOut ;
+}
+
+public Boolean add(SanPham sanPham) {
         Transaction transaction = null;
         try {
             Session session = HibernateConfig.getFACTORY().openSession();

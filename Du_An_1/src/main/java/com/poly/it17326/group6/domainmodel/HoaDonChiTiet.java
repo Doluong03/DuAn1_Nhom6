@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -39,7 +40,7 @@ public class HoaDonChiTiet implements Serializable {
     private HoaDon IdHoaDon;
     
     @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IdChiTietSP")
     private ChiTietSP IdChiTietSP;
 

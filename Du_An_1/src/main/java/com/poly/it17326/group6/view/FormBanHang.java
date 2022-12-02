@@ -238,8 +238,7 @@ public class FormBanHang extends javax.swing.JPanel {
                     loadGH(listGh);
                 } else {
                     loadDataHdct(listGhct);
-                }
-                
+                }        
             }
             if (tbHoaDon.getValueAt(index, 3).equals("Chờ thanh toán") && check == 1) {
                 listGh.removeAll(listGh);
@@ -614,6 +613,7 @@ public class FormBanHang extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel7.setText("Ngày tạo");
+
         jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel8.setText("Tổng tiền hàng :");
 
@@ -771,8 +771,8 @@ public class FormBanHang extends javax.swing.JPanel {
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jlbGIAMGIA, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jlbPHANTRAM, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -809,9 +809,9 @@ public class FormBanHang extends javax.swing.JPanel {
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
+                        .addGap(59, 59, 59)
                         .addComponent(btntaohoadon)
-                        .addGap(48, 48, 48)
+                        .addGap(99, 99, 99)
                         .addComponent(btnHuy))
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addContainerGap()
@@ -902,12 +902,15 @@ public class FormBanHang extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(85, 85, 85)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(31, 31, 31)
                 .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(605, Short.MAX_VALUE))
@@ -920,9 +923,9 @@ public class FormBanHang extends javax.swing.JPanel {
                     .addComponent(jLayeredPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(42, 42, 42)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(218, Short.MAX_VALUE))
         );
@@ -1111,28 +1114,27 @@ public class FormBanHang extends javax.swing.JPanel {
             hdct.setIdChiTietSP(ctsp);
             listHDCT.add(hdct);
         }
-        List<Voucher> listVCh = voucherService.Find(txtMavch.getText());
-        int idvch = listVCh.get(0).getId(); // lay id vch
-
-        List<Voucher> list = voucherService.FindTEN(txtMavch.getText());
-        int soluongTon = list.get(0).getSoLuong();
-        
+//        List<Voucher> listVCh = voucherService.Find(txtMavch.getText());
+//        int idvch = listVCh.get(0).getId(); // lay id vch
+//
+//        List<Voucher> list = voucherService.FindTEN(txtMavch.getText());
+//        int soluongTon = list.get(0).getSoLuong();
+//        
         int check = 0;
         HoaDonChiTietResponsitory hdrp = new HoaDonChiTietResponsitory();
         hdrp.deleteSP(jlbMAHD.getText());
         for (HoaDonChiTiet hoaDonChiTiet : listHDCT) {
             hoaDonChiTietService.saveHDCT(hoaDonChiTiet);
             if (txttienkhachdua.getText().isEmpty()) {
-                
                 hoaDonService.updateHD(jlbMAHD.getText(), new BigDecimal(jlbtongitenhang.getText()), 0, txtTenKH.getText(), txtSDT.getText());
-                hoaDonService.updateVCHHD(jlbMAHD.getText(), idvch); // update vocher
-                voucherService.updateSLVCH(txtMavch.getText(), (soluongTon - 1));
+//                hoaDonService.updateVCHHD(jlbMAHD.getText(), idvch); // update vocher// co loi
+//                voucherService.updateSLVCH(txtMavch.getText(), (soluongTon - 1)); // co loi
                 loadHD(hoaDonService.getListsHD());
             } else {
                 check = 1;
 //                chiTietSPService.updateSoLuong(ctsp);
                 hoaDonService.updateHD(jlbMAHD.getText(), new BigDecimal(jlbtongitenhang.getText()), 1, txtTenKH.getText(), txtSDT.getText());
-                hoaDonService.updateVCHHD(jlbMAHD.getText(), idvch); // update vocher
+//                hoaDonService.updateVCHHD(jlbMAHD.getText(), idvch); // update vocher // co loi
                 loadHD(hoaDonService.getListsHD());
             }
         }

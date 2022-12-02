@@ -191,7 +191,7 @@
                       <Component id="btnThem" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="108" max="32767" attributes="0"/>
+                  <EmptySpace pref="229" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -442,7 +442,7 @@
                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                       <Component id="cbTimKiemLSP" min="-2" pref="196" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="44" max="32767" attributes="0"/>
+                  <EmptySpace pref="559" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>

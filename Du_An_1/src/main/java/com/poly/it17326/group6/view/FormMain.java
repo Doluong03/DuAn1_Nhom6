@@ -4,6 +4,7 @@
  */
 package com.poly.it17326.group6.view;
 
+import com.poly.it17326.group6.view.FormNhanVien;
 import com.poly.it17326.group6.domainmodel.TaiKhoan;
 import com.poly.it17326.group6.service.ChiTietSPService;
 import com.poly.it17326.group6.service.TaiKhoanService;
@@ -342,6 +343,7 @@ public class FormMain extends javax.swing.JFrame {
     private void lbFormBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFormBanHangMouseClicked
         // TODO add your handling code here:
         lbFormBanHang.setForeground(Color.GREEN);
+        lbFormNhanVien.setForeground(Color.white);
         lbFormKhuyenMai.setForeground(Color.WHITE);
         lbFormSanPham.setForeground(Color.WHITE);
         tpBanHang.removeAll();
@@ -355,6 +357,7 @@ public class FormMain extends javax.swing.JFrame {
     private void lbFormSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFormSanPhamMouseClicked
         // TODO add your handling code here:
         lbFormBanHang.setForeground(Color.WHITE);
+        lbFormNhanVien.setForeground(Color.white);
         lbFormKhuyenMai.setForeground(Color.WHITE);
         lbFormSanPham.setForeground(Color.GREEN);
         tpBanHang.removeAll();
@@ -365,12 +368,22 @@ public class FormMain extends javax.swing.JFrame {
 
     private void lbFormNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFormNhanVienMouseClicked
         // TODO add your handling code here:
+        lbFormBanHang.setForeground(Color.WHITE);
+        lbFormKhuyenMai.setForeground(Color.WHITE);
+        lbFormSanPham.setForeground(Color.white);
+        lbFormNhanVien.setForeground(Color.GREEN);
+        tpBanHang.removeAll();
+        pnBanHang = new FormNhanVien();
+        tpBanHang.addTab("Quản lý sản phẩm", pnBanHang);
+        tpBanHang.setSelectedComponent(pnBanHang);
+
     }//GEN-LAST:event_lbFormNhanVienMouseClicked
 
     private void lbFormKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFormKhuyenMaiMouseClicked
         // TODO add your handling code here:
         lbFormBanHang.setForeground(Color.WHITE);
         lbFormSanPham.setForeground(Color.WHITE);
+        lbFormNhanVien.setForeground(Color.white);
         lbFormKhuyenMai.setForeground(Color.GREEN);
         tpBanHang.removeAll();
         pnBanHang = new FormKhuyenMai();
@@ -380,7 +393,7 @@ public class FormMain extends javax.swing.JFrame {
 
     private void btnDoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMKActionPerformed
         // TODO add your handling code here:
-        FormChangePassword fChangeP= new FormChangePassword();
+        FormChangePassword fChangeP = new FormChangePassword();
         fChangeP.setVisible(true);
     }//GEN-LAST:event_btnDoiMKActionPerformed
 

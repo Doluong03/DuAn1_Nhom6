@@ -71,8 +71,12 @@ public class HoaDonChiTietResponsitory {
     public static void main(String[] args) {
         String ma = "HD7";
         HoaDonChiTietResponsitory s = new HoaDonChiTietResponsitory();
-        s.deleteSP(ma);
+        for (HoaDonChiTiet arg : s.getListHDCT()) {
+            System.out.println(arg.toString());
+        }
+ 
     }
+    
 
 //    public static void main(String[] args) {
 //        HoaDonChiTietResponsitory hd = new HoaDonChiTietResponsitory();
@@ -100,4 +104,7 @@ public class HoaDonChiTietResponsitory {
 //            hd.saveHDCT(hoaDonChiTiet);
 //        }
 //    }
+    
+    
+    
 }
