@@ -141,12 +141,13 @@ public class FormBanHang extends javax.swing.JPanel {
     }
     
     private void loadIcon() {
-        btnLamMoiGH.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\reload.png"));
-        btnXoaSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\dustbin.png"));
-        lbTimKiemSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\search.png"));
-        btntaohoadon.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\add.png"));
-        btnThanhToan.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\pay.png"));
-        
+        btnLamMoiGH.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\SanPham\\reload.png"));
+        btnXoaSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\SanPham\\dustbin.png"));
+        lbTimKiemSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\SanPham\\search.png"));
+        btntaohoadon.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\SanPham\\add.png"));
+        btnThanhToan.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\SanPham\\pay.png"));
+
+
     }
     
     private void loadDataHdct(ArrayList<HoaDonCTResponse> listGh) {

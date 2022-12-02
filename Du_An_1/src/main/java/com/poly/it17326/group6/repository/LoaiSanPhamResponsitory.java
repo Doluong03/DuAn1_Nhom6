@@ -18,7 +18,7 @@ import org.hibernate.Transaction;
  */
 public class LoaiSanPhamResponsitory {
        
-    String sql="from LoaiSP ";
+    String sql="from LoaiSP lsp order by cast (SUBSTRING(lsp.ma,4,3) as int) desc ";
     public List<LoaiSP> getAll(){
         Session session=HibernateConfig.getFACTORY().openSession();
         Query query=session.createQuery(sql);

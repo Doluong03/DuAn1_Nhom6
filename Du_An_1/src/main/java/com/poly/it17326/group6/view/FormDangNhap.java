@@ -43,6 +43,7 @@ public class FormDangNhap extends javax.swing.JFrame {
         show.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\hidden.png"));
         disable.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\hidden.png"));
         txtHienMk.setVisible(false);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -123,6 +124,11 @@ public class FormDangNhap extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Quên mật khẩu?");
         jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 116, 32));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -268,6 +274,12 @@ public class FormDangNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Đăng nhập thất bại");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+    FormForgotPassword frmForgot = new FormForgotPassword();
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+        frmForgot.setVisible(true);
+        
+    }//GEN-LAST:event_jLabel8MouseClicked
 
     /**
      * @param args the command line arguments

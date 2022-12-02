@@ -41,6 +41,7 @@ public class DialogNsx extends javax.swing.JDialog {
         for (NSX repose1 : lists) {
             dtm.addRow(new Object[]{repose1.getId(), repose1.getMa(), repose1.getTen(), repose1.getQuocGia()});
         }
+                txtMa.setText("NSX" + ((lists.size()) + 1));
     }
 
     /**

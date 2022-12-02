@@ -20,7 +20,7 @@ public class SanPhamRepository {
 
     private Session session = HibernateConfig.getFACTORY().openSession();
 
-    private String formTable = "from SanPham";
+    private String formTable = "from SanPham sp order by cast (SUBSTRING(sp.ma,3,3) as int) desc";
 
     public List<SanPham> getAll() {
         Session session = HibernateConfig.getFACTORY().openSession();

@@ -138,7 +138,7 @@ public class FormSanPham extends javax.swing.JPanel {
                 txtDonGia.setText(ct.getDonGia().toString());
                 jdcHSD.setDate(ct.getHsd());
                 txtSoLuong.setText(String.valueOf(ct.getSoLuongTon()));
-                lbAnhSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\" + ct.getAnh().getTen() + ".jpg"));
+                lbAnhSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\SanPham\\" + ct.getAnh().getLink()));
             }
         }
     }
@@ -282,6 +282,12 @@ public class FormSanPham extends javax.swing.JPanel {
             }
         });
 
+        btnThemAnh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemAnhActionPerformed(evt);
+            }
+        });
+
         jdcHSD.setDateFormatString("yyyy-MM-dd");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -406,13 +412,13 @@ public class FormSanPham extends javax.swing.JPanel {
         tbSanPham.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         tbSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tbSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -479,8 +485,8 @@ public class FormSanPham extends javax.swing.JPanel {
                     .addComponent(cbTimKiemLSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -582,7 +588,16 @@ public class FormSanPham extends javax.swing.JPanel {
         Window wd = SwingUtilities.windowForComponent(this);
         DialogLSP dialogLSP = new DialogLSP((Frame) wd, true);
         dialogLSP.setVisible(true);
+        loadCB();
     }//GEN-LAST:event_btnThemLSPActionPerformed
+
+    private void btnThemAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemAnhActionPerformed
+        // TODO add your handling code here:
+        Window wd = SwingUtilities.windowForComponent(this);
+        DialogAnh dialogAnh = new DialogAnh((Frame) wd, true);
+        dialogAnh.setVisible(true);
+        loadCB();
+    }//GEN-LAST:event_btnThemAnhActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -17,12 +17,12 @@ import org.hibernate.Transaction;
  */
 public class AnhRepository {
 
-    Session session = HibernateConfig.getFACTORY().openSession();
-    String sql = "from Anh";
-
     public List<Anh> getAll() {
+        Session session = HibernateConfig.getFACTORY().openSession();
+        String sql = "from Anh a order by cast (SUBSTRING(a.ma,2,3) as int) desc";
         Query query = session.createQuery(sql);
         List<Anh> listA = (List<Anh>) query.getResultList();
+        session.close();
         return listA;
     }
 
