@@ -23,7 +23,7 @@ public class HoaDonresponse {
     private int tinhtrang;
     private String tenKH;
     private String sdt;
-
+    
     public HoaDonresponse() {
     }
 
@@ -35,6 +35,7 @@ public class HoaDonresponse {
         this.tinhtrang = hd.getTrangThai();
         this.tenKH = hd.getHoTenkh();
         this.sdt = hd.getSdt();
+        
     }
     
     public String trangThai(){

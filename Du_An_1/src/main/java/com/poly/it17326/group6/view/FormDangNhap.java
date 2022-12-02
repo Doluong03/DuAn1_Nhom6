@@ -49,6 +49,7 @@ public class FormDangNhap extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lbAnhNen = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         lbExit = new javax.swing.JLabel();
@@ -67,7 +68,8 @@ public class FormDangNhap extends javax.swing.JFrame {
         show = new javax.swing.JLabel();
         lbIconPassWord2 = new javax.swing.JLabel();
         txtHienMk = new javax.swing.JTextField();
-        lbAnhNen = new javax.swing.JLabel();
+
+        lbAnhNen.setBackground(new java.awt.Color(102, 102, 255));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 255));
@@ -199,10 +201,7 @@ public class FormDangNhap extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(458, 0, 540, 430));
 
-        lbAnhNen.setBackground(new java.awt.Color(102, 102, 255));
-        jPanel1.add(lbAnhNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 433));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 1000, 430));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

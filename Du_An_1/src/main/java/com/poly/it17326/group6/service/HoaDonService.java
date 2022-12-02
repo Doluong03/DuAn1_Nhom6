@@ -17,17 +17,13 @@ import java.util.List;
  *
  * @author Hp
  */
-
-
 public interface HoaDonService {
 
     public ArrayList<HoaDonresponse> getListsHD();
 
     public ArrayList<HoaDon> getIDHD(String Ma);
 
-    public boolean updateHD(String Ma, BigDecimal tongtien, int trangthai,String tenKH,String sdt);
-
-    public ArrayList<HoaDonresponse> getAllHD();
+    public boolean updateHD(String Ma, BigDecimal tongtien, int trangthai, String tenKH, String sdt);
 
     public boolean addHD(int idTk);
 
@@ -35,4 +31,7 @@ public interface HoaDonService {
 
     public ArrayList<HoaDonresponse> timKiemHD(String ma);
 
+    public List<HoaDon> getALLHD();
+
+    public boolean updateVCHHD(String ma, int IdVC);
 }
