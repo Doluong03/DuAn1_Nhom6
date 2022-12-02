@@ -11,7 +11,7 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
     <name>Du_An_1</name>
-     <dependencies>
+    <dependencies>
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -44,10 +44,62 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE126</version>
+        </dependency>
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.github.sarxos/webcam-capture -->
+        <dependency>
+            <groupId>com.github.sarxos</groupId>
+            <artifactId>webcam-capture</artifactId>
+            <version>0.3.12</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.zxing/javase -->
+        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <!-- Thanks for using https://jar-download.com -->
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.nativelibs4java</groupId>
+            <artifactId>bridj</artifactId>
+            <version>0.6.2</version>
+        </dependency>
+        <!-- Thanks for using https://jar-download.com -->
+        <!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.5.1</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>3.3.3</version>
+        </dependency>
+        <!-- Thanks for using https://jar-download.com -->
           <dependency>
-               <groupId>org.netbeans.external</groupId>
-               <artifactId>AbsoluteLayout</artifactId>
-               <version>RELEASE126</version>
+               <groupId>com.sun.mail</groupId>
+               <artifactId>jakarta.mail</artifactId>
+               <version>2.0.1</version>
+               <type>jar</type>
           </dependency>
      </dependencies>
+
 </project>

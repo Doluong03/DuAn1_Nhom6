@@ -68,7 +68,7 @@ public class TaiKhoan implements Serializable {
     private String email;
 
     @Column(name = "NgaySinh")
-    private String NgaySinh;
+    private Date NgaySinh;
 
     @Column(name = "Status")
     private boolean Status;
@@ -82,7 +82,7 @@ public class TaiKhoan implements Serializable {
     @Column(name = "Deleted")
     private boolean delete;
 
-   @ManyToOne
+   @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "IdCV", referencedColumnName = "id")
     private ChucVu chucVu;
 

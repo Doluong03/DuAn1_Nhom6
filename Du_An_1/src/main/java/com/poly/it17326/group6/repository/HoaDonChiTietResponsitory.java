@@ -21,8 +21,6 @@ import org.hibernate.Transaction;
  */
 public class HoaDonChiTietResponsitory {
 
-    Session session = HibernateConfig.getFACTORY().openSession();
-
 //    public ArrayList<Integer> getIDHD(String maHD) {
 //        Query query = session.createQuery("from HoaDonChiTiet  where Ma = :maHD");
 //        query.setParameter("Ma", maHD);
@@ -44,19 +42,21 @@ public class HoaDonChiTietResponsitory {
 
     }
 
-    public ArrayList<HoaDonChiTiet> getListHDCT() {
-        String sql="from HoaDonChiTiet";
+    public List<HoaDonChiTiet> getListHDCT() {
+        Session session = HibernateConfig.getFACTORY().openSession();
+        String sql = "from HoaDonChiTiet";
         Query q = session.createQuery(sql);
-        return (ArrayList<HoaDonChiTiet>) q.getResultList();
+        List<HoaDonChiTiet> list = q.getResultList();
+        session.close();
+        return list;
     }
-    
-    
-    public boolean deleteSP(String ma){
+
+    public boolean deleteSP(String ma) {
         Transaction tran = null;
         try (Session session = HibernateConfig.getFACTORY().openSession();) {
             tran = session.beginTransaction();
-            String sql ="delete HoaDonChiTiet where MaHD = :ma";
-            Query q =session.createQuery(sql);
+            String sql = "delete HoaDonChiTiet where MaHD = :ma";
+            Query q = session.createQuery(sql);
             q.setParameter("ma", ma);
             q.executeUpdate();
             tran.commit();
@@ -67,11 +67,16 @@ public class HoaDonChiTietResponsitory {
         }
         return false;
     }
+
     public static void main(String[] args) {
-        String ma= "HD7";
+        String ma = "HD7";
         HoaDonChiTietResponsitory s = new HoaDonChiTietResponsitory();
-        s.deleteSP(ma);
+        for (HoaDonChiTiet arg : s.getListHDCT()) {
+            System.out.println(arg.toString());
+        }
+ 
     }
+    
 
 //    public static void main(String[] args) {
 //        HoaDonChiTietResponsitory hd = new HoaDonChiTietResponsitory();
@@ -99,5 +104,7 @@ public class HoaDonChiTietResponsitory {
 //            hd.saveHDCT(hoaDonChiTiet);
 //        }
 //    }
-
+    
+    
+    
 }

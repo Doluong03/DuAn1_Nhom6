@@ -40,5 +40,7 @@ public class Anh implements Serializable {
     private String ten;
     @Column(name = "Cover")
     private boolean cover;
+    @Column(name = "link")
+    private String link;
 
 }

@@ -68,5 +68,7 @@ public class HoaDon implements Serializable {
  
 
     // chua maping voi vocher
-
+    @ManyToOne(targetEntity = com.poly.it17326.group6.domainmodel.Voucher.class)
+    @JoinColumn(name = "IdVC",referencedColumnName = "Id")
+    private Voucher voucher;
 }

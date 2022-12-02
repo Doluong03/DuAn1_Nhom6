@@ -28,7 +28,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ThanhPhan implements Serializable {
+public class ThanhPhan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

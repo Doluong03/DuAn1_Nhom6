@@ -14,6 +14,7 @@ import com.poly.it17326.group6.response.ChiTietSpResponse;
 import com.poly.it17326.group6.response.ChiTietSpResponse_2;
 import com.poly.it17326.group6.service.ChiTietSPService;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -24,9 +25,9 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
     private ChiTietSpRepository chiTietSpRepository = new ChiTietSpRepository();
 
     @Override
-    public ArrayList<ChiTietSpResponse> getAll() {
-        ArrayList<ChiTietSP> listCt = chiTietSpRepository.getAll();
-        ArrayList<ChiTietSpResponse> listCTR = new ArrayList<>();
+    public List<ChiTietSpResponse> getAll() {
+        List<ChiTietSP> listCt = chiTietSpRepository.getAll();
+        List<ChiTietSpResponse> listCTR = new ArrayList<>();
         for (ChiTietSP chiTietSP : listCt) {
             ChiTietSpResponse ctr = new ChiTietSpResponse(chiTietSP);
             listCTR.add(ctr);
@@ -53,9 +54,9 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
     }
 
     @Override
-    public ArrayList<ChiTietSpResponse_2> getAllFSP() {
-        ArrayList<ChiTietSP> listCt = chiTietSpRepository.getAll();
-        ArrayList<ChiTietSpResponse_2> listCTR = new ArrayList<>();
+    public List<ChiTietSpResponse_2> getAllFSP() {
+        List<ChiTietSP> listCt = chiTietSpRepository.getAll();
+        List<ChiTietSpResponse_2> listCTR = new ArrayList<>();
         for (ChiTietSP chiTietSP : listCt) {
             ChiTietSpResponse_2 ctr = new ChiTietSpResponse_2(chiTietSP);
             listCTR.add(ctr);
@@ -63,17 +64,25 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
         return listCTR;
     }
 
+//    public static void main(String[] args) {
+//        ChiTietSPServiceImpl c= new ChiTietSPServiceImpl();
+//        for (ChiTietSpResponse_2 chiString : c.getAllFSP()) {
+//            System.out.println(chiString);
+//        }
+//    }
     @Override
-    public ArrayList<ChiTietSpResponse_2> getTimKiemLsp(String ten) {
+    public List<ChiTietSpResponse_2> getTimKiemLsp(String ten) {
         ArrayList<ChiTietSpResponse_2> listCTrespon = new ArrayList<>();
-        ChiTietSP c = chiTietSpRepository.getTimKiem(ten);
-        ChiTietSpResponse_2 ctr = new ChiTietSpResponse_2(c);
-        listCTrespon.add(ctr);
+        List<ChiTietSP> c = chiTietSpRepository.getTimKiemLsp(ten);
+        for (ChiTietSP chiTietSP : c) {
+            ChiTietSpResponse_2 ctr = new ChiTietSpResponse_2(chiTietSP);
+            listCTrespon.add(ctr);
+        }
         return listCTrespon;
     }
 
     @Override
-    public ArrayList<SanPham> getListSp() {
+    public List<SanPham> getListSp() {
         return chiTietSpRepository.getListSP();
     }
 
@@ -112,17 +121,17 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
     }
 
     @Override
-    public ArrayList<NSX> getListNsx() {
+    public List<NSX> getListNsx() {
         return chiTietSpRepository.getListNsx();
     }
 
     @Override
-    public ArrayList<LoaiSP> getListLSp() {
+    public List<LoaiSP> getListLSp() {
         return chiTietSpRepository.getListLSP();
     }
 
     @Override
-    public ArrayList<Anh> getListA() {
+    public List<Anh> getListA() {
         return chiTietSpRepository.getListAnh();
     }
 
@@ -156,5 +165,10 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
         ChiTietSpResponse_2 ctr = new ChiTietSpResponse_2(ct);
         chiTietSpRepository.updateSP(ct);
         return ctr;
+    }
+
+    @Override
+    public boolean updateSoLuong( int sl,int id) {
+        return  chiTietSpRepository.updateSL(sl,id);
     }
 }

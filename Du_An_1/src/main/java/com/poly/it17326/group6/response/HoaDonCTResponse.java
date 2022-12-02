@@ -9,6 +9,7 @@ import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.HoaDon;
 import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
 import com.poly.it17326.group6.domainmodel.SanPham;
+import com.poly.it17326.group6.domainmodel.Voucher;
 import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +32,8 @@ public class HoaDonCTResponse {
     private String sdt;
     private int idChiTietSP;
     private String maSP;
+   
+    
     public HoaDonCTResponse() {
     }
 
