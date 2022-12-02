@@ -58,11 +58,7 @@ private HoaDonRepository HoaDonRepository = new HoaDonRepository();
         return listHDRespon;
     }
 
-    @Override
-    public ArrayList<HoaDonresponse> getAllHD() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+  
     @Override
     public ArrayList<HoaDonresponse> timKiemHD(String ma) {
         ArrayList<HoaDon> listHD = new HoaDonRepository().timKiemHD(ma);
@@ -72,6 +68,16 @@ private HoaDonRepository HoaDonRepository = new HoaDonRepository();
             listHDRespon.add(hdr);
         }
         return listHDRespon;
+    }
+
+    @Override
+    public List<HoaDon> getALLHD() {
+        return HoaDonRepository.getALLHD();
+    }
+
+    @Override
+    public boolean updateVCHHD(String ma, int IdVC) {
+        return HoaDonRepository.updateVCHHD(ma, IdVC);
     }
 
 
