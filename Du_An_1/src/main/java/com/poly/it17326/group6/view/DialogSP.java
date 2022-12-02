@@ -43,6 +43,7 @@ public class DialogSP extends javax.swing.JDialog {
         for (SanPham sv : sanPhams) {
             defaultTableModel.addRow(new Object[]{sv.getId(), sv.getMa(), sv.getTen(), doiNgay(sv.getCreateAt()), sv.getUpdateAt()});
         }
+        txtma.setText("SP" + ((sanPhams.size()) + 1));
     }
 
     private String doiNgay(Date d) {
@@ -207,7 +208,6 @@ public class DialogSP extends javax.swing.JDialog {
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
 
         SanPham sv = new SanPham();
-        sv.setMa(txtma.getText());
         sv.setTen(txtten.getText());
         sv.setCreateAt(new Date());
         if (sanPhamService.them(sv)) {
@@ -224,7 +224,7 @@ public class DialogSP extends javax.swing.JDialog {
         sv.setMa(txtma.getText());
         sv.setTen(txtten.getText());
         try {
-            Date ngayTao= new SimpleDateFormat("yyyy-MM-dd").parse(txtcreateat.getText());
+            Date ngayTao = new SimpleDateFormat("yyyy-MM-dd").parse(txtcreateat.getText());
             sv.setCreateAt(ngayTao);
         } catch (ParseException ex) {
             Logger.getLogger(DialogSP.class.getName()).log(Level.SEVERE, null, ex);

@@ -45,6 +45,8 @@ public class DialogAnh extends javax.swing.JDialog {
             model.addRow(new Object[]{anhResponse.getId(), anhResponse.getMa(), anhResponse.getTen(), anhResponse.getLink()});
 
         }
+        txtMa.setText("A" + ((listA.size()) + 1));
+
     }
     int index = 0;
 
@@ -74,17 +76,19 @@ public class DialogAnh extends javax.swing.JDialog {
 
         }
     }
-      public boolean check(){
-          if (txtMa.getText().isEmpty()) {
-              JOptionPane.showMessageDialog(this,"khong de trong","loi",JOptionPane.ERROR_MESSAGE);
-              return false;
-          }
-            if (txtTen.getText().isEmpty()) {
-              JOptionPane.showMessageDialog(this,"khong de trong","loi",JOptionPane.ERROR_MESSAGE);
-              return false;
-          }
-          return true;
-      }
+
+    public boolean check() {
+        if (txtMa.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "khong de trong", "loi", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (txtTen.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "khong de trong", "loi", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -256,22 +260,21 @@ public class DialogAnh extends javax.swing.JDialog {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         if (check()) {
-            
-        
-        Anh anh = new Anh();
-        anh.setMa(txtMa.getText());
-        anh.setTen(txtTen.getText());
-        if (duongdananh == null) {
-            anh.setLink("no image");
-        } else {
-            anh.setLink(duongdananh);
-        }
-        if (anhService.Them(anh)) {
-            JOptionPane.showMessageDialog(this, "them thanh cong");
-            loadTable(anhService.getAll());
-        } else {
-            JOptionPane.showMessageDialog(this, "them that bai");
-        }
+
+            Anh anh = new Anh();
+            anh.setMa(txtMa.getText());
+            anh.setTen(txtTen.getText());
+            if (duongdananh == null) {
+                anh.setLink("no image");
+            } else {
+                anh.setLink(duongdananh);
+            }
+            if (anhService.Them(anh)) {
+                JOptionPane.showMessageDialog(this, "them thanh cong");
+                loadTable(anhService.getAll());
+            } else {
+                JOptionPane.showMessageDialog(this, "them that bai");
+            }
         }
     }//GEN-LAST:event_btnThemActionPerformed
 

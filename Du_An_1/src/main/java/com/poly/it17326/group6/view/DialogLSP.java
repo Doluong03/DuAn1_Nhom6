@@ -58,6 +58,7 @@ public class DialogLSP extends javax.swing.JDialog {
             dtm.addRow((Object[]) repose1.row());
 
         }
+        txtMa.setText("LSP" + ((lists.size()) + 1));
     }
 
     /**

@@ -27,7 +27,7 @@ public class ChiTietSpRepository {
 
     public List<ChiTietSP> getAll() {
         Session session = HibernateConfig.getFACTORY().openSession();
-        String sql = "from ChiTietSP ";
+        String sql = "select ct from ChiTietSP as ct join ct.sanPham sp order by cast (SUBSTRING(sp.ma,3,3) as int) desc";
         Query q = session.createQuery(sql);
         List<ChiTietSP> listCTSP = q.getResultList();
         session.close();
