@@ -12,7 +12,9 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Query;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -111,6 +113,38 @@ public boolean updateHD(String ma,BigDecimal tongTien , int trangThai , String t
         ArrayList<HoaDon> listSearch = (ArrayList<HoaDon>) query.getResultList();
         session.close();
         return listSearch;
+    }
+  
+    public List<HoaDon> getALLHD() {
+        Session session= HibernateConfig.getFACTORY().openSession();
+        Query query = session.createQuery("from HoaDon ");
+        
+      List<HoaDon> listSearch = (List<HoaDon>) query.getResultList();
+        session.close();
+        return listSearch;
+    }
+    
+    public boolean updateVCHHD(String ma,int IdVC) {
+        Transaction tran = null;
+        try ( Session session= HibernateConfig.getFACTORY().openSession();) {
+            tran = session.beginTransaction();
+            String sql = "update HoaDon set IdVC = :IdVC where MaHD = :Ma";
+            Query query = session.createQuery(sql);
+            query.setParameter("IdVC", IdVC);
+            query.setParameter("Ma", ma);    
+            query.executeUpdate();
+            tran.commit();
+            return true;
+        }catch(HibernateException ex){
+            ex.getMessage();
+            
+        }
+        return false;
+      
+}
+    public static void main(String[] args) {
+        HoaDonRepository s = new HoaDonRepository();
+          s.updateVCHHD("HD15", 3);
     }
   
 

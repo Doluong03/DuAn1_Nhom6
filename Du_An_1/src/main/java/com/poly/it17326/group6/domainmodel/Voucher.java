@@ -4,9 +4,9 @@
  */
 package com.poly.it17326.group6.domainmodel;
 
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,31 +17,38 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@Entity
 @Table(name = "Voucher")
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Getter
 @Setter
-@ToString
-public class Voucher implements Serializable {
+public class Voucher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private int id;
+    private int Id;
 
     @Column(name = "Ma")
-    private String ma;
+    private String Ma;
 
     @Column(name = "Ten")
     private String Ten;
-    
+
     @Column(name = "NgayApDung")
     private Date NgayApDung;
-    
+
     @Column(name = "NgayKetThuc")
     private Date NgayKetThuc;
-    
+
     @Column(name = "PhanTram")
     private float PhanTram;
+    
+    @Column(name = "TrangThai")
+    private int TrangThai;
+    
+     @Column(name = "SoLuong")
+     private int SoLuong;
 }
