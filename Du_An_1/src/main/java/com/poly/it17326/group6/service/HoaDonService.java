@@ -29,7 +29,7 @@ public interface HoaDonService {
 
     public ArrayList<HoaDonresponse> timKiemTT(int tt);
 
-    public ArrayList<HoaDonresponse> timKiemHD(String ma);
+    public ArrayList<HoaDonresponse> timKiemHD(String ma, String sdt);
 
     public List<HoaDon> getALLHD();
 

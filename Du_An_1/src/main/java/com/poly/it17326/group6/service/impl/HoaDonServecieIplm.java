@@ -60,8 +60,8 @@ private HoaDonRepository HoaDonRepository = new HoaDonRepository();
 
   
     @Override
-    public ArrayList<HoaDonresponse> timKiemHD(String ma) {
-        ArrayList<HoaDon> listHD = new HoaDonRepository().timKiemHD(ma);
+    public ArrayList<HoaDonresponse> timKiemHD(String ma , String sdt) {
+        ArrayList<HoaDon> listHD = new HoaDonRepository().timKiemHD(ma,sdt);
         ArrayList<HoaDonresponse> listHDRespon = new ArrayList<>();
         for (HoaDon hd : listHD) {
             HoaDonresponse hdr = new HoaDonresponse(hd);
