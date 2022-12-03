@@ -6,6 +6,7 @@ D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\service
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\domainmodel\NSX.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\view\DialogSP.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\service\impl\AnhServiceImpl.java
+D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\view\FormNhanVien.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\repository\VoucherResponsitory.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\view\DialogLSP.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\domainmodel\HoadonChiTietID.java
@@ -64,7 +65,6 @@ D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\reposit
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\response\HoaDonCTResponse.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\response\GioHangresponse.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\config\HibernateConfig.java
-D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\view\FormTaiKhoan.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\service\ChiTietSPService.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\repository\NSXRespository.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\repository\ThongKeRepository.java

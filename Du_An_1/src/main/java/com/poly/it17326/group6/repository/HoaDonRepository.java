@@ -106,10 +106,11 @@ public boolean updateHD(String ma,BigDecimal tongTien , int trangThai , String t
         return listSearch;
     }
     
-    public ArrayList<HoaDon> timKiemHD(String ma) {
+    public ArrayList<HoaDon> timKiemHD(String ma, String sdt) {
             Session session= HibernateConfig.getFACTORY().openSession();
-        Query query = session.createQuery("select hd from HoaDon hd  join hd.taiKhoan where hd.MaHD = :ma order by cast (SUBSTRING(hd.MaHD,3,3) as int) asc");
+        Query query = session.createQuery("select hd from HoaDon hd  join hd.taiKhoan where hd.MaHD = :ma or hd.Sdt = :sdt order by cast (SUBSTRING(hd.MaHD,3,3) as int) asc");
         query.setParameter("ma", ma);
+        query.setParameter("sdt", sdt);
         ArrayList<HoaDon> listSearch = (ArrayList<HoaDon>) query.getResultList();
         session.close();
         return listSearch;
