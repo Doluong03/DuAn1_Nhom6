@@ -13,6 +13,15 @@ import com.google.zxing.MultiFormatReader;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
+import com.itextpdf.kernel.color.DeviceRgb;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.VerticalAlignment;
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.HoaDon;
 import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
@@ -49,6 +58,7 @@ import java.awt.Window;
 
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -88,9 +98,12 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
         loadSP(chiTietSPService.getAll());
         loadIcon();
         cbbhtThanhtoan.addItem("Tiền mặt");
+        cbbhtThanhtoan.addItem("Chuyển khoản");
+        cbbhtThanhtoan.addItem("Kết hợp");
         loadWeb();
         setKH("KH0");
         loadHD(listHD);
+        loadCB();
 
     }
 
@@ -207,6 +220,16 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
 
     }
 
+    private void loadCB() {
+        cbVoucher.removeAllItems();
+        for (VocherReponse vocherReponse : voucherService.getAll()) {
+            cbVoucher.addItem(vocherReponse.getTenVCh());
+        }
+        if (this.isVisible() == false) {
+            webcam.close();
+        }
+    }
+
     private void showJLBKH() { // hien thi jlb cua phan thong tin nv va kh
         jlbMAHD.setVisible(true);
         // jlbTENNV.setVisible(true);
@@ -223,6 +246,8 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
 
     private void loadTextFiled(int index) {
         int check = 0;
+        jlbtienCK.setText("0");
+        jlbtienthua.setText("0");
         if (tbHoaDon.getRowCount() > 0) {
             jlbMAHD.setText(tbHoaDon.getValueAt(index, 0).toString());
             //  jlbTENNV.setText(tbHoaDon.getValueAt(index, 2).toString());
@@ -367,6 +392,7 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
                         String sl = JOptionPane.showInputDialog(this, "Nhập số lượng");
                         GHupdate.setSoLuong(Integer.parseInt(sl));
                         GHupdate.setMaVach(chiTietSpResponse.getMaVach());
+                        
                         listGh.add(GHupdate);
                         loadGH(listGh);
                     }
@@ -396,6 +422,197 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
         }
 
         return id;
+
+    }
+
+    public void close() {
+        webcam.close();
+    }
+
+    private void print() {
+        String path = "D:\\Nhom6_PRO1041\\DuAn1_ST2\\HoaDonPDF\\ " + jlbMAHD.getText() + ".pdf"; // duowng daan
+
+        float col = 280f;
+        float columnWidth[] = {col, col};
+
+        PdfWriter writer;
+        try {
+            writer = new PdfWriter(path);
+            PdfDocument pdfDocument = new PdfDocument(writer);
+            com.itextpdf.layout.Document doc = new com.itextpdf.layout.Document(pdfDocument) {
+            };
+            pdfDocument.setDefaultPageSize(PageSize.A4);
+            com.itextpdf.layout.element.Table tb = new com.itextpdf.layout.element.Table(columnWidth);
+
+            tb.addCell(new Cell().add("FMILK")
+                    .setTextAlignment(TextAlignment.LEFT)
+                    .setVerticalAlignment(VerticalAlignment.MIDDLE)
+                    .setMarginTop(30f)
+                    .setMarginBottom(30f)
+                    .setFontSize(30f)
+                    .setBorder(Border.NO_BORDER));
+            tb.addCell(new Cell().add("")
+                    .setTextAlignment(TextAlignment.RIGHT)
+                    .setMarginTop(30f)
+                    .setMarginBottom(30f)
+                    .setBorder(Border.NO_BORDER)
+                    .setMarginRight(10f));
+            tb.setBackgroundColor(new DeviceRgb(0, 51, 102))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE);
+            tb.addCell(new Cell().add("")
+                    .setTextAlignment(TextAlignment.RIGHT)
+                    .setMarginTop(30f)
+                    .setMarginBottom(30f)
+                    .setBorder(Border.NO_BORDER)
+                    .setMarginRight(10f));
+            tb.setBackgroundColor(new DeviceRgb(0, 51, 102))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE);
+            tb.addCell(new Cell().add("SDT: 0865683753")
+                    .setTextAlignment(TextAlignment.RIGHT)
+                    .setMarginTop(30f)
+                    .setMarginBottom(30f)
+                    .setBorder(Border.NO_BORDER)
+                    .setMarginRight(10f));
+            tb.setBackgroundColor(new DeviceRgb(0, 51, 102))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE);
+
+            tb.addCell(new Cell().add("")
+                    .setTextAlignment(TextAlignment.RIGHT)
+                    .setMarginTop(30f)
+                    .setMarginBottom(30f)
+                    .setBorder(Border.NO_BORDER)
+                    .setMarginRight(10f));
+            tb.setBackgroundColor(new DeviceRgb(0, 51, 102))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE);
+            tb.addCell(new Cell().add("D/C: Trinh Van Po - Nam Tu Liem - Ha Noi")
+                    .setTextAlignment(TextAlignment.RIGHT)
+                    .setMarginTop(50f)
+                    .setMarginBottom(30f)
+                    .setBorder(Border.NO_BORDER)
+                    .setMarginRight(10f));
+            tb.setBackgroundColor(new DeviceRgb(0, 51, 102))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE);
+
+            float colwidth[] = {80, 300, 100, 80};
+            com.itextpdf.layout.element.Table customInforTbale = new com.itextpdf.layout.element.Table(colwidth);
+            customInforTbale.addCell(new Cell(0, 4).add("Thong tin hoa don")
+                    .setBorder(Border.NO_BORDER));
+            customInforTbale.addCell(new Cell().add("NhanVien:")
+                    .setBorder(Border.NO_BORDER));
+            customInforTbale.addCell(new Cell().add(tbHoaDon.getValueAt(0, 2).toString())
+                    .setBorder(Border.NO_BORDER));
+            customInforTbale.addCell(new Cell().add("MaHD:")
+                    .setBorder(Border.NO_BORDER));
+            customInforTbale.addCell(new Cell().add(jlbMAHD.getText())
+                    .setBorder(Border.NO_BORDER));
+            customInforTbale.addCell(new Cell().add("TenKhach :")
+                    .setBorder(Border.NO_BORDER));
+            customInforTbale.addCell(new Cell().add(txtTenKH.getText())
+                    .setBorder(Border.NO_BORDER));
+            customInforTbale.addCell(new Cell().add("NgayTao :")
+                    .setBorder(Border.NO_BORDER));
+            customInforTbale.addCell(new Cell().add(tbHoaDon.getValueAt(0, 1).toString())
+                    .setBorder(Border.NO_BORDER));
+
+            float itemInforWidth[] = {140, 140, 140, 140, 140};
+            com.itextpdf.layout.element.Table itemTbale = new com.itextpdf.layout.element.Table(itemInforWidth);
+
+            itemTbale.addCell(new Cell().add("Ma SP")
+                    .setBackgroundColor(new DeviceRgb(0, 51, 102))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setTextAlignment(TextAlignment.CENTER));
+            itemTbale.addCell(new Cell().add("Ten SP")
+                    .setBackgroundColor(new DeviceRgb(0, 51, 102))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE));
+            itemTbale.addCell(new Cell().add("So luong")
+                    .setBackgroundColor(new DeviceRgb(0, 51, 102))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setTextAlignment(TextAlignment.CENTER));
+            itemTbale.addCell(new Cell().add("Don gia")
+                    .setBackgroundColor(new DeviceRgb(0, 51, 102))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setTextAlignment(TextAlignment.CENTER));
+            itemTbale.addCell(new Cell().add("Thanh tien")
+                    .setBackgroundColor(new DeviceRgb(0, 51, 102))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setTextAlignment(TextAlignment.CENTER));
+
+            for (int i = 0; i < tbGioHang.getRowCount(); i++) {
+
+                String maSp = tbGioHang.getValueAt(i, 0).toString();
+                String tenSp = tbGioHang.getValueAt(i, 1).toString();
+                String soluong = tbGioHang.getValueAt(i, 2).toString();
+                String dongia = tbGioHang.getValueAt(i, 3).toString() + " VND";
+                String thanhtien = tbGioHang.getValueAt(i, 4).toString() + " VND";
+                itemTbale.addCell(maSp).setTextAlignment(TextAlignment.CENTER);
+                itemTbale.addCell(tenSp).setTextAlignment(TextAlignment.CENTER);
+                itemTbale.addCell(soluong).setTextAlignment(TextAlignment.CENTER);
+                itemTbale.addCell(dongia).setTextAlignment(TextAlignment.CENTER);
+                itemTbale.addCell(thanhtien).setTextAlignment(TextAlignment.CENTER);
+
+            }
+
+            itemTbale.addCell(new Cell().add("")
+                    .setBackgroundColor(new DeviceRgb(0, 51, 102))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setBorder(Border.NO_BORDER));
+
+            itemTbale.addCell(new Cell().add("")
+                    .setBackgroundColor(new DeviceRgb(0, 51, 102))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setBorder(Border.NO_BORDER));
+
+            itemTbale.addCell(new Cell().add("")
+                    .setBackgroundColor(new DeviceRgb(0, 51, 102))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setBorder(Border.NO_BORDER));
+
+            itemTbale.addCell(new Cell().add("Tong tien:")
+                    .setBackgroundColor(new DeviceRgb(0, 51, 102))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setBorder(Border.NO_BORDER)
+                    .setTextAlignment(TextAlignment.RIGHT));
+            itemTbale.addCell(new Cell().add(jlbtongitenhang.getText() + " VND")
+                    .setBackgroundColor(new DeviceRgb(0, 51, 102))
+                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+                    .setBorder(Border.NO_BORDER)
+                    .setTextAlignment(TextAlignment.RIGHT));
+
+//              itemTbale.addCell(new Cell().add("")
+//                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+//                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+//                    .setBorder(Border.NO_BORDER));
+//            
+//            itemTbale.addCell(new Cell().add("")
+//                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+//                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+//                    .setBorder(Border.NO_BORDER));
+//            
+//            itemTbale.addCell(new Cell().add("")
+//                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+//                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+//                    .setBorder(Border.NO_BORDER));
+//            
+//            itemTbale.addCell(new Cell().add("Tien thua:")
+//                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+//                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+//                    .setBorder(Border.NO_BORDER)
+//                    .setTextAlignment(TextAlignment.RIGHT));
+//            itemTbale.addCell(new Cell().add(jlbtienthua.getText())
+//                    .setBackgroundColor(new DeviceRgb(63, 169, 219))
+//                    .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
+//                    .setBorder(Border.NO_BORDER)
+//                    .setTextAlignment(TextAlignment.RIGHT));
+            doc.add(tb);
+            doc.add(new Paragraph("\n"));
+            doc.add(customInforTbale);
+            doc.add(new Paragraph("\n"));
+            doc.add(itemTbale);
+            doc.close();
+            JOptionPane.showMessageDialog(this, "In thành công");
+        } catch (FileNotFoundException ex) {
+
+        }
 
     }
 
@@ -448,7 +665,6 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
         jLabel1 = new javax.swing.JLabel();
         jlbGIAMGIA = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtMavch = new javax.swing.JTextField();
         btnsudung = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jlbTiengiam = new javax.swing.JLabel();
@@ -467,6 +683,10 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnHuy1 = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        jlbtienCK = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        cbVoucher = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -754,6 +974,11 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
         });
 
         cbbhtThanhtoan.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        cbbhtThanhtoan.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbbhtThanhtoanItemStateChanged(evt);
+            }
+        });
         cbbhtThanhtoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbhtThanhtoanActionPerformed(evt);
@@ -801,20 +1026,6 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
         jlbGIAMGIA.setText("0");
 
         jLabel2.setText("Mã Voucher");
-
-        txtMavch.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtMavchMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                txtMavchMouseReleased(evt);
-            }
-        });
-        txtMavch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMavchActionPerformed(evt);
-            }
-        });
 
         btnsudung.setText("Sử dụng");
         btnsudung.addActionListener(new java.awt.event.ActionListener() {
@@ -912,6 +1123,25 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
             }
         });
 
+        jLabel15.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jLabel15.setText("Tiền chuyển khoản  :");
+
+        jlbtienCK.setText("0");
+        jlbtienCK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlbtienCKMouseEntered(evt);
+            }
+        });
+
+        jLabel16.setText("VND");
+
+        cbVoucher.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbVoucher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbVoucherActionPerformed(evt);
+            }
+        });
+
         jLayeredPane2.setLayer(jSeparator2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jlbMAHD, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -930,7 +1160,6 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
         jLayeredPane2.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jlbGIAMGIA, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(txtMavch, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(btnsudung, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jlbTiengiam, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -942,6 +1171,10 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
         jLayeredPane2.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(btnHuy1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabel15, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jlbtienCK, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabel16, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(cbVoucher, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -950,7 +1183,7 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jSeparator3)
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addContainerGap()
@@ -984,10 +1217,10 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(59, 59, 59)
-                                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtMavch, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                                    .addComponent(jlbMAHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(42, 42, 42)
+                                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlbMAHD, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
                                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btntaohoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnsudung, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -996,18 +1229,17 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbbhtThanhtoan, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txttienkhachdua, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jlbtienthua, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jlbtienCK, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7))
-                            .addComponent(cbbhtThanhtoan, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txttienkhachdua, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jLabel16)))
+                        .addContainerGap(138, Short.MAX_VALUE))))
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addGap(113, 113, 113)
                 .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1015,9 +1247,21 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
                 .addComponent(btnHuy1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
-                .addGap(0, 59, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 49, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(jlbtienthua, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jLayeredPane2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnHuy, btnHuy1});
@@ -1027,18 +1271,24 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(btntaohoadon)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(jlbMAHD, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)))
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtMavch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnsudung))
-                .addGap(28, 28, 28)
+                        .addGap(26, 26, 26)
+                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlbMAHD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btntaohoadon)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(btnsudung))
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addComponent(cbVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)))
+                .addGap(32, 32, 32)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1065,7 +1315,12 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txttienkhachdua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(17, 17, 17)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jlbtienCK)
+                    .addComponent(jLabel16))
+                .addGap(12, 12, 12)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
@@ -1073,7 +1328,7 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
                     .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jlbtienthua)
                         .addComponent(jLabel7)))
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
@@ -1084,7 +1339,7 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
                     .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHuy1))
                 .addGap(18, 18, 18)
-                .addComponent(btnThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1106,7 +1361,7 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(28, 28, 28)
                 .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(621, Short.MAX_VALUE))
+                .addContainerGap(630, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1309,10 +1564,10 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
             hdct.setIdChiTietSP(ctsp);
             listHDCT.add(hdct);
         }
-        List<Voucher> listVCh = voucherService.Find(txtMavch.getText());
+        List<Voucher> listVCh = voucherService.Find(cbVoucher.getSelectedItem().toString());
         int idvch = listVCh.get(0).getId(); // lay id vch
 
-        List<Voucher> list = voucherService.FindTEN(txtMavch.getText());
+        List<Voucher> list = voucherService.FindTEN(cbVoucher.getSelectedItem().toString());
         int soluongTon = list.get(0).getSoLuong();
 //        
         int check = 0;
@@ -1324,7 +1579,7 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
                 System.out.println(getIdKh());
                 hoaDonService.updateHD(jlbMAHD.getText(), new BigDecimal(jlbtongitenhang.getText()), 0, getIdKh());//chua fix sdt 
                 hoaDonService.updateVCHHD(jlbMAHD.getText(), idvch); // update vocher// co loi
-                voucherService.updateSLVCH(txtMavch.getText(), (soluongTon - 1)); // co loi
+                voucherService.updateSLVCH(cbVoucher.getSelectedItem().toString(), (soluongTon - 1)); // co loi
                 loadHD(hoaDonService.getListsHD());
             } else {
                 check = 1;
@@ -1337,8 +1592,16 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
         if (check == 0) {
             JOptionPane.showMessageDialog(this, "Hóa đơn đã được treo");
         } else {
-            JOptionPane.showMessageDialog(this, "Thanh toán thành công");
-            updateSL();
+            int x = JOptionPane.showConfirmDialog(this, "Bạn có muốn in hóa đơn", "Notification", JOptionPane.YES_NO_OPTION);
+            if (x == JOptionPane.YES_OPTION) {
+                print();
+                JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+                updateSL();
+            } else {
+                JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+                updateSL();
+            }
+
         }
         listGh.removeAll(listGh);// xoa het gio hang
         loadGH(listGh);
@@ -1353,7 +1616,7 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void btnsudungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsudungActionPerformed
-        List<Voucher> list = voucherService.FindTEN(txtMavch.getText());
+        List<Voucher> list = voucherService.FindTEN(cbVoucher.getSelectedItem().toString());
         int soluongTon = list.get(0).getSoLuong();
 
         if (jlbMAHD.getText().isEmpty()) {
@@ -1364,7 +1627,7 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
             JOptionPane.showMessageDialog(this, "Số lượng voucher này đã hết ?Vui lòng thử voucher khác ");
             return;
         }
-        if (txtMavch.getText().isEmpty()) {
+        if (cbVoucher.getSelectedItem().toString().isEmpty()) {
             jlbGIAMGIA.setText("");
             return;
         }
@@ -1376,16 +1639,18 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
         for (HoaDon hd : hoaDonService.getALLHD()) {
             if (hd.getMaHD().equals(jlbMAHD.getText())) {
                 if (hd.getVoucher() == null) {
-                    float giaTriGiamGia = list.get(0).getPhanTram();
-                    int epkieu = (int) giaTriGiamGia;
-                    jlbGIAMGIA.setText(String.valueOf(epkieu));
-                    jlbPHANTRAM.setText("%");
-                    JOptionPane.showMessageDialog(this, "success");
-                    float tienGiam = Float.parseFloat(jlbtongitenhang.getText());
-                    float tienGiam2 = (tienGiam * giaTriGiamGia) / 100;
-                    jlbTiengiam.setText(String.valueOf(tienGiam2));
-                    return;
-                } else if (hd.getVoucher().getTen().equals(txtMavch.getText())) {
+                    for (Voucher voucher : list) {
+                        float giaTriGiamGia = voucher.getPhanTram();
+                        int epkieu = (int) giaTriGiamGia;
+                        jlbGIAMGIA.setText(String.valueOf(epkieu));
+                        jlbPHANTRAM.setText("%");
+                        JOptionPane.showMessageDialog(this, "success");
+                        float tienGiam = Float.parseFloat(jlbtongitenhang.getText());
+                        float tienGiam2 = (tienGiam * giaTriGiamGia) / 100;
+                        jlbTiengiam.setText(String.valueOf(tienGiam2));
+                        return;
+                    }
+                } else if (hd.getVoucher().getTen().equals(cbVoucher.getSelectedItem().toString())) {
                     JOptionPane.showMessageDialog(this, "Hoa don da duoc su dung voucher nay r?");
                     int chon = JOptionPane.showConfirmDialog(this, "Ban co muon thay doi voucher?", "Update vch", JOptionPane.YES_NO_OPTION);
                     if (chon == JOptionPane.YES_OPTION) {
@@ -1408,20 +1673,6 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
 
 
     }//GEN-LAST:event_btnsudungActionPerformed
-
-    private void txtMavchMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMavchMouseReleased
-
-    }//GEN-LAST:event_txtMavchMouseReleased
-
-    private void txtMavchMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMavchMousePressed
-        if (txtMavch.getText().isEmpty()) {
-            jlbGIAMGIA.setText("");
-        }
-    }//GEN-LAST:event_txtMavchMousePressed
-
-    private void txtMavchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMavchActionPerformed
-
-    }//GEN-LAST:event_txtMavchActionPerformed
 
     private void btnChonKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonKHActionPerformed
         // TODO add your handling code here:
@@ -1459,6 +1710,35 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
         txttienkhachdua.setText("0");
         setKH("KH0");
     }//GEN-LAST:event_btnHuy1ActionPerformed
+
+    private void cbbhtThanhtoanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbhtThanhtoanItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == 1) {
+            if (cbbhtThanhtoan.getSelectedIndex() == 0) {
+                txttienkhachdua.setText("0");
+            }
+            if (cbbhtThanhtoan.getSelectedIndex() == 1) {
+                txttienkhachdua.setText(jlbtongitenhang.getText());
+                jlbtienthua.setText("0");
+            }
+            if (cbbhtThanhtoan.getSelectedIndex() == 2) {
+                double tong = Double.parseDouble(jlbtongitenhang.getText());
+                double tkh = Double.parseDouble(txttienkhachdua.getText());
+                jlbtienCK.setText(String.valueOf(tong - tkh));
+                jlbtienthua.setText("0");
+            }
+
+        }
+    }//GEN-LAST:event_cbbhtThanhtoanItemStateChanged
+
+    private void jlbtienCKMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbtienCKMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jlbtienCKMouseEntered
+
+    private void cbVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVoucherActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_cbVoucherActionPerformed
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1510,6 +1790,7 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.JComboBox<String> cbVoucher;
     private javax.swing.JComboBox<String> cbbhtThanhtoan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1517,6 +1798,8 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1543,6 +1826,7 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
     private javax.swing.JLabel jlbMAHD;
     private javax.swing.JLabel jlbPHANTRAM;
     private javax.swing.JLabel jlbTiengiam;
+    private javax.swing.JLabel jlbtienCK;
     private javax.swing.JLabel jlbtienthua;
     private javax.swing.JLabel jlbtongitenhang;
     private javax.swing.JLabel lbTimKiemSP;
@@ -1555,7 +1839,6 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
     private javax.swing.JTable tbHoaDon;
     private javax.swing.JTable tbSanPham;
     private javax.swing.JTextField txtMaKH;
-    private javax.swing.JTextField txtMavch;
     private javax.swing.JTextField txtTenKH;
     private javax.swing.JTextField txtTimKiemSP;
     private javax.swing.JTextField txtsearchhoadon;
