@@ -5,7 +5,7 @@
 package com.poly.it17326.group6.view;
 
 import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.WebcamPanel;
+
 import com.poly.it17326.group6.view.FormNhanVien;
 import com.poly.it17326.group6.domainmodel.TaiKhoan;
 import com.poly.it17326.group6.service.ChiTietSPService;
@@ -401,6 +401,7 @@ private WebcamPanel panel = null;
         lbFormThongke.setForeground(Color.WHITE);
         lbFormSanPham.setForeground(Color.GREEN);
         tpBanHang.removeAll();
+
         pnBanHang = new FormSanPham();
         tpBanHang.addTab("Quản lý sản phẩm", pnBanHang);
         tpBanHang.setSelectedComponent(pnBanHang);

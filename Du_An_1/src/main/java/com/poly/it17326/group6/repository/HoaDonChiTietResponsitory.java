@@ -74,14 +74,7 @@ public class HoaDonChiTietResponsitory {
         return false;
     }
 
-   
-//    public static void main(String[] args) {
-//
-//        HoaDonChiTietResponsitory s = new HoaDonChiTietResponsitory();
-//        List<HaoDonChitietdomain> list = s.getListHDCTALL();
-//        System.out.println(list.toString() + "\n");
-//
-//    }
+
 
 //    public static void main(String[] args) {
 //        HoaDonChiTietResponsitory hd = new HoaDonChiTietResponsitory();
@@ -109,4 +102,5 @@ public class HoaDonChiTietResponsitory {
 //            hd.saveHDCT(hoaDonChiTiet);
 //        }
 //    }
+
 }

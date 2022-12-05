@@ -6,6 +6,7 @@ package com.poly.it17326.group6.repository;
 
 import com.poly.it17326.group6.config.HibernateConfig;
 import com.poly.it17326.group6.domainmodel.HoaDon;
+import com.poly.it17326.group6.domainmodel.KhachHang;
 import com.poly.it17326.group6.domainmodel.TaiKhoan;
 import com.poly.it17326.group6.domainmodel.Voucher;
 import java.math.BigDecimal;
@@ -24,50 +25,46 @@ import org.hibernate.Transaction;
  */
 public class HoaDonRepository {
 
-
-    String sql="from HoaDon hd order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc ";
-    public ArrayList<HoaDon> getAll(){
-            Session session= HibernateConfig.getFACTORY().openSession();
-        Query query= session.createQuery(sql);
-        ArrayList<HoaDon> listHD=(ArrayList<HoaDon>) query.getResultList();
+    public List<HoaDon> getAll() {
+        String sql = "from HoaDon hd order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc ";
+        Session session = HibernateConfig.getFACTORY().openSession();
+        Query query = session.createQuery(sql);
+        List<HoaDon> listHD = (ArrayList<HoaDon>) query.getResultList();
         session.close();
         return listHD;
     }
     // lay id hoa don
-public ArrayList<HoaDon> getIDHD(String Ma){
-        Session session= HibernateConfig.getFACTORY().openSession();
-        Query query= session.createQuery("from HoaDon  where Ma = :Ma");
-        query.setParameter("Ma",Ma);
-        ArrayList<HoaDon> listIDHD=(ArrayList<HoaDon>) query.getResultList();
+
+    public ArrayList<HoaDon> getIDHD(String Ma) {
+        Session session = HibernateConfig.getFACTORY().openSession();
+        Query query = session.createQuery("from HoaDon  where Ma = :Ma");
+        query.setParameter("Ma", Ma);
+        ArrayList<HoaDon> listIDHD = (ArrayList<HoaDon>) query.getResultList();
         session.close();
         return listIDHD;
     }
 
-
-public boolean updateHD(String ma,BigDecimal tongTien , int trangThai , String tenKH, String sdt) {
+    public boolean updateHD(String ma, BigDecimal tongTien, int trangThai, KhachHang idKh) {
         Transaction tran = null;
-        int check=0;
-        try ( Session session= HibernateConfig.getFACTORY().openSession();) {
+        int check = 0;
+        try (Session session = HibernateConfig.getFACTORY().openSession();) {
             tran = session.beginTransaction();
-            String sql = "update HoaDon set HoTenkh = :tenKH , Sdt = :sdt , tongTien = :tongtien , TrangThai = :TrangThai where MaHD = :Ma";
+            String sql = "update HoaDon set khachHang = :kh , tongTien = :tongtien , TrangThai = :TrangThai where MaHD = :Ma";
             Query query = session.createQuery(sql);
-            query.setParameter("tenKH", tenKH);
-            query.setParameter("sdt", sdt);
+            query.setParameter("kh", idKh);
             query.setParameter("tongtien", tongTien);
             query.setParameter("TrangThai", trangThai);
-            query.setParameter("Ma", ma);    
-            check =query.executeUpdate();
+            query.setParameter("Ma", ma);
+            check = query.executeUpdate();
             tran.commit();
+            session.close();
         }
-        if(check!=1){
+        if (check != 1) {
             return true;
-        }else{
+        } else {
             return false;
         }
-}
- 
-
-  
+    }
 
     public boolean addHD(int idtk) {
         HoaDon hd = new HoaDon();
@@ -84,7 +81,9 @@ public boolean updateHD(String ma,BigDecimal tongTien , int trangThai , String t
             vc.setId(1);
             Date nt = new SimpleDateFormat("yyyy-MM-dd").parse(ngayTao);
             hd.setMaHD("HD" + i++);
-            hd.setMaKH("KH" + i++);
+            KhachHang kh = new KhachHang();
+            kh.setId(3);
+            hd.setKhachHang(kh);
             hd.setCreateAt(nt);
             hd.setTaiKhoan(tk);
             hd.setTrangThai(0);
@@ -97,51 +96,58 @@ public boolean updateHD(String ma,BigDecimal tongTien , int trangThai , String t
         }
     }
 
-    public ArrayList<HoaDon> getSearch(int tt) {
-            Session session= HibernateConfig.getFACTORY().openSession();
+    public List<HoaDon> getSearch(int tt) {
+        Session session = HibernateConfig.getFACTORY().openSession();
         Query query = session.createQuery("select hd from HoaDon hd join hd.taiKhoan where hd.TrangThai = :ma order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc");
         query.setParameter("ma", tt);
-        ArrayList<HoaDon> listSearch = (ArrayList<HoaDon>) query.getResultList();
+        List<HoaDon> listSearch = (ArrayList<HoaDon>) query.getResultList();
         session.close();
         return listSearch;
     }
-    
-    public ArrayList<HoaDon> timKiemHD(String ma, String sdt) {
-            Session session= HibernateConfig.getFACTORY().openSession();
-        Query query = session.createQuery("select hd from HoaDon hd  join hd.taiKhoan where hd.MaHD = :ma or hd.Sdt = :sdt order by cast (SUBSTRING(hd.MaHD,3,3) as int) asc");
+
+    public List<HoaDon> timKiemHD(String ma, String sdt) {
+        Session session = HibernateConfig.getFACTORY().openSession();
+        Query query = session.createQuery("select hd from HoaDon hd  join hd.taiKhoan join hd.khachHang where hd.MaHD = :ma or hd.khachHang.sdt =: sdt order by cast (SUBSTRING(hd.MaHD,3,3) as int) asc");
         query.setParameter("ma", ma);
         query.setParameter("sdt", sdt);
-        ArrayList<HoaDon> listSearch = (ArrayList<HoaDon>) query.getResultList();
+        List<HoaDon> listSearch = (ArrayList<HoaDon>) query.getResultList();
+
         session.close();
         return listSearch;
     }
-  
+
     public List<HoaDon> getALLHD() {
-        Session session= HibernateConfig.getFACTORY().openSession();
+        Session session = HibernateConfig.getFACTORY().openSession();
         Query query = session.createQuery("from HoaDon ");
-        
-      List<HoaDon> listSearch = (List<HoaDon>) query.getResultList();
+
+        List<HoaDon> listSearch = (List<HoaDon>) query.getResultList();
         session.close();
         return listSearch;
     }
-    
-    public boolean updateVCHHD(String ma,int IdVC) {
+
+    public boolean updateVCHHD(String ma, int IdVC) {
         Transaction tran = null;
-        try ( Session session= HibernateConfig.getFACTORY().openSession();) {
+        try (Session session = HibernateConfig.getFACTORY().openSession();) {
             tran = session.beginTransaction();
             String sql = "update HoaDon set IdVC = :IdVC where MaHD = :Ma";
             Query query = session.createQuery(sql);
             query.setParameter("IdVC", IdVC);
-            query.setParameter("Ma", ma);    
+            query.setParameter("Ma", ma);
             query.executeUpdate();
             tran.commit();
             return true;
-        }catch(HibernateException ex){
+        } catch (HibernateException ex) {
             ex.getMessage();
-            
+
         }
         return false;
-      
+
+    }
+
+    public static void main(String[] args) {
+        HoaDonRepository s = new HoaDonRepository();
+        s.updateVCHHD("HD15", 3);
+    }
+
 }
-   
-}
+

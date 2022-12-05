@@ -181,7 +181,7 @@ public class FormForgotPassword extends javax.swing.JFrame {
         btnback.setBackground(new java.awt.Color(153, 0, 0));
         btnback.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnback.setForeground(new java.awt.Color(255, 255, 255));
-        btnback.setText("Back");
+        btnback.setText("Quay lại");
         btnback.setBorder(null);
         btnback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,7 +193,7 @@ public class FormForgotPassword extends javax.swing.JFrame {
         btn_Accept.setBackground(new java.awt.Color(153, 0, 0));
         btn_Accept.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_Accept.setForeground(new java.awt.Color(255, 255, 255));
-        btn_Accept.setText("Accept");
+        btn_Accept.setText("Xác nhận");
         btn_Accept.setBorder(null);
         btn_Accept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,8 +203,8 @@ public class FormForgotPassword extends javax.swing.JFrame {
         jPanel2.add(btn_Accept, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 520, 90, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel7.setText("Forgot your Password?");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
+        jLabel7.setText("Quên mật khẩu");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
 
         jLabel8.setText("____________________________________________");
         jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -238,13 +238,13 @@ public class FormForgotPassword extends javax.swing.JFrame {
         jPanel2.add(txt_Verification, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 299, -1));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel4.setText("Verification");
+        jLabel4.setText("Mã xác nhận");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 90, -1));
 
         btn_SendVerification.setBackground(new java.awt.Color(153, 0, 0));
         btn_SendVerification.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btn_SendVerification.setForeground(new java.awt.Color(255, 255, 255));
-        btn_SendVerification.setText("Send Verification");
+        btn_SendVerification.setText("Gửi mã");
         btn_SendVerification.setBorder(null);
         btn_SendVerification.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,7 +261,7 @@ public class FormForgotPassword extends javax.swing.JFrame {
         jPanel2.add(txt_NewPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 307, -1));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel5.setText("New password");
+        jLabel5.setText("Mật khẩu mới");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, -1, 20));
 
         jLabel13.setText("___________________________________________");
@@ -271,8 +271,8 @@ public class FormForgotPassword extends javax.swing.JFrame {
         jPanel2.add(txt_ConfirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 470, 310, -1));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel6.setText("Confirm Password");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, -1, -1));
+        jLabel6.setText("Xác nhận mật khẩu");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 447, -1, 30));
         jPanel2.add(jlb_ConfirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 470, 190, 30));
         jPanel2.add(jlb_Email, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 200, 30));
         jPanel2.add(jlb_Verification2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, 180, 30));

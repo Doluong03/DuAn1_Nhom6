@@ -1,5 +1,6 @@
-com\poly\it17326\group6\view\FormSanPham$4.class
+com\poly\it17326\group6\domainmodel\HoaDon.class
 com\poly\it17326\group6\repository\HoaDonChiTietResponsitory.class
+
 com\poly\it17326\group6\response\ChiTietSpResponse_2.class
 com\poly\it17326\group6\repository\SanPhamRepository.class
 com\poly\it17326\group6\service\NSXService.class
@@ -201,3 +202,15 @@ com\poly\it17326\group6\view\DialogLSP$4.class
 com\poly\it17326\group6\view\DialogSP$2.class
 com\poly\it17326\group6\view\FormBanHang$20.class
 com\poly\it17326\group6\repository\LoaiSanPhamResponsitory.class
+
+com\poly\it17326\group6\domainmodel\ThanhPhan.class
+com\poly\it17326\group6\domainmodel\ChiTietSP.class
+com\poly\it17326\group6\domainmodel\ChucVu.class
+com\poly\it17326\group6\domainmodel\Anh.class
+com\poly\it17326\group6\domainmodel\KhachHang.class
+com\poly\it17326\group6\domainmodel\HoaDonChiTiet.class
+com\poly\it17326\group6\domainmodel\LoaiSP.class
+com\poly\it17326\group6\domainmodel\NSX.class
+com\poly\it17326\group6\domainmodel\SanPham.class
+com\poly\it17326\group6\domainmodel\TaiKhoan.class
+com\poly\it17326\group6\domainmodel\Voucher.class

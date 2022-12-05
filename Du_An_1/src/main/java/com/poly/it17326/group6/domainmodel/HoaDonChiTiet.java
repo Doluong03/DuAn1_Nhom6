@@ -40,7 +40,7 @@ public class HoaDonChiTiet implements Serializable {
     private HoaDon IdHoaDon;
     
     @Id
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "IdChiTietSP")
     private ChiTietSP IdChiTietSP;
 

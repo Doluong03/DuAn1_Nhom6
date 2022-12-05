@@ -6,6 +6,7 @@ import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.ChucVu;
 import com.poly.it17326.group6.domainmodel.HoaDon;
 import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
+import com.poly.it17326.group6.domainmodel.KhachHang;
 
 
 import com.poly.it17326.group6.domainmodel.LoaiSP;
@@ -54,7 +55,7 @@ public class HibernateConfig {
         conf.addAnnotatedClass(ChucVu.class);
         conf.addAnnotatedClass(HoaDon.class);
         conf.addAnnotatedClass(HoaDonChiTiet.class);
-//      conf.addAnnotatedClass(TinhTrang.class);
+      conf.addAnnotatedClass(KhachHang.class);
         
         
 
