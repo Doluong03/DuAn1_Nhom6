@@ -39,16 +39,16 @@ public class ChiTietSP {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private int id;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "IdSP")
     private SanPham sanPham;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "IdNsx")
     private NSX nsx;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "IdLoaiSP")
     private LoaiSP loaiSP;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "IdAnh")
     private Anh anh;
     @Column(name = "HSD")
@@ -57,5 +57,6 @@ public class ChiTietSP {
     private int soLuongTon;
     @Column(name = "DonGia")
     private BigDecimal donGia;
-
+    @Column(name = "maVach")
+    private String maVach;
 }

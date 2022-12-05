@@ -59,8 +59,8 @@ public class sacn_QR extends javax.swing.JFrame implements Runnable, ThreadFacto
         jLayeredPane1.add(jLayeredPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 570, 350));
 
         jLabel2.setText("Result");
-        jLayeredPane1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, 50, -1));
-        jLayeredPane1.add(txtketqua, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, 250, -1));
+        jLayeredPane1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, 50, -1));
+        jLayeredPane1.add(txtketqua, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, 250, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,7 +121,7 @@ public class sacn_QR extends javax.swing.JFrame implements Runnable, ThreadFacto
         panel.setFPSDisplayed(true);
         
         jLayeredPane2.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 300));
-        executor.execute(this);
+      //  executor.execute(this);
     }
     
     @Override

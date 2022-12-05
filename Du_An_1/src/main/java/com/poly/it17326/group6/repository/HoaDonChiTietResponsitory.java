@@ -68,14 +68,14 @@ public class HoaDonChiTietResponsitory {
         return false;
     }
 
-    public static void main(String[] args) {
-        String ma = "HD7";
-        HoaDonChiTietResponsitory s = new HoaDonChiTietResponsitory();
-        for (HoaDonChiTiet arg : s.getListHDCT()) {
-            System.out.println(arg.toString());
-        }
- 
-    }
+//    public static void main(String[] args) {
+//        String ma = "HD7";
+//        HoaDonChiTietResponsitory s = new HoaDonChiTietResponsitory();
+//        for (HoaDonChiTiet arg : s.getListHDCT()) {
+//            System.out.println(arg.toString());
+//        }
+// 
+//    }
     
 
 //    public static void main(String[] args) {
@@ -105,6 +105,11 @@ public class HoaDonChiTietResponsitory {
 //        }
 //    }
     
+    public static void main(String[] args) {
+        for (HoaDonChiTiet object : new HoaDonChiTietResponsitory().getListHDCT()) {
+            System.out.println(object.toString());
+        }
+    }
     
     
 }

@@ -5,6 +5,7 @@
 package com.poly.it17326.group6.service;
 
 import com.poly.it17326.group6.domainmodel.HoaDon;
+import com.poly.it17326.group6.domainmodel.KhachHang;
 
 import com.poly.it17326.group6.repository.HoaDonRepository;
 
@@ -19,17 +20,17 @@ import java.util.List;
  */
 public interface HoaDonService {
 
-    public ArrayList<HoaDonresponse> getListsHD();
+    public List<HoaDonresponse> getListsHD();
 
     public ArrayList<HoaDon> getIDHD(String Ma);
 
-    public boolean updateHD(String Ma, BigDecimal tongtien, int trangthai, String tenKH, String sdt);
+    public boolean updateHD(String Ma, BigDecimal tongtien, int trangthai,KhachHang idKH);
 
     public boolean addHD(int idTk);
 
-    public ArrayList<HoaDonresponse> timKiemTT(int tt);
+    public List<HoaDonresponse> timKiemTT(int tt);
 
-    public ArrayList<HoaDonresponse> timKiemHD(String ma);
+    public List<HoaDonresponse> timKiemHD(String ma, String sdt);
 
     public List<HoaDon> getALLHD();
 

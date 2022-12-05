@@ -42,7 +42,7 @@ public class LoaiSP  {
     private String ma;
     @Column(name = "Ten")
     private String ten;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "IdTP")
     private ThanhPhan thanhPhan;
 

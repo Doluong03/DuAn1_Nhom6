@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,6 +37,7 @@ public class FormKhuyenMai extends javax.swing.JPanel {
         LoadTable(voucherService.getAll());
         loadCBBTT();
         loadCBBTimKiem();
+        lbAnhKM.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\sale.png"));
     }
 
     private String doiNgay(Date d) {
@@ -228,8 +230,6 @@ public class FormKhuyenMai extends javax.swing.JPanel {
                 btnThemActionPerformed(evt);
             }
         });
-
-        lbAnhKM.setText("jLabel4");
 
         btnCapNhat1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnCapNhat1.setForeground(new java.awt.Color(0, 102, 153));

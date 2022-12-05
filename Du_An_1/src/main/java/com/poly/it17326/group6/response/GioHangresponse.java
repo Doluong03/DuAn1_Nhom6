@@ -24,6 +24,7 @@ public class GioHangresponse implements Serializable{
     private String tenSP;
     private int soLuong;
     private BigDecimal donGia;
+    private String maVach;
 
     public GioHangresponse() {
     }
@@ -34,6 +35,7 @@ public class GioHangresponse implements Serializable{
         this.soLuong = soluong;
         this.donGia = chiTietSP.getDonGia();
         this.idCTSP = chiTietSP.getIdCTSP();
+        this.maVach = chiTietSP.getMaVach();
     }
     
     public BigDecimal getThanhTien(){

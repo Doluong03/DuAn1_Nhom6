@@ -29,6 +29,7 @@ public class ChiTietSpResponse implements Serializable{
     private String ten;
     private int soLuongTon;
     private BigDecimal donGia;
+    private String maVach;
 
     public ChiTietSpResponse() {
     }
@@ -40,6 +41,7 @@ public class ChiTietSpResponse implements Serializable{
         this.soLuongTon = ctsp.getSoLuongTon();
         this.donGia = ctsp.getDonGia();
         this.idCTSP = ctsp.getId();
+        this.maVach = ctsp.getMaVach();
     }
     
     

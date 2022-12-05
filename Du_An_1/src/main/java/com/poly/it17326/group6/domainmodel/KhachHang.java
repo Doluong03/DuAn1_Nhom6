@@ -4,15 +4,12 @@
  */
 package com.poly.it17326.group6.domainmodel;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,24 +22,28 @@ import lombok.ToString;
  * @author 123
  */
 @Entity
-@Table(name = "NSX")
+@Table(name = "KhachHang")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class NSX implements Serializable {
-
+public class KhachHang {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private int id;
     @Column(name = "Ma")
     private String ma;
-    @Column(name = "Ten")
-    private String ten;
-    @Column(name = "QuocGia")
-    private String quocGia;
-    @OneToMany(mappedBy = "nsx")
-    private List<ChiTietSP> chiTietSP;
+    @Column(name = "HoTen")
+    private String ten;  
+    @Column(name = "NgaySinh")
+    private Date ngaySinh;
+    @Column(name = "DiaChi")
+    private String diaChi;
+    @Column(name = "Sdt")
+    private String sdt;
+    @Column(name = "trangThai")
+    private boolean trangThai;
+    
 }

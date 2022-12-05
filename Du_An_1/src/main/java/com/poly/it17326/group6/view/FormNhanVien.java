@@ -122,8 +122,6 @@ public class FormNhanVien extends javax.swing.JPanel {
         txtDiaC = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtSDT = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        tpxPass = new javax.swing.JPasswordField();
         jLabel10 = new javax.swing.JLabel();
         txtMail = new javax.swing.JTextField();
         btnThem = new javax.swing.JButton();
@@ -271,12 +269,6 @@ public class FormNhanVien extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(0, 102, 153));
         jLabel8.setText("Số Điện Thoại:");
 
-        jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel9.setText("Mật Khẩu:");
-
-        tpxPass.setText("jPasswordField1");
-
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 102, 153));
         jLabel10.setText("Email:");
@@ -349,7 +341,6 @@ public class FormNhanVien extends javax.swing.JPanel {
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -362,7 +353,6 @@ public class FormNhanVien extends javax.swing.JPanel {
                             .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dpkNgayS, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtDiaC, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tpxPass, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtMail, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbChucVu, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtSDT))
@@ -404,11 +394,7 @@ public class FormNhanVien extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tpxPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(21, 21, 21)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
@@ -423,7 +409,7 @@ public class FormNhanVien extends javax.swing.JPanel {
                     .addComponent(btnXoa)
                     .addComponent(btnSua)
                     .addComponent(btnThem))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -456,7 +442,7 @@ public class FormNhanVien extends javax.swing.JPanel {
             dpkNgayS.setDate(newDate);
             txtDiaC.setText(tblTaiKh.getValueAt(i, 5).toString());
             txtSDT.setText(tblTaiKh.getValueAt(i, 7).toString());
-            tpxPass.setToolTipText(tblTaiKh.getValueAt(i, 8).toString());
+         //   tpxPass.setToolTipText(tblTaiKh.getValueAt(i, 8).toString());
             if (tblTaiKh.getValueAt(i, 3).toString().equalsIgnoreCase("Nam")) {
                 rdoNam.setSelected(true);
             } else {
@@ -526,7 +512,7 @@ public class FormNhanVien extends javax.swing.JPanel {
         tk.setNgaySinh(dpkNgayS.getDate());
         tk.setDiaChi(txtDiaC.getText());
         tk.setSdt(txtSDT.getText());
-        tk.setMatKhau(tpxPass.getText());
+     //   tk.setMatKhau(tpxPass.getText());
         tk.setCreateAt(new Date());
         tk.setEmail(txtMail.getText());
         for (ChucVu chucVu : taiKhoanService.getListCB()) {
@@ -561,9 +547,9 @@ public class FormNhanVien extends javax.swing.JPanel {
         tk.setNgaySinh(dpkNgayS.getDate());
         tk.setDiaChi(txtDiaC.getText());
         tk.setSdt(txtSDT.getText());
-        tk.setMatKhau(tpxPass.getToolTipText());
+       // tk.setMatKhau(tpxPass.getToolTipText());
         tk.setEmail(txtMail.getText());
-        tk.setMatKhau(tpxPass.getText());
+      //  tk.setMatKhau(tpxPass.getText());
         tk.setUpdateAt(new Date());
         if (taiKhoanService.sua(tk)) {
             JOptionPane.showMessageDialog(this, "Sua thanh cong");
@@ -614,14 +600,12 @@ public class FormNhanVien extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rdoNam;
     private javax.swing.JRadioButton rdoNu;
     private javax.swing.JTable tblTaiKh;
-    private javax.swing.JPasswordField tpxPass;
     private javax.swing.JTextField txtDiaC;
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtMail;

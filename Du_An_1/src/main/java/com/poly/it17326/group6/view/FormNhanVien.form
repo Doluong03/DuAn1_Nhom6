@@ -245,7 +245,6 @@
                               <Component id="jLabel10" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
                               <Component id="jLabel11" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
                               <Component id="jLabel6" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
-                              <Component id="jLabel9" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
                               <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -260,7 +259,6 @@
                               <Component id="txtName" alignment="0" max="32767" attributes="0"/>
                               <Component id="dpkNgayS" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtDiaC" alignment="0" max="32767" attributes="0"/>
-                              <Component id="tpxPass" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtMail" alignment="0" max="32767" attributes="0"/>
                               <Component id="cbChucVu" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtSDT" alignment="1" max="32767" attributes="0"/>
@@ -315,12 +313,7 @@
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <Component id="txtSDT" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="tpxPass" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtMail" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -339,7 +332,7 @@
                       <Component id="btnSua" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnThem" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="251" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -436,22 +429,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtSDT">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel9">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="18" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="99" green="66" red="0" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="M&#x1ead;t Kh&#x1ea9;u:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JPasswordField" name="tpxPass">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jPasswordField1"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>

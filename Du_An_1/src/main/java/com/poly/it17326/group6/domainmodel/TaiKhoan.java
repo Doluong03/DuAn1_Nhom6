@@ -82,7 +82,7 @@ public class TaiKhoan implements Serializable {
     @Column(name = "Deleted")
     private boolean delete;
 
-   @ManyToOne(fetch = FetchType.EAGER)
+   @ManyToOne()
     @JoinColumn (name = "IdCV", referencedColumnName = "id")
     private ChucVu chucVu;
 
