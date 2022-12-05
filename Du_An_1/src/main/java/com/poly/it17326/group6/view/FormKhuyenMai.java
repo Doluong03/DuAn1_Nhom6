@@ -12,9 +12,12 @@ import java.awt.JobAttributes;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -63,6 +66,7 @@ public class FormKhuyenMai extends javax.swing.JPanel {
         }
 
     }
+    
 
     private void loadTextField(int i) {
         if (tbKhuyenMai.getRowCount() > 0) {
@@ -76,7 +80,7 @@ public class FormKhuyenMai extends javax.swing.JPanel {
                 Date NgayKT = new SimpleDateFormat("yyyy-MM-dd").parse(tbKhuyenMai.getValueAt(i, 3).toString());
 
                 idcNgayBD.setDate(ngaBd);
-                idcNgayKT.setDate(NgayKT);
+//                idcNgayKT.setDate(NgayKT);
             } catch (ParseException ex) {
                 Logger.getLogger(FormKhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -124,10 +128,16 @@ public class FormKhuyenMai extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Khong duoc de trong ngay bat dau");
             return false;
         }
-        if (idcNgayKT.getDate().equals(" ")) {
-            JOptionPane.showMessageDialog(this, "Khong duoc de trong ngay ket thuc");
+//        if (idcNgayKT.getDate().equals(" ")) {
+//            JOptionPane.showMessageDialog(this, "Khong duoc de trong ngay ket thuc");
+//            return false;
+//        }
+        Date curent = new Date();
+        if(idcNgayBD.getDate().before(curent)){
+            JOptionPane.showMessageDialog(this,"Ngày bắt đầu phải ở hiện tại hoặc trong tương lai");
             return false;
         }
+       
         return true;
     }
 
@@ -158,13 +168,11 @@ public class FormKhuyenMai extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtMaKM = new javax.swing.JTextField();
         txtTenKM = new javax.swing.JTextField();
         idcNgayBD = new com.toedter.calendar.JDateChooser();
-        idcNgayKT = new com.toedter.calendar.JDateChooser();
         cbTrangThai = new javax.swing.JComboBox<>();
         btnThem = new javax.swing.JButton();
         lbAnhKM = new javax.swing.JLabel();
@@ -202,10 +210,6 @@ public class FormKhuyenMai extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(0, 102, 153));
         jLabel3.setText("Giá trị:");
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel5.setText("Ngày kết thúc:");
-
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 102, 153));
         jLabel6.setText("Ngày bắt đầu:");
@@ -219,6 +223,8 @@ public class FormKhuyenMai extends javax.swing.JPanel {
                 txtMaKMActionPerformed(evt);
             }
         });
+
+        idcNgayBD.setDateFormatString("yyyy-MM-dd");
 
         btnThem.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnThem.setForeground(new java.awt.Color(0, 102, 153));
@@ -265,7 +271,6 @@ public class FormKhuyenMai extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -273,8 +278,7 @@ public class FormKhuyenMai extends javax.swing.JPanel {
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(46, 46, 46)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(idcNgayKT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                            .addComponent(idcNgayBD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(idcNgayBD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                             .addComponent(txtMaKM, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtTenKM, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbTrangThai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -283,7 +287,7 @@ public class FormKhuyenMai extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel5, jLabel6, jLabel7});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel6, jLabel7});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,16 +311,9 @@ public class FormKhuyenMai extends javax.swing.JPanel {
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(idcNgayBD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(cbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(idcNgayKT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
@@ -328,7 +325,7 @@ public class FormKhuyenMai extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCapNhat1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(226, 215, 214));
@@ -365,6 +362,10 @@ public class FormKhuyenMai extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 102, 153));
         jLabel10.setText("Trạng thái");
+
+        idcNgayKT1.setDateFormatString("yyyy-MM-dd");
+
+        idcNgayBD1.setDateFormatString("yyyy-MM-dd");
 
         btnlocvocher.setText("Lọc");
         btnlocvocher.addActionListener(new java.awt.event.ActionListener() {
@@ -487,14 +488,14 @@ public class FormKhuyenMai extends javax.swing.JPanel {
             Voucher vc = new Voucher();
             vc.setMa(txtMaKM.getText());
             String ngayBD = doiNgay(idcNgayBD.getDate());
-            String ngayKT = doiNgay(idcNgayKT.getDate());
+//            String ngayKT = doiNgay(idcNgayKT.getDate());
             int soLuong = Integer.parseInt(txtSoluong.getText());
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 Date ngaybd = format.parse(ngayBD);
-                Date ngaykt = format.parse(ngayKT);
+//                Date ngaykt = format.parse(ngayKT);
                 vc.setNgayApDung(ngaybd);
-                vc.setNgayKetThuc(ngaykt);
+//                vc.setNgayKetThuc(ngaykt);
                 vc.setPhanTram(Float.valueOf(txtPhantram.getText()));
                 if (cbTrangThai.getSelectedItem().toString().equals("Dang hoat dong")) {
                     vc.setTrangThai(1);
@@ -575,14 +576,14 @@ public class FormKhuyenMai extends javax.swing.JPanel {
             Voucher vc = new Voucher();
             String ma = txtMaKM.getText();
             String ngayBD = doiNgay(idcNgayBD.getDate());
-            String ngayKT = doiNgay(idcNgayKT.getDate());
+//            String ngayKT = doiNgay(idcNgayKT.getDate());
              int soLuong = Integer.parseInt(txtSoluong.getText());
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 Date ngaybd = format.parse(ngayBD);
-                Date ngaykt = format.parse(ngayKT);
+//                Date ngaykt = format.parse(ngayKT);
                 vc.setNgayApDung(ngaybd);
-                vc.setNgayKetThuc(ngaykt);
+//                vc.setNgayKetThuc(ngaykt);
                 vc.setPhanTram(Float.parseFloat(txtPhantram.getText()));
                 vc.setSoLuong(soLuong);
                 if (cbTrangThai.getSelectedItem().toString().equals("Dang hoat dong")) {
@@ -660,7 +661,6 @@ public class FormKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbTrangThai;
     private com.toedter.calendar.JDateChooser idcNgayBD;
     private com.toedter.calendar.JDateChooser idcNgayBD1;
-    private com.toedter.calendar.JDateChooser idcNgayKT;
     private com.toedter.calendar.JDateChooser idcNgayKT1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -668,7 +668,6 @@ public class FormKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

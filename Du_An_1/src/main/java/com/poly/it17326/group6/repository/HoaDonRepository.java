@@ -143,10 +143,5 @@ public boolean updateHD(String ma,BigDecimal tongTien , int trangThai , String t
         return false;
       
 }
-    public static void main(String[] args) {
-        HoaDonRepository s = new HoaDonRepository();
-          s.updateVCHHD("HD15", 3);
-    }
-  
-
+   
 }

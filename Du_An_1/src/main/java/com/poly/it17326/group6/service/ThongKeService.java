@@ -13,9 +13,24 @@ import java.util.List;
  * @author 123
  */
 public interface ThongKeService {
-    
-    
-    public List<BigDecimal> doanhThu(Date begin, Date end);
-    
-    public List<Long> hoaDon(Date begin, Date end);
+
+    public List<BigDecimal> getListDtThang(String year, String Month);
+
+    public List<BigDecimal> getListDtNam(String nam);
+
+    public List<BigDecimal> getListDtNgay(String createAt);
+
+    public List<Integer> getListHdThanhcongNgay(String createAt);
+
+    public List<Integer> getListHDDAHUYNgay(String createAt);
+
+    public List<Integer> getListHDDahuyThang(String year, String Montht);
+
+    public List<Integer> getListHDTAHNHCONGTHANg(String year, String Month);
+
+    public List<Integer> getListHDDAHUYnam(String nam);
+
+    public List<Integer> getListHDthanhcongNam(String nam);
+
+      public List<Double> getListDtThangs(String year, String Month);
 }

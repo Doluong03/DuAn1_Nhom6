@@ -38,8 +38,8 @@ com\poly\it17326\group6\view\FormMain$7.class
 com\poly\it17326\group6\view\FormBanHang$7.class
 com\poly\it17326\group6\service\impl\LoaiSanPhamServiceImpl.class
 com\poly\it17326\group6\response\ChiTietSpResponse.class
+com\poly\it17326\group6\view\FormMain$11.class
 com\poly\it17326\group6\view\FormSanPham$5.class
-.netbeans_automatic_build
 com\poly\it17326\group6\service\impl\ThongKeServiceImpl.class
 com\poly\it17326\group6\response\GioHangresponse.class
 com\poly\it17326\group6\service\VoucherService.class
@@ -94,7 +94,6 @@ com\poly\it17326\group6\service\ChangePasswordService.class
 com\poly\it17326\group6\view\FormMain$4.class
 com\poly\it17326\group6\view\FormForgotPassword$4.class
 com\poly\it17326\group6\view\FormNhanVien$6.class
-com\poly\it17326\group6\view\FormBanHang$26.class
 com\poly\it17326\group6\view\DialogNsx$3.class
 com\poly\it17326\group6\view\FormChangePassword.class
 com\poly\it17326\group6\view\login$3.class
@@ -176,6 +175,7 @@ com\poly\it17326\group6\view\FormBanHang$13.class
 com\poly\it17326\group6\view\FormMain$8.class
 com\poly\it17326\group6\view\DialogAnh$3.class
 com\poly\it17326\group6\response\SanPhamResponse.class
+com\poly\it17326\group6\view\FormMain$12.class
 com\poly\it17326\group6\service\impl\HoaDonServecieIplm.class
 com\poly\it17326\group6\view\DialogNsx.class
 com\poly\it17326\group6\view\FormKhuyenMai$3.class

@@ -4,9 +4,11 @@
  */
 package com.poly.it17326.group6.service.impl;
 
+import com.poly.it17326.group6.domainmodel.HaoDonChitietdomain;
 import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
 import com.poly.it17326.group6.repository.HoaDonChiTietResponsitory;
 import com.poly.it17326.group6.response.HoaDonCTResponse;
+
 import com.poly.it17326.group6.service.HoaDonChiTietService;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,5 +41,7 @@ public class HOaDonChiTietServiceIplm implements HoaDonChiTietService {
     public boolean deleteSP(String ma) {
         return deleteSP(ma);
     }
+
+    
 
 }
