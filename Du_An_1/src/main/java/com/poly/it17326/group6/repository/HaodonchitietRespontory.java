@@ -17,6 +17,7 @@ import java.util.List;
  * @author Hp
  */
 public class HaodonchitietRespontory {
+    
 
     public List<HaoDonChitietdomain> getlistALLHDCT() {
         List<HaoDonChitietdomain> list = new ArrayList<>();

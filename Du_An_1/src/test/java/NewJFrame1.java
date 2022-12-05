@@ -2,7 +2,7 @@
 
 import com.poly.it17326.group6.service.ThongKeService;
 import com.poly.it17326.group6.service.impl.ThongKeServiceImpl;
-import static com.poly.it17326.group6.view.NewJPanel.year2;
+import static com.poly.it17326.group6.view.FormThongKe.year2;
 import java.awt.BorderLayout;
 import java.math.BigDecimal;
 import java.util.List;

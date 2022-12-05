@@ -5,6 +5,7 @@
 package com.poly.it17326.group6.view;
 
 import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
 
 import com.poly.it17326.group6.view.FormNhanVien;
 import com.poly.it17326.group6.domainmodel.TaiKhoan;
@@ -13,11 +14,7 @@ import com.poly.it17326.group6.service.TaiKhoanService;
 import com.poly.it17326.group6.service.impl.ChiTietSPServiceImpl;
 import com.poly.it17326.group6.service.impl.TaiKhoanServiceImpl;
 import java.awt.Color;
-import java.awt.Event;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -51,6 +48,7 @@ private WebcamPanel panel = null;
         lbFormSanPham.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\box.png"));
         lbFormNhanVien.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\employee.png"));
         lbFormThongke.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\statistics.png"));
+        lbFormKhuyenMai1.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\sale_2.png"));
         btnDangXuat.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\door.png"));
         btnDoiMK.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\password.png"));
         btnKetThuc.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\cancel.png"));
@@ -210,7 +208,8 @@ private WebcamPanel panel = null;
                     .addComponent(lbFormBanHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbFormSanPham, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbFormNhanVien, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbFormThongke, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbFormThongke, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbFormKhuyenMai1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 27, Short.MAX_VALUE)
@@ -225,11 +224,6 @@ private WebcamPanel panel = null;
                         .addGap(18, 18, 18)
                         .addComponent(lbChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(lbLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(lbFormKhuyenMai1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,14 +244,11 @@ private WebcamPanel panel = null;
                 .addComponent(lbFormSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(lbFormNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(lbFormKhuyenMai1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbFormThongke, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(628, Short.MAX_VALUE)
-                    .addComponent(lbFormKhuyenMai1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(164, 164, 164)))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lbFormBanHang, lbFormNhanVien, lbFormSanPham, lbFormThongke});
@@ -427,7 +418,7 @@ private WebcamPanel panel = null;
         lbFormNhanVien.setForeground(Color.white);
         lbFormThongke.setForeground(Color.GREEN);
         tpBanHang.removeAll();
-        pnBanHang = new FormKhuyenMai();
+        pnBanHang = new FormThongKe();
         tpBanHang.addTab("Quản lý khuyến mãi", pnBanHang);
         tpBanHang.setSelectedComponent(pnBanHang);
     }//GEN-LAST:event_lbFormThongkeMouseClicked
@@ -458,9 +449,10 @@ private WebcamPanel panel = null;
        lbFormBanHang.setForeground(Color.WHITE);
         lbFormSanPham.setForeground(Color.WHITE);
         lbFormNhanVien.setForeground(Color.white);
+        lbFormKhuyenMai1.setForeground(Color.WHITE);
         lbFormThongke.setForeground(Color.GREEN);
         tpBanHang.removeAll();
-        pnBanHang = new NewJPanel();
+        pnBanHang = new FormThongKe();
         tpBanHang.addTab("Quản lý khuyến mãi", pnBanHang);
         tpBanHang.setSelectedComponent(pnBanHang);
     }//GEN-LAST:event_btnThongKeActionPerformed
@@ -470,7 +462,15 @@ private WebcamPanel panel = null;
     }//GEN-LAST:event_btnThongKeMouseClicked
 
     private void lbFormKhuyenMai1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFormKhuyenMai1MouseClicked
-     
+        lbFormBanHang.setForeground(Color.WHITE);
+        lbFormSanPham.setForeground(Color.WHITE);
+        lbFormNhanVien.setForeground(Color.white);
+        lbFormThongke.setForeground(Color.WHITE);
+        lbFormKhuyenMai1.setForeground(Color.GREEN);
+        tpBanHang.removeAll();
+        pnBanHang = new FormKhuyenMai();
+        tpBanHang.addTab("Quản lý khuyến mãi", pnBanHang);
+        tpBanHang.setSelectedComponent(pnBanHang);
     }//GEN-LAST:event_lbFormKhuyenMai1MouseClicked
 
     /**
