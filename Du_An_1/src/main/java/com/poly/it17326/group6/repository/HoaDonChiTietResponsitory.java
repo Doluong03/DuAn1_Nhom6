@@ -6,9 +6,15 @@ package com.poly.it17326.group6.repository;
 
 import com.poly.it17326.group6.config.HibernateConfig;
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
+import com.poly.it17326.group6.domainmodel.HaoDonChitietdomain;
 import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
 import com.poly.it17326.group6.response.HoaDonCTResponse;
 import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
@@ -29,7 +35,7 @@ public class HoaDonChiTietResponsitory {
 //    }
     public boolean saveHDCT(HoaDonChiTiet hdct) {
         Transaction tran = null;
-        try (Session session = HibernateConfig.getFACTORY().openSession();) {
+        try ( Session session = HibernateConfig.getFACTORY().openSession();) {
             tran = session.beginTransaction();
             session.save(hdct);
             tran.commit();
@@ -53,7 +59,7 @@ public class HoaDonChiTietResponsitory {
 
     public boolean deleteSP(String ma) {
         Transaction tran = null;
-        try (Session session = HibernateConfig.getFACTORY().openSession();) {
+        try ( Session session = HibernateConfig.getFACTORY().openSession();) {
             tran = session.beginTransaction();
             String sql = "delete HoaDonChiTiet where MaHD = :ma";
             Query q = session.createQuery(sql);
@@ -68,15 +74,7 @@ public class HoaDonChiTietResponsitory {
         return false;
     }
 
-//    public static void main(String[] args) {
-//        String ma = "HD7";
-//        HoaDonChiTietResponsitory s = new HoaDonChiTietResponsitory();
-//        for (HoaDonChiTiet arg : s.getListHDCT()) {
-//            System.out.println(arg.toString());
-//        }
-// 
-//    }
-    
+
 
 //    public static void main(String[] args) {
 //        HoaDonChiTietResponsitory hd = new HoaDonChiTietResponsitory();
@@ -104,12 +102,5 @@ public class HoaDonChiTietResponsitory {
 //            hd.saveHDCT(hoaDonChiTiet);
 //        }
 //    }
-    
-    public static void main(String[] args) {
-        for (HoaDonChiTiet object : new HoaDonChiTietResponsitory().getListHDCT()) {
-            System.out.println(object.toString());
-        }
-    }
-    
-    
+
 }

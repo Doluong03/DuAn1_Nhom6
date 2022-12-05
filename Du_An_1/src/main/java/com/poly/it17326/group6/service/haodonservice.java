@@ -5,23 +5,15 @@
 package com.poly.it17326.group6.service;
 
 import com.poly.it17326.group6.domainmodel.HaoDonChitietdomain;
-import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
-import com.poly.it17326.group6.response.HoaDonCTResponse;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author Hp
  */
-public interface HoaDonChiTietService {
+public interface haodonservice {
 
-    public boolean saveHDCT(HoaDonChiTiet hdct);
+    public List<HaoDonChitietdomain> getlistTehongay(String bd, String end);
 
-    public List<HoaDonCTResponse> getListHDCT();
-
-    public boolean deleteSP(String ma);
-
-    
+    public List<HaoDonChitietdomain> getlistALLHDCT();
 }

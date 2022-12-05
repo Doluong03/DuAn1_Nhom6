@@ -111,6 +111,7 @@ public class HoaDonRepository {
         query.setParameter("ma", ma);
         query.setParameter("sdt", sdt);
         List<HoaDon> listSearch = (ArrayList<HoaDon>) query.getResultList();
+
         session.close();
         return listSearch;
     }
@@ -149,3 +150,4 @@ public class HoaDonRepository {
     }
 
 }
+
