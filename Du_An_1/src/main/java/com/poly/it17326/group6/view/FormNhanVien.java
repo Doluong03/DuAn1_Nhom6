@@ -8,16 +8,26 @@ import com.poly.it17326.group6.domainmodel.ChucVu;
 import com.poly.it17326.group6.domainmodel.TaiKhoan;
 import com.poly.it17326.group6.service.TaiKhoanService;
 import com.poly.it17326.group6.service.impl.TaiKhoanServiceImpl;
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import java.awt.Frame;
 import java.awt.Window;
 
 import java.awt.event.KeyEvent;
 import java.awt.print.Book;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import java.util.Random;
 import java.util.logging.Level;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -94,7 +104,68 @@ public class FormNhanVien extends javax.swing.JPanel {
         }
         return true;
     }
+    Random rd = new Random();
+    int pass = rd.nextInt(899999) + 100000;
+       private static String generateRandomString() {
+           String asciiUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String asciiLowerCase = asciiUpperCase.toLowerCase();
+         String digits = "1234567890";
+        String asciiChars = asciiUpperCase + asciiLowerCase + digits;
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        Random rand = new Random();
+        while (i < 10) {
+            sb.append(asciiChars.charAt(rand.nextInt(asciiChars.length())));
+            i++;
+        }
+        return sb.toString();
+    }
+               String randomString = generateRandomString();
+  public String sendEmail(String id, String email) throws MessagingException, UnsupportedEncodingException {
 
+        //Email gửi đi
+        String fromEmail = "anhnttph23200@fpt.edu.vn";
+
+        //Password của email
+        String passwordEmail = "aqfwxdeeyauyvpqk";
+
+        //Email người nhận
+        String toEmail = email;
+
+        //Tiêu đề email
+        String subject = "Cửa hàng bán sữa";
+
+        //Nội dung
+        String body = "Test";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Authenticator authenticator = new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, passwordEmail);
+            }
+        };
+        jakarta.mail.Session session = jakarta.mail.Session.getInstance(props, authenticator);
+        MimeMessage message = new MimeMessage(session);
+
+        message.addHeader("Content-type", "Text/HTML; charset=UTF-8");
+        message.addHeader("format", "flowed");
+        message.addHeader("Content-Transfer-Encoding", "8bit");
+        message.setFrom(new InternetAddress(fromEmail, "Acount employee"));
+        message.setReplyTo(InternetAddress.parse(fromEmail, false));
+        message.setSubject(subject, "UTF-8");
+        message.setText("UserName: "+ txtMa.getText()+" \n password: " + randomString, "UTF-8");
+        message.setSentDate(new Date());
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
+
+        Transport.send(message);
+        return "Send email successfully, please check your email!";
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -122,8 +193,6 @@ public class FormNhanVien extends javax.swing.JPanel {
         txtDiaC = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtSDT = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        tpxPass = new javax.swing.JPasswordField();
         jLabel10 = new javax.swing.JLabel();
         txtMail = new javax.swing.JTextField();
         btnThem = new javax.swing.JButton();
@@ -271,12 +340,6 @@ public class FormNhanVien extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(0, 102, 153));
         jLabel8.setText("Số Điện Thoại:");
 
-        jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel9.setText("Mật Khẩu:");
-
-        tpxPass.setText("jPasswordField1");
-
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 102, 153));
         jLabel10.setText("Email:");
@@ -349,7 +412,6 @@ public class FormNhanVien extends javax.swing.JPanel {
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -362,7 +424,6 @@ public class FormNhanVien extends javax.swing.JPanel {
                             .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dpkNgayS, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtDiaC, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tpxPass, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtMail, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbChucVu, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtSDT))
@@ -404,11 +465,7 @@ public class FormNhanVien extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tpxPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(21, 21, 21)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
@@ -423,7 +480,7 @@ public class FormNhanVien extends javax.swing.JPanel {
                     .addComponent(btnXoa)
                     .addComponent(btnSua)
                     .addComponent(btnThem))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -456,7 +513,7 @@ public class FormNhanVien extends javax.swing.JPanel {
             dpkNgayS.setDate(newDate);
             txtDiaC.setText(tblTaiKh.getValueAt(i, 5).toString());
             txtSDT.setText(tblTaiKh.getValueAt(i, 7).toString());
-            tpxPass.setToolTipText(tblTaiKh.getValueAt(i, 8).toString());
+         //   tpxPass.setToolTipText(tblTaiKh.getValueAt(i, 8).toString());
             if (tblTaiKh.getValueAt(i, 3).toString().equalsIgnoreCase("Nam")) {
                 rdoNam.setSelected(true);
             } else {
@@ -526,17 +583,25 @@ public class FormNhanVien extends javax.swing.JPanel {
         tk.setNgaySinh(dpkNgayS.getDate());
         tk.setDiaChi(txtDiaC.getText());
         tk.setSdt(txtSDT.getText());
-        tk.setMatKhau(tpxPass.getText());
+       tk.setMatKhau(randomString);
         tk.setCreateAt(new Date());
         tk.setEmail(txtMail.getText());
         for (ChucVu chucVu : taiKhoanService.getListCB()) {
             if (chucVu.getTen().equals(cbChucVu.getSelectedItem())) {
-                tk.setId(chucVu.getId());
+               tk.setChucVu(chucVu);
             }
         }
         if (taiKhoanService.them(tk)) {
-            JOptionPane.showMessageDialog(this, "Thanh cong");
+            
             LoadData(taiKhoanService.getAll());
+        }
+        try {
+            sendEmail(txtMa.getText(), txtMail.getText());
+            JOptionPane.showMessageDialog(this, "Tài khoản và mật khẩu đã được gửi đến email đăng ký");
+        } catch (MessagingException ex) {
+            java.util.logging.Logger.getLogger(FormNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            java.util.logging.Logger.getLogger(FormNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
         valiDate();
     }//GEN-LAST:event_btnThemActionPerformed
@@ -561,9 +626,9 @@ public class FormNhanVien extends javax.swing.JPanel {
         tk.setNgaySinh(dpkNgayS.getDate());
         tk.setDiaChi(txtDiaC.getText());
         tk.setSdt(txtSDT.getText());
-        tk.setMatKhau(tpxPass.getToolTipText());
+       // tk.setMatKhau(tpxPass.getToolTipText());
         tk.setEmail(txtMail.getText());
-        tk.setMatKhau(tpxPass.getText());
+      //  tk.setMatKhau(tpxPass.getText());
         tk.setUpdateAt(new Date());
         if (taiKhoanService.sua(tk)) {
             JOptionPane.showMessageDialog(this, "Sua thanh cong");
@@ -614,14 +679,12 @@ public class FormNhanVien extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rdoNam;
     private javax.swing.JRadioButton rdoNu;
     private javax.swing.JTable tblTaiKh;
-    private javax.swing.JPasswordField tpxPass;
     private javax.swing.JTextField txtDiaC;
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtMail;

@@ -4,8 +4,10 @@
  */
 package com.poly.it17326.group6.service;
 
+import com.poly.it17326.group6.domainmodel.HaoDonChitietdomain;
 import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
 import com.poly.it17326.group6.response.HoaDonCTResponse;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +18,10 @@ import java.util.List;
 public interface HoaDonChiTietService {
 
     public boolean saveHDCT(HoaDonChiTiet hdct);
-    
-    public List<HoaDonCTResponse> getListHDCT();
-    
-    public boolean  deleteSP(String ma);
-}
 
+    public List<HoaDonCTResponse> getListHDCT();
+
+    public boolean deleteSP(String ma);
+
+    
+}

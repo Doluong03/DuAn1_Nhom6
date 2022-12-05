@@ -43,6 +43,6 @@ public class NSX implements Serializable {
     private String ten;
     @Column(name = "QuocGia")
     private String quocGia;
-    @OneToMany(mappedBy = "nsx", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "nsx")
     private List<ChiTietSP> chiTietSP;
 }

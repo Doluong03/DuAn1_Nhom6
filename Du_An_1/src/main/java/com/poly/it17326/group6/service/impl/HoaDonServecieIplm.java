@@ -5,6 +5,7 @@
 package com.poly.it17326.group6.service.impl;
 
 import com.poly.it17326.group6.domainmodel.HoaDon;
+import com.poly.it17326.group6.domainmodel.KhachHang;
 import com.poly.it17326.group6.repository.HoaDonRepository;
 import com.poly.it17326.group6.response.HoaDonresponse;
 import com.poly.it17326.group6.service.HoaDonService;
@@ -20,12 +21,11 @@ import java.util.List;
 public class HoaDonServecieIplm  implements HoaDonService{
 private HoaDonRepository HoaDonRepository = new HoaDonRepository();
     @Override
-    public ArrayList<HoaDonresponse> getListsHD() {
-        ArrayList<HoaDon> listHD = new HoaDonRepository().getAll();
+    public List<HoaDonresponse> getListsHD() {
+        List<HoaDon> listHD = new HoaDonRepository().getAll();
            ArrayList<HoaDonresponse> listHDRespon=new ArrayList<>();
         for (HoaDon hd : listHD) {
             HoaDonresponse hdr= new HoaDonresponse(hd);
-
             listHDRespon.add(hdr);
         }
         return listHDRespon;
@@ -38,8 +38,8 @@ private HoaDonRepository HoaDonRepository = new HoaDonRepository();
 
     @Override
 
-    public boolean updateHD(String Ma, BigDecimal tongtien,int trangthai, String tenKH, String sdt) {
-        return HoaDonRepository.updateHD(Ma, tongtien,trangthai,tenKH,sdt);
+    public boolean updateHD(String Ma, BigDecimal tongtien,int trangthai, KhachHang idKH) {
+        return HoaDonRepository.updateHD(Ma, tongtien,trangthai,idKH);
     }
 
 @Override
@@ -48,8 +48,8 @@ private HoaDonRepository HoaDonRepository = new HoaDonRepository();
     }
 
     @Override
-    public ArrayList<HoaDonresponse> timKiemTT(int tt) {
-        ArrayList<HoaDon> listHD = new HoaDonRepository().getSearch(tt);
+    public List<HoaDonresponse> timKiemTT(int tt) {
+        List<HoaDon> listHD = new HoaDonRepository().getSearch(tt);
         ArrayList<HoaDonresponse> listHDRespon = new ArrayList<>();
         for (HoaDon hd : listHD) {
             HoaDonresponse hdr = new HoaDonresponse(hd);
@@ -60,8 +60,9 @@ private HoaDonRepository HoaDonRepository = new HoaDonRepository();
 
   
     @Override
-    public ArrayList<HoaDonresponse> timKiemHD(String ma) {
-        ArrayList<HoaDon> listHD = new HoaDonRepository().timKiemHD(ma);
+
+    public List<HoaDonresponse> timKiemHD(String ma,String sdt) {
+        List<HoaDon> listHD = new HoaDonRepository().timKiemHD(ma,sdt);
         ArrayList<HoaDonresponse> listHDRespon = new ArrayList<>();
         for (HoaDon hd : listHD) {
             HoaDonresponse hdr = new HoaDonresponse(hd);

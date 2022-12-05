@@ -71,7 +71,7 @@ public class FormChangePassword extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Forgot Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 24), new java.awt.Color(153, 0, 0))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thay đổi mật khẩu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 24), new java.awt.Color(153, 0, 0))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -109,7 +109,7 @@ public class FormChangePassword extends javax.swing.JFrame {
         btn_Back.setBackground(new java.awt.Color(153, 0, 0));
         btn_Back.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_Back.setForeground(new java.awt.Color(255, 255, 255));
-        btn_Back.setText("Back");
+        btn_Back.setText("Quay lại");
         btn_Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_BackActionPerformed(evt);
@@ -120,7 +120,7 @@ public class FormChangePassword extends javax.swing.JFrame {
         btn_Accept.setBackground(new java.awt.Color(153, 0, 0));
         btn_Accept.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_Accept.setForeground(new java.awt.Color(255, 255, 255));
-        btn_Accept.setText("Accept");
+        btn_Accept.setText("Xác nhận");
         btn_Accept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_AcceptActionPerformed(evt);

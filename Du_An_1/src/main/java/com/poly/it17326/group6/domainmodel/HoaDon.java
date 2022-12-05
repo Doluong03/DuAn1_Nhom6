@@ -26,7 +26,6 @@ import lombok.ToString;
 
 import org.hibernate.annotations.GenericGenerator;
 
-
 @Entity
 @Table(name = "HoaDon")
 @AllArgsConstructor
@@ -42,12 +41,6 @@ public class HoaDon implements Serializable {
     private int id;
     @Column(name = "Ma")
     private String MaHD;
-    @Column(name = "MaKH")
-    private String MaKH;
-    @Column(name = "HoTen")
-    private String HoTenkh;
-    @Column(name = "Sdt")
-    private String Sdt;
     @Column(name = "TongTien")
     private BigDecimal tongTien;
     @Column(name = "Create_at")
@@ -59,16 +52,17 @@ public class HoaDon implements Serializable {
     @Column(name = "TrangThai")
     private int TrangThai;
 
-
 // khoa ngoai voi banng tai khoan
     @ManyToOne(targetEntity = com.poly.it17326.group6.domainmodel.TaiKhoan.class)
-    @JoinColumn(name = "IdTK",referencedColumnName = "Id")
+    @JoinColumn(name = "IdTK", referencedColumnName = "Id")
     private TaiKhoan taiKhoan;
 
- 
+    @ManyToOne(targetEntity = com.poly.it17326.group6.domainmodel.KhachHang.class)
+    @JoinColumn(name = "IdKH", referencedColumnName = "Id")
+    private KhachHang khachHang;
 
     // chua maping voi vocher
     @ManyToOne(targetEntity = com.poly.it17326.group6.domainmodel.Voucher.class)
-    @JoinColumn(name = "IdVC",referencedColumnName = "Id")
+    @JoinColumn(name = "IdVC", referencedColumnName = "Id")
     private Voucher voucher;
 }

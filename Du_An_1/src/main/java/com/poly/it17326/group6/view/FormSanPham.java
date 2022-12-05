@@ -4,6 +4,7 @@
  */
 package com.poly.it17326.group6.view;
 
+import com.github.sarxos.webcam.Webcam;
 import com.poly.it17326.group6.domainmodel.Anh;
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.LoaiSP;
@@ -65,6 +66,7 @@ public class FormSanPham extends javax.swing.JPanel {
         initComponents();
         loadCB();
         loadIcon();
+       
     }
 
     /**
@@ -83,7 +85,8 @@ public class FormSanPham extends javax.swing.JPanel {
         }
         
     }
-    
+
+
     private String doiNgay(Date d) {
         SimpleDateFormat format = new SimpleDateFormat();
         format.applyPattern("yyyy-MM-dd");

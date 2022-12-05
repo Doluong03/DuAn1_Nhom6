@@ -40,7 +40,7 @@ public class HoaDonChiTiet implements Serializable {
     private HoaDon IdHoaDon;
     
     @Id
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "IdChiTietSP")
     private ChiTietSP IdChiTietSP;
 
@@ -59,14 +59,6 @@ public class HoaDonChiTiet implements Serializable {
     @Column(name = "DonGia")
     private BigDecimal DonGia;
 
-//    @ManyToOne
-//    @JoinColumn(name = "IdTK")
-//    private TaiKhoan taiKhoan;
-//    
-//    @ManyToOne
-//    @JoinColumn(name = "IdHoaDon")
-//    private HoaDon hoaDon;
- 
 
   }      
     
