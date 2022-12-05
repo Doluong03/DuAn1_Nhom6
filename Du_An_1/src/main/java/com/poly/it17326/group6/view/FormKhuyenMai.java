@@ -41,6 +41,7 @@ public class FormKhuyenMai extends javax.swing.JPanel {
         loadCBBTT();
         loadCBBTimKiem();
         lbAnhKM.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\sale.png"));
+        update();
     }
 
     private String doiNgay(Date d) {
@@ -160,6 +161,33 @@ public class FormKhuyenMai extends javax.swing.JPanel {
                 vocherReponse.trangThai()});
         }
 
+    }
+    
+    private void update(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 5);
+        calendar.set(Calendar.MINUTE, 04);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        Date dateSchedule = calendar.getTime();
+       
+
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                
+                String ma = txtMaKM.getText();
+                if(ma.isEmpty()){
+                   return;
+                }
+                voucherService.updateTrangThai(ma,0);
+            }
+        };
+
+        Timer timer = new Timer();
+        timer.schedule(timerTask, dateSchedule);
+    
     }
 
     @SuppressWarnings("unchecked")

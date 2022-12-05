@@ -57,7 +57,7 @@ public class FormSanPham extends javax.swing.JPanel {
     private ChiTietSPService chiTietSPService = new ChiTietSPServiceImpl();
     private ChiTietSpRepository chiTietSpRepository = new ChiTietSpRepository();
     List<ChiTietSpResponse_2> listHD = chiTietSPService.getAllFSP();
-    private FormImport formImport = new FormImport();
+  //  private FormImport formImport = new FormImport();
 
     /**
      * Creates new form FormSanPham

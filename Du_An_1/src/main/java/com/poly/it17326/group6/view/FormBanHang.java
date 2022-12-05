@@ -107,6 +107,7 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
         setKH("KH0");
         loadHD(listHD);
         loadCB();
+//        webcam.close();
 
     }
 
@@ -576,6 +577,7 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
                     .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
                     .setBorder(Border.NO_BORDER)
                     .setTextAlignment(TextAlignment.RIGHT));
+                    
             itemTbale.addCell(new Cell().add(jlbTiengiam.getText() + " VND")
                     .setBackgroundColor(new DeviceRgb(0, 51, 102))
                     .setFontColor(com.itextpdf.kernel.color.Color.WHITE)
