@@ -8,16 +8,26 @@ import com.poly.it17326.group6.domainmodel.ChucVu;
 import com.poly.it17326.group6.domainmodel.TaiKhoan;
 import com.poly.it17326.group6.service.TaiKhoanService;
 import com.poly.it17326.group6.service.impl.TaiKhoanServiceImpl;
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import java.awt.Frame;
 import java.awt.Window;
 
 import java.awt.event.KeyEvent;
 import java.awt.print.Book;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import java.util.Random;
 import java.util.logging.Level;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -94,7 +104,68 @@ public class FormNhanVien extends javax.swing.JPanel {
         }
         return true;
     }
+    Random rd = new Random();
+    int pass = rd.nextInt(899999) + 100000;
+       private static String generateRandomString() {
+           String asciiUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String asciiLowerCase = asciiUpperCase.toLowerCase();
+         String digits = "1234567890";
+        String asciiChars = asciiUpperCase + asciiLowerCase + digits;
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        Random rand = new Random();
+        while (i < 10) {
+            sb.append(asciiChars.charAt(rand.nextInt(asciiChars.length())));
+            i++;
+        }
+        return sb.toString();
+    }
+               String randomString = generateRandomString();
+  public String sendEmail(String id, String email) throws MessagingException, UnsupportedEncodingException {
 
+        //Email gửi đi
+        String fromEmail = "anhnttph23200@fpt.edu.vn";
+
+        //Password của email
+        String passwordEmail = "aqfwxdeeyauyvpqk";
+
+        //Email người nhận
+        String toEmail = email;
+
+        //Tiêu đề email
+        String subject = "Cửa hàng bán sữa";
+
+        //Nội dung
+        String body = "Test";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Authenticator authenticator = new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, passwordEmail);
+            }
+        };
+        jakarta.mail.Session session = jakarta.mail.Session.getInstance(props, authenticator);
+        MimeMessage message = new MimeMessage(session);
+
+        message.addHeader("Content-type", "Text/HTML; charset=UTF-8");
+        message.addHeader("format", "flowed");
+        message.addHeader("Content-Transfer-Encoding", "8bit");
+        message.setFrom(new InternetAddress(fromEmail, "Acount employee"));
+        message.setReplyTo(InternetAddress.parse(fromEmail, false));
+        message.setSubject(subject, "UTF-8");
+        message.setText("UserName: "+ txtMa.getText()+" \n password: " + randomString, "UTF-8");
+        message.setSentDate(new Date());
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
+
+        Transport.send(message);
+        return "Send email successfully, please check your email!";
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -512,17 +583,25 @@ public class FormNhanVien extends javax.swing.JPanel {
         tk.setNgaySinh(dpkNgayS.getDate());
         tk.setDiaChi(txtDiaC.getText());
         tk.setSdt(txtSDT.getText());
-     //   tk.setMatKhau(tpxPass.getText());
+       tk.setMatKhau(randomString);
         tk.setCreateAt(new Date());
         tk.setEmail(txtMail.getText());
         for (ChucVu chucVu : taiKhoanService.getListCB()) {
             if (chucVu.getTen().equals(cbChucVu.getSelectedItem())) {
-                tk.setId(chucVu.getId());
+               tk.setChucVu(chucVu);
             }
         }
         if (taiKhoanService.them(tk)) {
-            JOptionPane.showMessageDialog(this, "Thanh cong");
+            
             LoadData(taiKhoanService.getAll());
+        }
+        try {
+            sendEmail(txtMa.getText(), txtMail.getText());
+            JOptionPane.showMessageDialog(this, "Tài khoản và mật khẩu đã được gửi đến email đăng ký");
+        } catch (MessagingException ex) {
+            java.util.logging.Logger.getLogger(FormNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            java.util.logging.Logger.getLogger(FormNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
         valiDate();
     }//GEN-LAST:event_btnThemActionPerformed

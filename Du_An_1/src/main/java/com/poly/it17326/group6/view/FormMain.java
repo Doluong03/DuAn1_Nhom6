@@ -4,6 +4,7 @@
  */
 package com.poly.it17326.group6.view;
 
+import com.github.sarxos.webcam.Webcam;
 import com.poly.it17326.group6.view.FormNhanVien;
 import com.poly.it17326.group6.domainmodel.TaiKhoan;
 import com.poly.it17326.group6.service.ChiTietSPService;
@@ -361,6 +362,7 @@ public class FormMain extends javax.swing.JFrame {
         lbFormKhuyenMai.setForeground(Color.WHITE);
         lbFormSanPham.setForeground(Color.GREEN);
         tpBanHang.removeAll();
+
         pnBanHang = new FormSanPham();
         tpBanHang.addTab("Quản lý sản phẩm", pnBanHang);
         tpBanHang.setSelectedComponent(pnBanHang);
