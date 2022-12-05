@@ -148,6 +148,7 @@
                       <Component id="lbFormSanPham" alignment="0" max="32767" attributes="0"/>
                       <Component id="lbFormNhanVien" alignment="0" max="32767" attributes="0"/>
                       <Component id="lbFormThongke" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lbFormKhuyenMai1" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -166,13 +167,6 @@
                           <Component id="lbChucVu" max="32767" attributes="0"/>
                       </Group>
                       <Component id="lbLogo" min="-2" pref="165" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lbFormKhuyenMai1" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -198,16 +192,11 @@
                   <Component id="lbFormSanPham" linkSize="1" min="-2" pref="73" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                   <Component id="lbFormNhanVien" linkSize="1" min="-2" pref="70" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="lbFormKhuyenMai1" min="-2" pref="75" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="lbFormThongke" linkSize="1" min="-2" pref="75" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-              </Group>
-              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="628" max="32767" attributes="0"/>
-                      <Component id="lbFormKhuyenMai1" min="-2" pref="75" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="164" max="-2" attributes="0"/>
-                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
