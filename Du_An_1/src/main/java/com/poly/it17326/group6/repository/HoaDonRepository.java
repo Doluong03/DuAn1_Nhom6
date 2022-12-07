@@ -26,7 +26,7 @@ import org.hibernate.Transaction;
 public class HoaDonRepository {
 
     public List<HoaDon> getAll() {
-        String sql = "from HoaDon hd order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc ";
+        String sql = "from HoaDon hd  order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc ";
         Session session = HibernateConfig.getFACTORY().openSession();
         Query query = session.createQuery(sql);
         List<HoaDon> listHD = (ArrayList<HoaDon>) query.getResultList();
@@ -70,7 +70,7 @@ public class HoaDonRepository {
         HoaDon hd = new HoaDon();
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
             Transaction transaction = session.beginTransaction();
-            int i = (int) (getAll().size() + 2);
+            int i = (int) (getAll().size() + 5);
             Date now = new Date();
             SimpleDateFormat format = new SimpleDateFormat();
             format.applyPattern("yyyy-MM-dd");
@@ -146,8 +146,9 @@ public class HoaDonRepository {
 
     public static void main(String[] args) {
         HoaDonRepository s = new HoaDonRepository();
-        s.updateVCHHD("HD15", 3);
+        for (HoaDon hoaDon : s.getAll()) {
+            System.out.println(hoaDon.toString());
+        }
     }
 
 }
-
