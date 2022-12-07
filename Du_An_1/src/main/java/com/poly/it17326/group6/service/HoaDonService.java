@@ -24,7 +24,7 @@ public interface HoaDonService {
 
     public ArrayList<HoaDon> getIDHD(String Ma);
 
-    public boolean updateHD(String Ma, BigDecimal tongtien, int trangthai,KhachHang idKH);
+    public boolean updateHD(String Ma, BigDecimal tongtien, int trangthai,KhachHang idKH ,  BigDecimal tienKH,BigDecimal tienCK ,BigDecimal tienThua);
 
     public boolean addHD(int idTk);
 
@@ -36,4 +36,6 @@ public interface HoaDonService {
     public List<HoaDon> getALLHD();
 
     public boolean updateVCHHD(String ma, int IdVC);
+    
+    public boolean updateTTHD(String Ma, int trangthai , String lyDo);
 }

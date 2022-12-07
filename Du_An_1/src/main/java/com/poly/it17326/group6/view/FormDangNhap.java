@@ -9,6 +9,7 @@ import com.poly.it17326.group6.repository.TaiKhoanRepository;
 import com.poly.it17326.group6.service.TaiKhoanService;
 import com.poly.it17326.group6.service.impl.TaiKhoanServiceImpl;
 import java.util.ArrayList;
+import java.util.prefs.Preferences;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -27,6 +28,7 @@ public class FormDangNhap extends javax.swing.JFrame {
         initComponents();
         loadIcon();
         setLocationRelativeTo(null);
+       remember();
     }
 
     /**
@@ -43,7 +45,23 @@ public class FormDangNhap extends javax.swing.JFrame {
         show.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\hidden.png"));
         disable.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\hidden.png"));
         txtHienMk.setVisible(false);
-        
+
+    }
+
+    Preferences preference;
+    boolean rememberPreference;
+
+    private void remember() {
+        preference = Preferences.userNodeForPackage(this.getClass());
+        // Put the boolean of the remember preference
+        rememberPreference = preference.getBoolean("remember", Boolean.valueOf(""));
+        // Check if the check box was selected
+        if (rememberPreference) {
+            // Replace the textField by the preference User and Password who will be stock
+            txtEmail.setText(preference.get("username", ""));
+            txtMatKhau.setText(preference.get("password", ""));
+            chkremember.setSelected(rememberPreference);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -69,6 +87,7 @@ public class FormDangNhap extends javax.swing.JFrame {
         show = new javax.swing.JLabel();
         lbIconPassWord2 = new javax.swing.JLabel();
         txtHienMk = new javax.swing.JTextField();
+        chkremember = new javax.swing.JCheckBox();
         lbAnh = new javax.swing.JLabel();
 
         lbAnhNen.setBackground(new java.awt.Color(102, 102, 255));
@@ -76,6 +95,11 @@ public class FormDangNhap extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 255));
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(102, 51, 255));
@@ -206,6 +230,10 @@ public class FormDangNhap extends javax.swing.JFrame {
         });
         jPanel2.add(txtHienMk, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 366, 20));
 
+        chkremember.setForeground(new java.awt.Color(255, 255, 255));
+        chkremember.setText("Lưu mật khẩu");
+        jPanel2.add(chkremember, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, -1, -1));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(458, 0, 540, 430));
         jPanel1.add(lbAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 430));
 
@@ -272,16 +300,36 @@ public class FormDangNhap extends javax.swing.JFrame {
             frm.setTk(email);
             frm.setVisible(true);
             this.dispose();
-        } else {
+            preference.put("username", email);
+            preference.put("password", matkhau);
+            preference.putBoolean("remember", true);
+        } else{
             JOptionPane.showMessageDialog(this, "Đăng nhập thất bại");
+            preference.put("username", "");
+            preference.put("password", "");
+            preference.putBoolean("remember", false);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     FormForgotPassword frmForgot = new FormForgotPassword();
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         // TODO add your handling code here:
         frmForgot.setVisible(true);
-        
+
     }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        for (double i = 0.0; i <= 1.0; i = i + 0.1) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            try {
+                Thread.sleep(30);
+            } catch (Exception e) {
+
+            }
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -320,6 +368,7 @@ public class FormDangNhap extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox chkremember;
     private javax.swing.JLabel disable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

@@ -24,8 +24,9 @@ public class FormMain extends javax.swing.JFrame {
 
     private ChiTietSPService chiTietSPService = new ChiTietSPServiceImpl();
     private TaiKhoanService taiKhoanService = new TaiKhoanServiceImpl();
-private WebcamPanel panel = null;
+    private WebcamPanel panel = null;
     private Webcam webcam = null;
+
     /**
      * Creates new form DemoBanHang
      */
@@ -34,10 +35,8 @@ private WebcamPanel panel = null;
         tpBanHang.removeAll();
         setLocationRelativeTo(null);
         loadIcon();
-
     }
-      
-  
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,7 +63,13 @@ private WebcamPanel panel = null;
             lbChucVu.setText(tk.getChucVu().getTen());
             idTK = tk.getId();
         }
+        if (lbChucVu.getText().equalsIgnoreCase("Nhân viên")) {
+            lbFormThongke.setEnabled(false);
+            lbFormNhanVien.setEnabled(false);
+        }
     }
+
+ 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -371,18 +376,13 @@ private WebcamPanel panel = null;
         lbFormThongke.setForeground(Color.WHITE);
         lbFormSanPham.setForeground(Color.WHITE);
         tpBanHang.removeAll();
-        
+
         FormBanHang fbh = new FormBanHang();
         fbh.setTk(lbTenNV.getText());
         pnBanHang = fbh;
         tpBanHang.addTab("Quản lý bán hàng", pnBanHang);
         tpBanHang.setSelectedComponent(pnBanHang);
         webcam.close();
-     
-        
-       
-           
-            
     }//GEN-LAST:event_lbFormBanHangMouseClicked
 
     private void lbFormSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFormSanPhamMouseClicked
@@ -392,7 +392,6 @@ private WebcamPanel panel = null;
         lbFormThongke.setForeground(Color.WHITE);
         lbFormSanPham.setForeground(Color.GREEN);
         tpBanHang.removeAll();
-
         pnBanHang = new FormSanPham();
         tpBanHang.addTab("Quản lý sản phẩm", pnBanHang);
         tpBanHang.setSelectedComponent(pnBanHang);
@@ -446,7 +445,7 @@ private WebcamPanel panel = null;
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
-       lbFormBanHang.setForeground(Color.WHITE);
+        lbFormBanHang.setForeground(Color.WHITE);
         lbFormSanPham.setForeground(Color.WHITE);
         lbFormNhanVien.setForeground(Color.white);
         lbFormKhuyenMai1.setForeground(Color.WHITE);
@@ -458,7 +457,7 @@ private WebcamPanel panel = null;
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void btnThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongKeMouseClicked
-        
+
     }//GEN-LAST:event_btnThongKeMouseClicked
 
     private void lbFormKhuyenMai1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFormKhuyenMai1MouseClicked

@@ -38,8 +38,8 @@ private HoaDonRepository HoaDonRepository = new HoaDonRepository();
 
     @Override
 
-    public boolean updateHD(String Ma, BigDecimal tongtien,int trangthai, KhachHang idKH) {
-        return HoaDonRepository.updateHD(Ma, tongtien,trangthai,idKH);
+    public boolean updateHD(String Ma, BigDecimal tongtien,int trangthai, KhachHang idKH ,  BigDecimal tienKH,BigDecimal tienCK ,BigDecimal tienThua) {
+        return HoaDonRepository.updateHD(Ma, tongtien,trangthai,idKH ,tienKH, tienCK, tienThua);
     }
 
 @Override
@@ -79,6 +79,11 @@ private HoaDonRepository HoaDonRepository = new HoaDonRepository();
     @Override
     public boolean updateVCHHD(String ma, int IdVC) {
         return HoaDonRepository.updateVCHHD(ma, IdVC);
+    }
+
+    @Override
+    public boolean updateTTHD(String Ma, int trangthai , String lyDo) {
+        return HoaDonRepository.updateTTHD(Ma, trangthai , lyDo);
     }
 
 

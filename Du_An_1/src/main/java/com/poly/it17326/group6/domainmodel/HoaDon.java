@@ -43,6 +43,12 @@ public class HoaDon implements Serializable {
     private String MaHD;
     @Column(name = "TongTien")
     private BigDecimal tongTien;
+    @Column(name = "tienKhachDua")
+    private BigDecimal tienKhachDua;
+    @Column(name = "tienChuyenKhoan")
+    private BigDecimal tienChuyenKhoan;
+    @Column(name = "tienThua")
+    private BigDecimal tienThua;
     @Column(name = "Create_at")
     private Date createAt;
     @Column(name = "Update_at")
@@ -51,13 +57,31 @@ public class HoaDon implements Serializable {
     private boolean delete;
     @Column(name = "TrangThai")
     private int TrangThai;
+    @Column(name = "hinhThucTT")
+    private int hinhThucTT;
+    @Column(name = "hinhThucBH")
+    private int hinhThucBH;
+    @Column(name = "tenNguoiNhan")
+    private String tenNguoiNhan;
+    @Column(name = "sdtNguoiNhan")
+    private String sdtNguoiNhan;
+    @Column(name = "tenNguoiShip")
+    private String tenNguoiShip;
+    @Column(name = "sdtNguoiShip")
+    private String sdtNguoiShip;
+    @Column(name = "tienShip")
+    private BigDecimal tienShip;
+    @Column(name = "lyDo")
+    private String lyDo;
+    @Column(name = "diaChi")
+    private String diaChi;
 
 // khoa ngoai voi banng tai khoan
     @ManyToOne(targetEntity = com.poly.it17326.group6.domainmodel.TaiKhoan.class)
     @JoinColumn(name = "IdTK", referencedColumnName = "Id")
     private TaiKhoan taiKhoan;
 
-    @ManyToOne(targetEntity = com.poly.it17326.group6.domainmodel.KhachHang.class)
+    @ManyToOne(targetEntity = com.poly.it17326.group6.domainmodel.KhachHang.class , fetch = FetchType.EAGER)
     @JoinColumn(name = "IdKH", referencedColumnName = "Id")
     private KhachHang khachHang;
 
