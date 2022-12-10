@@ -20,6 +20,8 @@ import java.awt.Window;
 
 import java.awt.event.KeyEvent;
 import java.awt.print.Book;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,6 +35,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.jboss.logging.Logger;
@@ -179,6 +186,7 @@ public class FormNhanVien extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         cbTrangThai = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         txtMa = new javax.swing.JTextField();
@@ -256,13 +264,20 @@ public class FormNhanVien extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Export Excel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(111, 111, 111)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,15 +289,17 @@ public class FormNhanVien extends javax.swing.JPanel {
                             .addComponent(jLabel13))
                         .addGap(63, 63, 63)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14))
-                        .addGap(0, 464, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(jLabel14)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(54, 54, 54)
+                                .addComponent(jButton1)))))
+                .addContainerGap(322, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(162, Short.MAX_VALUE)
+                .addContainerGap(163, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -295,8 +312,10 @@ public class FormNhanVien extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(17, 17, 17)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))))
+                .addGap(16, 16, 16)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
         );
@@ -657,6 +676,90 @@ public class FormNhanVien extends javax.swing.JPanel {
         loadCBtt();
     }//GEN-LAST:event_btnThemCvActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+          try {
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet sheet = workbook.createSheet("Thongke");
+            XSSFRow row = null;
+            Cell cell = null;
+            row = sheet.createRow(3);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("STT");
+            
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("Mã NV");
+
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("Họ tên");
+
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("Giới tính");
+
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("Ngày sinh");
+
+            cell = row.createCell(5, CellType.STRING);
+            cell.setCellValue("Địa chỉ");
+            cell = row.createCell(6, CellType.STRING);
+            cell.setCellValue("Chức vụ");
+            cell = row.createCell(7, CellType.STRING);
+            cell.setCellValue("SDT");
+            cell = row.createCell(8, CellType.STRING);
+            cell.setCellValue("Mật khẩu");
+            cell = row.createCell(9, CellType.STRING);
+            cell.setCellValue("Email");
+
+            for (int i = 0; i < tblTaiKh.getRowCount(); i++) {
+
+                row = sheet.createRow(5 + i);
+                cell = row.createCell(0, CellType.NUMERIC);
+                cell.setCellValue(tblTaiKh.getValueAt(i, 0).toString());
+
+                cell = row.createCell(1, CellType.NUMERIC);
+                cell.setCellValue(tblTaiKh.getValueAt(i, 1).toString());
+
+                cell = row.createCell(2, CellType.NUMERIC);
+                cell.setCellValue(tblTaiKh.getValueAt(i, 2).toString());
+
+                cell = row.createCell(3, CellType.NUMERIC);
+                cell.setCellValue(tblTaiKh.getValueAt(i, 3).toString());
+
+                cell = row.createCell(4, CellType.NUMERIC);
+                cell.setCellValue(tblTaiKh.getValueAt(i, 4).toString());
+                
+                cell = row.createCell(5, CellType.NUMERIC);
+                cell.setCellValue(tblTaiKh.getValueAt(i, 5).toString());
+                
+                cell = row.createCell(6, CellType.NUMERIC);
+                cell.setCellValue(tblTaiKh.getValueAt(i, 6).toString());
+                
+                cell = row.createCell(7, CellType.NUMERIC);
+                cell.setCellValue(tblTaiKh.getValueAt(i, 7).toString());
+                
+                cell = row.createCell(8, CellType.NUMERIC);
+                cell.setCellValue(tblTaiKh.getValueAt(i, 8).toString());
+                
+                cell = row.createCell(9, CellType.NUMERIC);
+                cell.setCellValue(tblTaiKh.getValueAt(i, 9).toString());
+
+            }
+
+            File file = new File("D:\\Nhom6_PRO1041\\ThongKe\\TaiKhoan.xlsx");
+            try {
+                FileOutputStream fis = new FileOutputStream(file);
+                workbook.write(fis);
+                fis.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            JOptionPane.showMessageDialog(this, "Xuat thanh cong");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Xuat that bai");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSua;
@@ -667,6 +770,7 @@ public class FormNhanVien extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbTrangThai;
     private javax.swing.JComboBox<String> cbVaiTro;
     private com.toedter.calendar.JDateChooser dpkNgayS;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

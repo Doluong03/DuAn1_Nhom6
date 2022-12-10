@@ -92,6 +92,8 @@ public class FormMain extends javax.swing.JFrame {
         lbTenNV = new javax.swing.JLabel();
         lbChucVu = new javax.swing.JLabel();
         lbFormKhuyenMai1 = new javax.swing.JLabel();
+        lbFormHD = new javax.swing.JLabel();
+        lbFormKH = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel2 = new javax.swing.JLabel();
         btnDangXuat = new javax.swing.JButton();
@@ -203,19 +205,32 @@ public class FormMain extends javax.swing.JFrame {
             }
         });
 
+        lbFormHD.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lbFormHD.setForeground(new java.awt.Color(255, 255, 255));
+        lbFormHD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbFormHD.setText("Hóa đơn ");
+        lbFormHD.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        lbFormHD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbFormHDMouseClicked(evt);
+            }
+        });
+
+        lbFormKH.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lbFormKH.setForeground(new java.awt.Color(255, 255, 255));
+        lbFormKH.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbFormKH.setText("Khách hàng");
+        lbFormKH.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        lbFormKH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbFormKHMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbFormBanHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbFormSanPham, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbFormNhanVien, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbFormThongke, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbFormKhuyenMai1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -229,6 +244,17 @@ public class FormMain extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(lbChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(lbLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbFormBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbFormSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbFormNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbFormThongke, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbFormKhuyenMai1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbFormHD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbFormKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,16 +269,20 @@ public class FormMain extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(lbChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbFormBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGap(20, 20, 20)
                 .addComponent(lbFormSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbFormNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbFormKhuyenMai1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbFormThongke, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbFormHD, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbFormKH, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -325,7 +355,7 @@ public class FormMain extends javax.swing.JFrame {
         btnThongKe.setBackground(new java.awt.Color(0, 102, 102));
         btnThongKe.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnThongKe.setForeground(new java.awt.Color(255, 255, 255));
-        btnThongKe.setText("Thống kê");
+        btnThongKe.setText("Hoá đơn");
         btnThongKe.setFocusable(false);
         btnThongKe.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnThongKe.setMargin(new java.awt.Insets(2, 20, 2, 20));
@@ -376,13 +406,12 @@ public class FormMain extends javax.swing.JFrame {
         lbFormThongke.setForeground(Color.WHITE);
         lbFormSanPham.setForeground(Color.WHITE);
         tpBanHang.removeAll();
-
         FormBanHang fbh = new FormBanHang();
         fbh.setTk(lbTenNV.getText());
         pnBanHang = fbh;
         tpBanHang.addTab("Quản lý bán hàng", pnBanHang);
         tpBanHang.setSelectedComponent(pnBanHang);
-        webcam.close();
+      //  webcam.close();
     }//GEN-LAST:event_lbFormBanHangMouseClicked
 
     private void lbFormSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFormSanPhamMouseClicked
@@ -472,6 +501,34 @@ public class FormMain extends javax.swing.JFrame {
         tpBanHang.setSelectedComponent(pnBanHang);
     }//GEN-LAST:event_lbFormKhuyenMai1MouseClicked
 
+    private void lbFormHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFormHDMouseClicked
+        // TODO add your handling code here:
+        lbFormBanHang.setForeground(Color.WHITE);
+        lbFormSanPham.setForeground(Color.WHITE);
+        lbFormNhanVien.setForeground(Color.white);
+        lbFormThongke.setForeground(Color.WHITE);
+        lbFormKhuyenMai1.setForeground(Color.WHITE);
+        lbFormHD.setForeground(Color.GREEN);
+        tpBanHang.removeAll();
+        pnBanHang = new FormHoaDon();
+        tpBanHang.addTab("Quản lý hóa đơn", pnBanHang);
+        tpBanHang.setSelectedComponent(pnBanHang);
+    }//GEN-LAST:event_lbFormHDMouseClicked
+
+    private void lbFormKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFormKHMouseClicked
+        // TODO add your handling code here:
+        lbFormBanHang.setForeground(Color.WHITE);
+        lbFormSanPham.setForeground(Color.WHITE);
+        lbFormNhanVien.setForeground(Color.white);
+        lbFormThongke.setForeground(Color.WHITE);
+        lbFormKhuyenMai1.setForeground(Color.WHITE);
+        lbFormHD.setForeground(Color.GREEN);
+        tpBanHang.removeAll();
+        pnBanHang = new FormKhachHang();
+        tpBanHang.addTab("Quản lý khách hàng", pnBanHang);
+        tpBanHang.setSelectedComponent(pnBanHang);
+    }//GEN-LAST:event_lbFormKHMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -527,6 +584,8 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lbChucVu;
     private javax.swing.JLabel lbFormBanHang;
+    private javax.swing.JLabel lbFormHD;
+    private javax.swing.JLabel lbFormKH;
     private javax.swing.JLabel lbFormKhuyenMai1;
     private javax.swing.JLabel lbFormNhanVien;
     private javax.swing.JLabel lbFormSanPham;

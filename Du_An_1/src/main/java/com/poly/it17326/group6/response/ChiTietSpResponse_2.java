@@ -30,19 +30,32 @@ public class ChiTietSpResponse_2 implements Serializable {
     private Date hsd;
     private String Nsx;
     private int id;
+
     public ChiTietSpResponse_2() {
     }
 
     public ChiTietSpResponse_2(ChiTietSP ctsp) {
-        this.anh = ctsp.getAnh().getTen();
-        this.ma = ctsp.getSanPham().getMa();
+        if (ctsp.getAnh() == null) {
+            this.anh = anh;
+        } else {
+            this.anh = ctsp.getAnh().getTen();
+        }
+        if (ctsp.getSanPham() == null) {
+            this.ma = ma;
+        } else {
+            this.ma = ctsp.getSanPham().getMa();
+        }
         this.ten = ctsp.getSanPham().getTen();
         this.soLuongTon = ctsp.getSoLuongTon();
         this.donGia = ctsp.getDonGia();
-        this.loaiSP = ctsp.getLoaiSP().getTen();
+        if (ctsp.getLoaiSP() == null) {
+            this.loaiSP = loaiSP;
+        } else {
+            this.loaiSP = ctsp.getLoaiSP().getTen();
+        }
         this.hsd = ctsp.getHsd();
         this.Nsx = ctsp.getNsx().getTen();
-        this.id= ctsp.getId();
+        this.id = ctsp.getId();
     }
 
 }

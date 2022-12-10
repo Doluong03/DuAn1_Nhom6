@@ -4,7 +4,6 @@
  */
 package com.poly.it17326.group6.response;
 
-
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.HoaDon;
 import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
@@ -32,8 +31,11 @@ public class HoaDonCTResponse {
     private String sdt;
     private int idChiTietSP;
     private String maSP;
-   
-    
+    private BigDecimal tongTien;//du dA đi qua nơi này
+    private BigDecimal giaBan;
+    private float giaKhuyenMai;
+    private String loaiSanPham;
+
     public HoaDonCTResponse() {
     }
 
@@ -45,12 +47,19 @@ public class HoaDonCTResponse {
         this.tenKH = hdct.getTenKH();
         this.idChiTietSP = hdct.getIdChiTietSP().getId();
         this.maSP = hdct.getIdChiTietSP().getSanPham().getMa();
+        this.tongTien = hdct.getIdHoaDon().getTongTien();
+        this.giaBan = getThanhTien();
+        if (hdct.getIdHoaDon().getVoucher() == null) {
+            this.giaKhuyenMai = giaKhuyenMai;
+        } else {
+            this.giaKhuyenMai = hdct.getIdHoaDon().getVoucher().getPhanTram();
+        }
+        this.loaiSanPham = hdct.getIdChiTietSP().getLoaiSP().getTen();
     }
 
-   public BigDecimal getThanhTien(){
-        BigDecimal sl= new BigDecimal(soLuong);
+    public BigDecimal getThanhTien() {
+        BigDecimal sl = new BigDecimal(soLuong);
         return donGia.multiply(sl);
     }
-
 
 }

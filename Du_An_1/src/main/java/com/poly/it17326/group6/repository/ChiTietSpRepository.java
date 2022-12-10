@@ -16,6 +16,7 @@ import com.poly.it17326.group6.domainmodel.NSX;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -27,7 +28,7 @@ public class ChiTietSpRepository {
 
     public List<ChiTietSP> getAll() {
         Session session = HibernateConfig.getFACTORY().openSession();
-        String sql = "select ct from ChiTietSP as ct join ct.sanPham sp order by cast (SUBSTRING(sp.ma,3,3) as int) desc";
+        String sql = "select ct from ChiTietSP as ct join ct.sanPham sp order by cast (SUBSTRING(sp.ma,3,3) as int) asc";
         Query q = session.createQuery(sql);
         List<ChiTietSP> listCTSP = q.getResultList();
         session.close();
@@ -37,23 +38,27 @@ public class ChiTietSpRepository {
 //    
     public static void main(String[] args) {
         ChiTietSpRepository s = new ChiTietSpRepository();
-        int sl=3;
-        int id=1;
-        s.updateSL(sl, id);
+        for (LoaiSP loaiSP : s.getListLSP()) {
+            System.out.println(String.format("%s", loaiSP.getTen()));
+        }
     }
 
     public ChiTietSP getTimKiem(String ma) {
         Session session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery(" select ct from ChiTietSP as ct join ct.sanPham sp where sp.ma = :ma");
         q.setParameter("ma", ma);
-        return (ChiTietSP) q.getSingleResult();
+        ChiTietSP ct = (ChiTietSP) q.getSingleResult();
+        session.close();
+        return ct;
     }
 
     public List<ChiTietSP> getTimKiemLsp(String ten) {
         Session session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery(" select ct from ChiTietSP as ct join ct.loaiSP lsp where lsp.ten = :ma");
         q.setParameter("ma", ten);
-        return q.getResultList();
+        List<ChiTietSP> list = q.getResultList();
+        session.close();
+        return list;
     }
 
     public ChiTietSP addSP(ChiTietSP ctsp) {

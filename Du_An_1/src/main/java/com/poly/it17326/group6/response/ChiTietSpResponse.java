@@ -19,10 +19,8 @@ import lombok.ToString;
 @Setter
 @ToString
 
-   
+public class ChiTietSpResponse implements Serializable {
 
-public class ChiTietSpResponse implements Serializable{
-  
     private int idCTSP;
     private String anh;
     private String ma;
@@ -38,17 +36,24 @@ public class ChiTietSpResponse implements Serializable{
     }
 
     public ChiTietSpResponse(ChiTietSP ctsp) {
-        this.anh = ctsp.getAnh().getTen();
-        this.ma =ctsp.getSanPham().getMa();
+        if (ctsp.getAnh() == null) {
+            this.anh = anh;
+        } else {
+            this.anh = ctsp.getAnh().getTen();
+        }
+        this.ma = ctsp.getSanPham().getMa();
         this.ten = ctsp.getSanPham().getTen();
         this.soLuongTon = ctsp.getSoLuongTon();
         this.donGia = ctsp.getDonGia();
         this.idCTSP = ctsp.getId();
         this.maVach = ctsp.getMaVach();
         this.nsx = ctsp.getNsx().getTen();
-        this.loaiSP = ctsp.getLoaiSP().getTen();
+        if (ctsp.getLoaiSP() == null) {
+            this.loaiSP = loaiSP;
+        } else {
+            this.loaiSP = ctsp.getLoaiSP().getTen();
+        }
         this.thanhPhan = ctsp.getLoaiSP().getThanhPhan().getTen();
     }
-    
-    
+
 }

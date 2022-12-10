@@ -64,13 +64,22 @@ public class FormThongKe extends javax.swing.JPanel {
         if (listNgay.isEmpty()) {
             jlbTongtienngay.setText("0" + "VND");
             return;
+        } else {
+            for (BigDecimal list : listNgay) {
+                BigDecimal a = list;
+                jlbTongtienngay.setText(String.valueOf(a) + "VND");
+            }
         }
-
-        jlbTongtienngay.setText(listNgay + "VND");
-
         List<Integer> ListHDThanhcong = thongKeService.getListHdThanhcongNgay(sw);
         List<Integer> ListHDhuy = thongKeService.getListHDDAHUYNgay(sw);
-
+//        for (Integer list : ListHDThanhcong) {
+//            Integer a = list;
+//            jlbthanhcongNgay.setText(String.valueOf(a) + "VND");
+//        }
+//        for (Integer list : ListHDhuy) {
+//            Integer a = list;
+//            jlbDahuyNgay.setText(String.valueOf(a) + "VND");
+//        }
         jlbDahuyNgay.setText(String.valueOf(ListHDhuy));
         jlbthanhcongNgay.setText(String.valueOf(ListHDThanhcong));
     }
@@ -191,13 +200,19 @@ public class FormThongKe extends javax.swing.JPanel {
         panel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 12), new java.awt.Color(204, 0, 0))); // NOI18N
         panel3.setForeground(new java.awt.Color(102, 51, 255));
 
-        jLabel22.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jlbtongtiennam.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+
+        jLabel22.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel22.setText("Thành công :");
 
-        jLabel25.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jlbThanhcongNam.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+
+        jlbdahuyNam.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+
+        jLabel25.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel25.setText("Đã hủy :");
 
-        jLabel16.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel16.setText("Doanh Thu:");
 
         panel3.setLayer(jlbtongtiennam, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -219,10 +234,10 @@ public class FormThongKe extends javax.swing.JPanel {
                     .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlbThanhcongNam, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlbdahuyNam, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlbtongtiennam, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(150, Short.MAX_VALUE))
+                    .addComponent(jlbtongtiennam, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlbThanhcongNam, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlbdahuyNam, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         panel3Layout.setVerticalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,13 +261,19 @@ public class FormThongKe extends javax.swing.JPanel {
         panel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 12), new java.awt.Color(204, 0, 0))); // NOI18N
         panel1.setForeground(new java.awt.Color(102, 51, 255));
 
-        jLabel12.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jlbTongtienngay.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+
+        jLabel12.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel12.setText("Thành công :");
 
-        jLabel13.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jlbthanhcongNgay.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+
+        jlbDahuyNgay.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+
+        jLabel13.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel13.setText("Đã hủy :");
 
-        jLabel14.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel14.setText("Doanh Thu:");
 
         panel1.setLayer(jlbTongtienngay, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -274,10 +295,10 @@ public class FormThongKe extends javax.swing.JPanel {
                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlbTongtienngay, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlbthanhcongNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlbDahuyNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(192, Short.MAX_VALUE))
+                    .addComponent(jlbTongtienngay, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlbthanhcongNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlbDahuyNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,9 +312,9 @@ public class FormThongKe extends javax.swing.JPanel {
                     .addComponent(jlbthanhcongNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addGap(23, 23, 23)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel13)
-                    .addComponent(jlbDahuyNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlbDahuyNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(22, 22, 22))
         );
 
@@ -301,13 +322,19 @@ public class FormThongKe extends javax.swing.JPanel {
         panel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 12), new java.awt.Color(204, 0, 0))); // NOI18N
         panel2.setForeground(new java.awt.Color(102, 51, 255));
 
-        jLabel17.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jlbtongtienthang.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+
+        jLabel17.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel17.setText("Thành công :");
 
-        jLabel20.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jlbThanhcongThang.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+
+        jlbDahuyThang.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+
+        jLabel20.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel20.setText("Đã hủy :");
 
-        jLabel15.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel15.setText("Doanh Thu:");
 
         panel2.setLayer(jlbtongtienthang, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -330,13 +357,14 @@ public class FormThongKe extends javax.swing.JPanel {
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel2Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jlbThanhcongThang, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                            .addComponent(jlbDahuyThang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jlbThanhcongThang, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jlbtongtienthang, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(191, Short.MAX_VALUE))
+                        .addComponent(jlbtongtienthang, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jlbDahuyThang, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,16 +376,15 @@ public class FormThongKe extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel2Layout.createSequentialGroup()
-                        .addComponent(jlbThanhcongThang, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panel2Layout.createSequentialGroup()
                         .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(12, 12, 12)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlbDahuyThang, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel20)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addComponent(jlbThanhcongThang, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jlbDahuyThang, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         jTabbedPane4.setBackground(new java.awt.Color(153, 204, 0));
@@ -419,7 +446,7 @@ public class FormThongKe extends javax.swing.JPanel {
         jLayeredPane3Layout.setHorizontalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1292, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1441, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
                 .addGap(177, 177, 177)
@@ -450,7 +477,7 @@ public class FormThongKe extends javax.swing.JPanel {
                         .addComponent(btnLoc)
                         .addComponent(jButton1)))
                 .addGap(37, 37, 37)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Bảng", jLayeredPane3);
@@ -494,7 +521,7 @@ public class FormThongKe extends javax.swing.JPanel {
                 .addComponent(cbQUy, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
                 .addComponent(cbNam2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(744, Short.MAX_VALUE))
+                .addContainerGap(893, Short.MAX_VALUE))
         );
         jLayeredPane4Layout.setVerticalGroup(
             jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -503,7 +530,7 @@ public class FormThongKe extends javax.swing.JPanel {
                 .addGroup(jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbQUy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbNam2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jpan2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -589,13 +616,22 @@ public class FormThongKe extends javax.swing.JPanel {
         if (lists.isEmpty()) {
             jlbtongtienthang.setText(String.valueOf(0));
         } else {
-
-            jlbtongtienthang.setText(String.valueOf(lists) + "VND");
+            for (BigDecimal list : lists) {
+                BigDecimal a = list;
+                jlbtongtienthang.setText(String.valueOf(a) + "VND");
+            }
         }
 
         List<Integer> ListHDThanhcong = thongKeService.getListHDTAHNHCONGTHANg(yearr, thang);
         List<Integer> ListHDhuy = thongKeService.getListHDDahuyThang(year, thang);
-
+//        for (Integer list : ListHDThanhcong) {
+//            Integer a = list;
+//            jlbThanhcongThang.setText(String.valueOf(a) + "VND");
+//        }
+//        for (Integer list : ListHDhuy) {
+//            Integer a = list;
+//            jlbDahuyThang.setText(String.valueOf(a) + "VND");
+//        }
         jlbDahuyThang.setText(String.valueOf(ListHDhuy));
         jlbThanhcongThang.setText(String.valueOf(ListHDThanhcong));
 
@@ -607,12 +643,21 @@ public class FormThongKe extends javax.swing.JPanel {
         if (lists.isEmpty()) {
             jlbtongtiennam.setText(String.valueOf(0));
         } else {
-
-            jlbtongtiennam.setText(String.valueOf(lists) + "VND");
+            for (BigDecimal list : lists) {
+                BigDecimal a = list;
+                jlbtongtiennam.setText(String.valueOf(a) + "VND");
+            }
         }
         List<Integer> ListHDThanhcong = thongKeService.getListHDthanhcongNam(year);
         List<Integer> ListHDhuy = thongKeService.getListHDDAHUYnam(year);
-
+//        for (Integer list : ListHDThanhcong) {
+//            Integer a = list;
+//            jlbThanhcongNam.setText(String.valueOf(a) + "VND");
+//        }
+//        for (Integer list : ListHDhuy) {
+//            Integer a = list;
+//            jlbdahuyNam.setText(String.valueOf(a) + "VND");
+//        }
         jlbdahuyNam.setText(String.valueOf(ListHDhuy));
         jlbThanhcongNam.setText(String.valueOf(ListHDThanhcong));
     }//GEN-LAST:event_cbNamActionPerformed

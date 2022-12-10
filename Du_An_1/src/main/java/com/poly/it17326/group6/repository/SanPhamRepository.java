@@ -5,7 +5,9 @@
 package com.poly.it17326.group6.repository;
 
 import com.poly.it17326.group6.config.HibernateConfig;
+import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.SanPham;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -78,4 +80,21 @@ public Boolean add(SanPham sanPham) {
             System.out.println(sp.toString());
         }
     }
+    public Boolean save(SanPham sanPham, ChiTietSP ctsp) {
+        Transaction transaction = null;
+        try {
+            Session session = HibernateConfig.getFACTORY().openSession();
+            transaction = session.beginTransaction();    
+           ctsp.setSanPham(sanPham);
+            sanPham.setChiTietSPs(Arrays.asList(ctsp));
+            session.persist(sanPham);
+            transaction.commit();
+            
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
 }

@@ -1,4 +1,5 @@
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,6 +9,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
+import javax.swing.JFileChooser;
 import org.exolab.castor.types.DateTime;
 
 /*
@@ -21,11 +23,13 @@ import org.exolab.castor.types.DateTime;
 public class NewClass2 {
 
     public static void main(String[] args) throws ParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
-        String date = "15-Dec-2018";
-        LocalDate localDate = LocalDate.parse(date, formatter);
-
-        System.out.println(localDate);
+        System.out.println("á");
+//            if(!file.getAbsolutePath().endsWith(".xlsx") || !file.getAbsolutePath().endsWith(".xls")){
+//                JOptionPane.showMessageDialog(null, "Hãy chọn đúng file excel");
+//                return;
+////            }
+//        ImportExcelCTSP excelCTSP = new ImportExcelCTSP();
+//        excelCTSP.ImportFile(file.getAbsolutePath());
 
     }
 

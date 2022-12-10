@@ -1,3 +1,4 @@
+D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\view\FormKhachHang.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\service\NSXService.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\service\impl\ThongKeServiceImpl.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\repository\ConectionRespon.java
@@ -30,6 +31,7 @@ D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\service
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\service\impl\TaiKhoanServiceImpl.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\repository\HoaDonRepository.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\domainmodel\Anh.java
+D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\view\DialogNV.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\domainmodel\KhachHang.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\service\impl\ChiTietSPServiceImpl.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\domainmodel\Voucher.java
@@ -37,7 +39,6 @@ D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\respons
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\service\SanPhamService.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\domainmodel\ThanhPhan.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\response\HoaDonCTResponse.java
-D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\view\NewJPanel.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\view\FormTaiKhoan.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\service\ChiTietSPService.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\repository\NSXRespository.java
@@ -50,7 +51,7 @@ D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\domainm
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\view\DialogChucVu.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\view\FormKhuyenMai.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\service\impl\ChucVuServiceImpl.java
-D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\response\DoanhThuReponse.java
+D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\response\DoanhThureponse.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\service\impl\HOaDonChiTietServiceIplm.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\view\DialogSP.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\service\impl\AnhServiceImpl.java
@@ -68,6 +69,7 @@ D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\view\Di
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\service\impl\LoaiSanPhamServiceImpl.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\response\SanPhamResponse.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\view\FormForgotPassword.java
+D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\view\FormHoaDon.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\view\FormMain.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\repository\TaiKhoanRepository.java
 D:\Nhom6_PRO1041\DuAn1_ST2\Du_An_1\src\main\java\com\poly\it17326\group6\service\LoaiSanPhamService.java

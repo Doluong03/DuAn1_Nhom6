@@ -81,7 +81,7 @@ public class HoaDon implements Serializable {
     @JoinColumn(name = "IdTK", referencedColumnName = "Id")
     private TaiKhoan taiKhoan;
 
-    @ManyToOne(targetEntity = com.poly.it17326.group6.domainmodel.KhachHang.class , fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = com.poly.it17326.group6.domainmodel.KhachHang.class )
     @JoinColumn(name = "IdKH", referencedColumnName = "Id")
     private KhachHang khachHang;
 

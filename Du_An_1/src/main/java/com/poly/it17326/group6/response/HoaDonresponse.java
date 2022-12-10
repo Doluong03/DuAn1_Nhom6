@@ -34,7 +34,10 @@ public class HoaDonresponse {
     private BigDecimal tienCK;
     private BigDecimal tienThua;
     private String diaChi;
-    private int httt ;
+    private int httt;
+    private int rank;
+    private BigDecimal tongTien;
+
     public HoaDonresponse() {
     }
 
@@ -46,6 +49,7 @@ public class HoaDonresponse {
         this.tinhtrang = hd.getTrangThai();
         this.maKH = hd.getKhachHang().getMa();
         this.tenKH = hd.getKhachHang().getTen();
+        this.sdt = hd.getKhachHang().getSdt();
         this.tenNN = hd.getTenNguoiNhan();
         this.tenNS = hd.getTenNguoiShip();
         this.sdtNN = hd.getSdtNguoiNhan();
@@ -56,28 +60,28 @@ public class HoaDonresponse {
         this.tienThua = hd.getTienThua();
         this.diaChi = hd.getDiaChi();
         this.httt = hd.getHinhThucTT();
+        this.rank = hd.getKhachHang().getRank();
+        this.tongTien = hd.getTongTien();
     }
-    
-    public String trangThai(){
-        if(tinhtrang==1){
+
+    public String trangThai() {
+        if (tinhtrang == 1) {
             return "Đã thanh toán";
-        }else if(tinhtrang==0){
+        } else if (tinhtrang == 0) {
             return "Chờ thanh toán";
-        }else if(tinhtrang==2){
-            return  "Đã hủy";
-        }else if(tinhtrang==3){
-            return  "Chờ giao hàng";
-        }else if(tinhtrang==4){
-            return  "Đang giao hàng";
-        }else {
-            return  "Đã giao hàng";
+        } else if (tinhtrang == 2) {
+            return "Đã hủy";
+        } else if (tinhtrang == 3) {
+            return "Chờ giao hàng";
+        } else if (tinhtrang == 4) {
+            return "Đang giao hàng";
+        } else {
+            return "Đã giao hàng";
         }
     }
-    
+
 //    
 //    public Object[] toAddrow(){
 //      return new Object[]{id,maHD,ngayTao,sdt,tenKH,tenNV,trangThai()};
 //    }
-    
-    
 }

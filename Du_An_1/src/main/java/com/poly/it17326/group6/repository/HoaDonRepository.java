@@ -6,14 +6,18 @@ package com.poly.it17326.group6.repository;
 
 import com.poly.it17326.group6.config.HibernateConfig;
 import com.poly.it17326.group6.domainmodel.HoaDon;
+import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
 import com.poly.it17326.group6.domainmodel.KhachHang;
 import com.poly.it17326.group6.domainmodel.TaiKhoan;
 import com.poly.it17326.group6.domainmodel.Voucher;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Query;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -26,7 +30,7 @@ import org.hibernate.Transaction;
 public class HoaDonRepository {
 
     public List<HoaDon> getAll() {
-        String sql = "from HoaDon hd  order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc ";
+        String sql = "from HoaDon hd order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc ";
         Session session = HibernateConfig.getFACTORY().openSession();
         Query query = session.createQuery(sql);
         List<HoaDon> listHD = (ArrayList<HoaDon>) query.getResultList();
@@ -34,6 +38,24 @@ public class HoaDonRepository {
         return listHD;
     }
     // lay id hoa don
+
+    public List<HoaDon> getAllDay() {
+        String sql = "from HoaDon hd where createAt = :date order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc ";
+        Session session = HibernateConfig.getFACTORY().openSession();
+        Query query = session.createQuery(sql);
+        Date now = new Date();
+        SimpleDateFormat format= new SimpleDateFormat();
+        format.applyPattern("yyyy-MM-dd");
+        try {
+            Date d = new SimpleDateFormat("yyyy-MM-dd").parse(format.format(now));
+                    query.setParameter("date", d);
+        } catch (ParseException ex) {
+            Logger.getLogger(HoaDonRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        List<HoaDon> listHD = (ArrayList<HoaDon>) query.getResultList();
+        session.close();
+        return listHD;
+    }
 
     public ArrayList<HoaDon> getIDHD(String Ma) {
         Session session = HibernateConfig.getFACTORY().openSession();
@@ -60,7 +82,6 @@ public class HoaDonRepository {
             query.setParameter("Ma", ma);
             check = query.executeUpdate();
             tran.commit();
-            session.close();
         }
         if (check != 1) {
             return true;
@@ -73,7 +94,7 @@ public class HoaDonRepository {
         HoaDon hd = new HoaDon();
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
             Transaction transaction = session.beginTransaction();
-            int i = (int) (getAll().size() + 5);
+            int i = (int) (getAll().size() + 6);
             Date now = new Date();
             SimpleDateFormat format = new SimpleDateFormat();
             format.applyPattern("yyyy-MM-dd");
@@ -101,7 +122,26 @@ public class HoaDonRepository {
 
     public List<HoaDon> getSearch(int tt) {
         Session session = HibernateConfig.getFACTORY().openSession();
-        Query query = session.createQuery("select hd from HoaDon hd join hd.taiKhoan where hd.TrangThai = :ma order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc");
+        Query query = session.createQuery("select hd from HoaDon hd join hd.taiKhoan where hd.TrangThai = :ma and hd.createAt = :date  order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc");
+        query.setParameter("ma", tt);
+        Date now = new Date();
+        SimpleDateFormat format= new SimpleDateFormat();
+        format.applyPattern("yyyy-MM-dd");
+        try {
+            Date d = new SimpleDateFormat("yyyy-MM-dd").parse(format.format(now));
+                    query.setParameter("date", d);
+        } catch (ParseException ex) {
+            Logger.getLogger(HoaDonRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        List<HoaDon> listSearch = (ArrayList<HoaDon>) query.getResultList();
+        session.close();
+        return listSearch;
+    }
+    
+    
+    public List<HoaDon> getSearch_all(int tt) {
+        Session session = HibernateConfig.getFACTORY().openSession();
+        Query query = session.createQuery("select hd from HoaDon hd join hd.taiKhoan where hd.TrangThai = :ma  order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc");
         query.setParameter("ma", tt);
         List<HoaDon> listSearch = (ArrayList<HoaDon>) query.getResultList();
         session.close();
@@ -114,7 +154,6 @@ public class HoaDonRepository {
         query.setParameter("ma", ma);
         query.setParameter("sdt", sdt);
         List<HoaDon> listSearch = (ArrayList<HoaDon>) query.getResultList();
-
         session.close();
         return listSearch;
     }
@@ -122,7 +161,6 @@ public class HoaDonRepository {
     public List<HoaDon> getALLHD() {
         Session session = HibernateConfig.getFACTORY().openSession();
         Query query = session.createQuery("from HoaDon ");
-
         List<HoaDon> listSearch = (List<HoaDon>) query.getResultList();
         session.close();
         return listSearch;
@@ -149,7 +187,7 @@ public class HoaDonRepository {
 
     public static void main(String[] args) {
         HoaDonRepository s = new HoaDonRepository();
-        for (HoaDon hoaDon : s.getAll()) {
+        for (HoaDon hoaDon : s.getAllDay()) {
             System.out.println(hoaDon.toString());
         }
     }
@@ -166,7 +204,6 @@ public class HoaDonRepository {
             query.setParameter("Ma", ma);
             check = query.executeUpdate();
             tran.commit();
-            session.close();
         }
         if (check != 1) {
             return true;
@@ -186,7 +223,6 @@ public class HoaDonRepository {
             query.setParameter("Ma", ma);
             check = query.executeUpdate();
             tran.commit();
-            session.close();
         }
         if (check != 1) {
             return true;
@@ -206,7 +242,6 @@ public class HoaDonRepository {
             query.setParameter("Ma", ma);
             check = query.executeUpdate();
             tran.commit();
-            session.close();
         }
         if (check != 1) {
             return true;
@@ -231,7 +266,6 @@ public class HoaDonRepository {
             query.setParameter("Ma", ma);
             check = query.executeUpdate();
             tran.commit();
-            session.close();
         }
         if (check != 1) {
             return true;
@@ -241,6 +275,28 @@ public class HoaDonRepository {
 
     }
 
-  
+    public List<HoaDonChiTiet> getListHDCT(String mahd) {
+        List<HoaDonChiTiet> list = new ArrayList<>();
+        try {
+            Session session = HibernateConfig.getFACTORY().openSession();
+            String hql = "from HoaDonChiTiet where MaHD = :mahd";
+            org.hibernate.query.Query query = session.createQuery(hql);
+            query.setParameter("mahd", mahd);
+            list = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+     public List<HoaDon> getAll_HTBH(int hinhThucBH) {
+        String sql = "from HoaDon hd where hinhThucBH = :hinhThucBH order by cast (SUBSTRING(hd.MaHD,3,3) as int) desc ";
+        Session session = HibernateConfig.getFACTORY().openSession();
+        Query query = session.createQuery(sql);
+        query.setParameter("hinhThucBH", hinhThucBH);
+        List<HoaDon> listHD = (ArrayList<HoaDon>) query.getResultList();
+        session.close();
+        return listHD;
+    }
 
 }
