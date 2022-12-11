@@ -232,26 +232,26 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String email = txtusername.getText();
-        String matkhau = txtpassword.getText();
-
-        ArrayList<TaiKhoan> liste = taiKhoanService.getCheck(email);
-        ArrayList<TaiKhoan> listmk = taiKhoanService.getCheck1(matkhau);
-        if (!liste.isEmpty() && !listmk.isEmpty() && chkremember.isSelected() && !rememberPreference) {
-
-            JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
-            FormMain frm = new FormMain();
-            frm.setVisible(true);
-            this.dispose();
-            preference.put("username", email);
-            preference.put("password", matkhau);
-            preference.putBoolean("remember", true);
-        } else if (liste.isEmpty() && listmk.isEmpty() && !chkremember.isSelected() && rememberPreference) {
-            JOptionPane.showMessageDialog(this, "Đăng nhập thất bại");
-            preference.put("username", "");
-            preference.put("password", "");
-            preference.putBoolean("remember", false);
-        }
+//        String email = txtusername.getText();
+//        String matkhau = txtpassword.getText();
+//
+//        ArrayList<TaiKhoan> liste = taiKhoanService.getCheck(email);
+//        ArrayList<TaiKhoan> listmk = taiKhoanService.getCheck1(matkhau);
+//        if (!liste.isEmpty() && !listmk.isEmpty() && chkremember.isSelected() && !rememberPreference) {
+//
+//            JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+//            FormMain frm = new FormMain();
+//            frm.setVisible(true);
+//            this.dispose();
+//            preference.put("username", email);
+//            preference.put("password", matkhau);
+//            preference.putBoolean("remember", true);
+//        } else if (liste.isEmpty() && listmk.isEmpty() && !chkremember.isSelected() && rememberPreference) {
+//            JOptionPane.showMessageDialog(this, "Đăng nhập thất bại");
+//            preference.put("username", "");
+//            preference.put("password", "");
+//            preference.putBoolean("remember", false);
+//        }
 
 
     }//GEN-LAST:event_jButton1ActionPerformed

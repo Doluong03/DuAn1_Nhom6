@@ -43,6 +43,8 @@ public interface ChiTietSPService {
     public ArrayList<ChiTietSpResponse_2> getTimKiemFSP(String ma);
     
     public boolean updateSoLuong(  int sl,int id);
+    
+    List<ChiTietSpResponse> getTimKiem2(String ma) ;
   
    
 }
