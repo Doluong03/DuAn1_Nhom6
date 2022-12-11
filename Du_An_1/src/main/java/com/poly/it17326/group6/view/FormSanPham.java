@@ -4,28 +4,23 @@
  */
 package com.poly.it17326.group6.view;
 
-import com.github.sarxos.webcam.Webcam;
 import com.poly.it17326.group6.domainmodel.Anh;
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.LoaiSP;
 import com.poly.it17326.group6.domainmodel.NSX;
 import com.poly.it17326.group6.domainmodel.SanPham;
 import com.poly.it17326.group6.repository.ChiTietSpRepository;
-import com.poly.it17326.group6.response.ChiTietSpResponse;
 import com.poly.it17326.group6.response.ChiTietSpResponse_2;
-import com.poly.it17326.group6.response.SanPhamResponse;
 import com.poly.it17326.group6.service.ChiTietSPService;
 import com.poly.it17326.group6.service.SanPhamService;
 import com.poly.it17326.group6.service.impl.ChiTietSPServiceImpl;
 import com.poly.it17326.group6.service.impl.SanPhamServiceIplm;
 import java.awt.Frame;
 import java.awt.Window;
-import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,20 +29,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.RootPaneContainer;
 import javax.swing.SwingUtilities;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import org.apache.poi.hpsf.Decimal;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -88,10 +77,10 @@ public class FormSanPham extends javax.swing.JPanel {
     private void loadSP(List<ChiTietSpResponse_2> listS) {
         DefaultTableModel model = (DefaultTableModel) tbSanPham.getModel();
         model.setRowCount(0);
-        model.setColumnIdentifiers(new String[]{"Mã SP", "Tên SP", "NSX", "Loại SP", "HSD", "Số lượng tồn", "Đơn giá"});
+        model.setColumnIdentifiers(new String[]{"Mã SP", "Tên SP", "NSX", "Loại SP", "HSD", "Số lượng tồn", "Đơn giá", "Mã Vạch", "Ảnh"});
         int i = 1;
         for (ChiTietSpResponse_2 chiTietSpResponse : listS) {
-            model.addRow(new Object[]{chiTietSpResponse.getMa(), chiTietSpResponse.getTen(), chiTietSpResponse.getNsx(), chiTietSpResponse.getLoaiSP(), doiNgay(chiTietSpResponse.getHsd()), chiTietSpResponse.getSoLuongTon(), chiTietSpResponse.getDonGia()});
+            model.addRow(new Object[]{chiTietSpResponse.getMa(), chiTietSpResponse.getTen(), chiTietSpResponse.getNsx(), chiTietSpResponse.getLoaiSP(), doiNgay(chiTietSpResponse.getHsd()), chiTietSpResponse.getSoLuongTon(), chiTietSpResponse.getDonGia(), chiTietSpResponse.getMaVach(), chiTietSpResponse.getAnh()});
             System.out.println(chiTietSpResponse);
         }
 
@@ -533,20 +522,18 @@ public class FormSanPham extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+        int i=120;
         if (validateform()) {
             try {
                 SanPham sanPham = new SanPham();
-                sanPham.setMa("SP" + tbSanPham.getRowCount() + 1);
+                sanPham.setMa("SP" + tbSanPham.getRowCount() + i++);
                 sanPham.setTen(txtTenSP.getText());
                 sanPham.setCreateAt(new Date());
                 ChiTietSP chiTietSP = new ChiTietSP();
-                for (LoaiSP loaiSP : chiTietSPService.getListLSp()) {
-                    System.out.println("1 - " + loaiSP.getTen());
-                    System.out.println(cbLoaiSP.getSelectedItem().toString());
-                    if (loaiSP.getTen() == cbLoaiSP.getSelectedItem().toString()) {
-                        chiTietSP.setLoaiSP(loaiSP);
-                    }
-                }
+                LoaiSP lsp = new LoaiSP();
+                lsp.setId(1);
+                chiTietSP.setLoaiSP(lsp);
+                chiTietSP.setMaVach("9836");
                 for (NSX nsx : chiTietSPService.getListNsx()) {
                     if (nsx.getTen().equals(cbNsx.getSelectedItem().toString())) {
                         chiTietSP.setNsx(nsx);
@@ -693,7 +680,9 @@ public class FormSanPham extends javax.swing.JPanel {
                     XSSFCell cellHSD = xSSFRow.getCell(4);
                     XSSFCell cellSoLuong = xSSFRow.getCell(5);
                     XSSFCell cellDonGia = xSSFRow.getCell(6);
-                    model1.addRow(new Object[]{cellMaSP, cellTenSP, cellNsx, cellLoaiSP, cellHSD, cellSoLuong, cellDonGia});
+                    XSSFCell cellMaVach = xSSFRow.getCell(7);
+                    XSSFCell cellAnh = xSSFRow.getCell(8);
+                    model1.addRow(new Object[]{cellMaSP, cellTenSP, cellNsx, cellLoaiSP, cellHSD, cellSoLuong, cellDonGia, cellMaVach, cellAnh});
                 }
                 for (int i = 11; i < tbSanPham.getRowCount(); i++) {
                     SanPham sanPham = new SanPham();
@@ -719,6 +708,12 @@ public class FormSanPham extends javax.swing.JPanel {
                     double db = Double.parseDouble(tbSanPham.getValueAt(i, 5).toString());
                     chiTietSP.setSoLuongTon((int) db);
                     chiTietSP.setDonGia(new BigDecimal(tbSanPham.getValueAt(i, 6).toString()));
+                    chiTietSP.setMaVach(tbSanPham.getValueAt(i, 7).toString());
+                     for (Anh anh : chiTietSPService.getListA()) {
+                        if (anh.getLink().equals(tbSanPham.getValueAt(i, 8).toString())) {
+                            chiTietSP.setAnh(anh);
+                        }
+                    }
                     sanPham.setChiTietSPs(Arrays.asList(chiTietSP));
                     chiTietSP.setSanPham(sanPham);
                     List<SanPham> list = sanPhamService.getAll();
@@ -794,7 +789,9 @@ public class FormSanPham extends javax.swing.JPanel {
                     lstChiTietSp.get(i).getLoaiSP(),
                     doiNgay(lstChiTietSp.get(i).getHsd()),
                     lstChiTietSp.get(i).getSoLuongTon(),
-                    lstChiTietSp.get(i).getDonGia(),});
+                    lstChiTietSp.get(i).getDonGia(),
+                    lstChiTietSp.get(i).getMaVach(),
+                    lstChiTietSp.get(i).getAnh(),});
             }
 
         } else {
@@ -807,7 +804,9 @@ public class FormSanPham extends javax.swing.JPanel {
                         lstChiTietSp.get(i).getLoaiSP(),
                         doiNgay(lstChiTietSp.get(i).getHsd()),
                         lstChiTietSp.get(i).getSoLuongTon(),
-                        lstChiTietSp.get(i).getDonGia(),});
+                        lstChiTietSp.get(i).getDonGia(),
+                        lstChiTietSp.get(i).getMaVach(),
+                        lstChiTietSp.get(i).getAnh(),});
                 }
             } else {
                 for (int i = n; i < m; i++) {
@@ -817,7 +816,9 @@ public class FormSanPham extends javax.swing.JPanel {
                         lstChiTietSp.get(i).getLoaiSP(),
                         doiNgay(lstChiTietSp.get(i).getHsd()),
                         lstChiTietSp.get(i).getSoLuongTon(),
-                        lstChiTietSp.get(i).getDonGia(),});
+                        lstChiTietSp.get(i).getDonGia(),
+                        lstChiTietSp.get(i).getMaVach(),
+                        lstChiTietSp.get(i).getAnh(),});
                 }
             }
         }

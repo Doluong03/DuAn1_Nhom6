@@ -117,12 +117,12 @@ public class ChiTietSpRepository {
         return listA;
     }
 
-    public boolean updateSL(int sl , int id) {
+    public boolean updateSL(int sl, int id) {
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
             Transaction transaction = session.beginTransaction();
-            String sql="Update ChiTietSP  set soLuongTon = soLuongTon -:sl where id = :ma ";
-            Query q= session.createQuery(sql);
-            q.setParameter("sl",sl);
+            String sql = "Update ChiTietSP  set soLuongTon = soLuongTon -:sl where id = :ma ";
+            Query q = session.createQuery(sql);
+            q.setParameter("sl", sl);
             q.setParameter("ma", id);
             q.executeUpdate();
             transaction.commit();
@@ -132,5 +132,14 @@ public class ChiTietSpRepository {
         }
         return false;
     }
-  
+
+    public List<ChiTietSP> getTimKiem2(String ma) {
+        Session session = HibernateConfig.getFACTORY().openSession();
+        Query q = session.createQuery(" select ct from ChiTietSP as ct join ct.sanPham sp where sp.ma = :ma");
+        q.setParameter("ma", ma);
+        ArrayList<ChiTietSP> list = (ArrayList<ChiTietSP>) q.getResultList();
+        session.close();
+        return list;
+
+    }
 }

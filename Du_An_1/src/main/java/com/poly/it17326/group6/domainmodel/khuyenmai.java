@@ -5,14 +5,12 @@
 package com.poly.it17326.group6.domainmodel;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.CascadeType;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,32 +18,51 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-/**
- *
- * @author 123
- */
 @Entity
-@Table(name = "Anh")
+@Table(name = "khuyenmai")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class Anh implements Serializable {
+public class khuyenmai implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
+    @Column(name = "id")
     private int id;
-    @Column(name = "Ma")
+    
+    @Column(name = "create_at")
+    private Date create_at;
+    
+    @Column(name = "gia_tri")
+    private int giaTri;
+    
+    @Column(name = "loai_khuyen_mai")
+    private String loaiKhuyenMai;
+    
+    @Column(name = "ma")
     private String ma;
-    @Column(name = "Ten")
+    
+    @Column(name = "ngay_bat_dau")
+    private Date ngay_bat_dau;
+    
+    @Column(name = "ngay_ket_thuc")
+    private Date ngay_ket_thuc;
+    
+    @Column(name = "ten")
     private String ten;
-    @Column(name = "Cover")
-    private boolean cover;
-    @Column(name = "link")
-    private String link;
-    @OneToMany(mappedBy = "anh", cascade = CascadeType.ALL)
-    public List<ChiTietSP> chiTietSPs;
 
+    
+    @Column(name = "trang_thai")
+    private int trangThai;
+
+    
+    public String trangthai(){
+        if(trangThai==1){
+            return "Đang hoạt động";
+        }else{
+            return "Ngừng hoạt động";
+        }
+    }
 }

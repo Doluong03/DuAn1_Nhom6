@@ -30,6 +30,7 @@ public class ChiTietSpResponse_2 implements Serializable {
     private Date hsd;
     private String Nsx;
     private int id;
+    private String maVach;
 
     public ChiTietSpResponse_2() {
     }
@@ -38,7 +39,7 @@ public class ChiTietSpResponse_2 implements Serializable {
         if (ctsp.getAnh() == null) {
             this.anh = anh;
         } else {
-            this.anh = ctsp.getAnh().getTen();
+            this.anh = ctsp.getAnh().getLink();
         }
         if (ctsp.getSanPham() == null) {
             this.ma = ma;
@@ -56,6 +57,7 @@ public class ChiTietSpResponse_2 implements Serializable {
         this.hsd = ctsp.getHsd();
         this.Nsx = ctsp.getNsx().getTen();
         this.id = ctsp.getId();
+        this.maVach = ctsp.getMaVach();
     }
 
 }

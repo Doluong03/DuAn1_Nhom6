@@ -131,10 +131,10 @@ public class FormNhanVien extends javax.swing.JPanel {
   public String sendEmail(String id, String email) throws MessagingException, UnsupportedEncodingException {
 
         //Email gửi đi
-        String fromEmail = "anhnttph23200@fpt.edu.vn";
+        String fromEmail = "tunganh.devj@gmail.com";
 
         //Password của email
-        String passwordEmail = "aqfwxdeeyauyvpqk";
+        String passwordEmail = "advdwwljqyzlihsb";
 
         //Email người nhận
         String toEmail = email;

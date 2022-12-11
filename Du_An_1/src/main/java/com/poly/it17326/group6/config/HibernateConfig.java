@@ -1,13 +1,12 @@
 package com.poly.it17326.group6.config;
 
-
 import com.poly.it17326.group6.domainmodel.Anh;
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
+import com.poly.it17326.group6.domainmodel.ChitietKhuyenMai;
 import com.poly.it17326.group6.domainmodel.ChucVu;
 import com.poly.it17326.group6.domainmodel.HoaDon;
 import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
 import com.poly.it17326.group6.domainmodel.KhachHang;
-
 
 import com.poly.it17326.group6.domainmodel.LoaiSP;
 import com.poly.it17326.group6.domainmodel.NSX;
@@ -15,8 +14,8 @@ import com.poly.it17326.group6.domainmodel.SanPham;
 import com.poly.it17326.group6.domainmodel.TaiKhoan;
 import com.poly.it17326.group6.domainmodel.ThanhPhan;
 
-
 import com.poly.it17326.group6.domainmodel.Voucher;
+import com.poly.it17326.group6.domainmodel.khuyenmai;
 
 import java.util.Properties;
 import org.hibernate.SessionFactory;
@@ -55,13 +54,12 @@ public class HibernateConfig {
         conf.addAnnotatedClass(ChucVu.class);
         conf.addAnnotatedClass(HoaDon.class);
         conf.addAnnotatedClass(HoaDonChiTiet.class);
-      conf.addAnnotatedClass(KhachHang.class);
-        
-        
+        conf.addAnnotatedClass(KhachHang.class);
+        conf.addAnnotatedClass(khuyenmai.class);
+        conf.addAnnotatedClass(ChitietKhuyenMai.class);
 
         conf.addAnnotatedClass(SanPham.class);
-                conf.addAnnotatedClass(HoaDon.class);
-
+        conf.addAnnotatedClass(HoaDon.class);
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
@@ -72,8 +70,8 @@ public class HibernateConfig {
     public static SessionFactory getFACTORY() {
         return FACTORY;
     }
-    
-     public static void main(String[] args) {
+
+    public static void main(String[] args) {
         getFACTORY();
     }
 

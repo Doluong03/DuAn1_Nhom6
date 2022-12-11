@@ -171,4 +171,15 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
     public boolean updateSoLuong( int sl,int id) {
         return  chiTietSpRepository.updateSL(sl,id);
     }
+    
+     @Override
+    public List<ChiTietSpResponse> getTimKiem2(String ma) {
+        ArrayList<ChiTietSpResponse> listCTrespon = new ArrayList<>();
+        List<ChiTietSP> c = chiTietSpRepository.getTimKiem2(ma);
+        for (ChiTietSP chiTietSP : c) {
+            ChiTietSpResponse ctr = new ChiTietSpResponse(chiTietSP);
+            listCTrespon.add(ctr);
+        }
+        return listCTrespon;
+    }
 }

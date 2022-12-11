@@ -153,16 +153,16 @@ public class FormKhachHang extends javax.swing.JPanel {
         }
     }
 
-    public void loadTable1(List<KhachHang> listH) {
-        DefaultTableModel model = (DefaultTableModel) tblThongTin.getModel();
-        model.setRowCount(0);
-        model.setColumnIdentifiers(new String[]{"Mã", "Họ tên", "SDT", "Ngày sinh", "Giới tính", "Địa chỉ", "Trạng thái", "Rank"});
-        int i = 1;
-        for (KhachHang kh : listH) {
-            model.addRow(new Object[]{kh.getMa(), kh.getTen(), kh.getSdt(), doiNgay(kh.getNgaySinh()), kh.getGioiTinh(), kh.getDiaChi(), kh.trangThai(), kh.Rank()});
-
-        }
-    }
+//    public void loadTable1(List<KhachHang> listH) {
+//        DefaultTableModel model = (DefaultTableModel) tblThongTin.getModel();
+//        model.setRowCount(0);
+//        model.setColumnIdentifiers(new String[]{"Mã", "Họ tên", "SDT", "Ngày sinh", "Giới tính", "Địa chỉ", "Trạng thái", "Rank"});
+//        int i = 1;
+//        for (KhachHang kh : listH) {
+//            model.addRow(new Object[]{kh.getMa(), kh.getTen(), kh.getSdt(), doiNgay(kh.getNgaySinh()), kh.getGioiTinh(), kh.getDiaChi(), kh.trangThai(), kh.Rank()});
+//
+//        }
+//    }
     String ma = null;
 
     public String getKH() {
@@ -596,32 +596,32 @@ public class FormKhachHang extends javax.swing.JPanel {
             cell = row.createCell(7, CellType.STRING);
             cell.setCellValue("rank");
 
-            for (int i = 0; i < tblThongTin.getRowCount(); i++) {
+            for (int i = 0; i < tbKH.getRowCount(); i++) {
 
                 row = sheet.createRow(5 + i);
                 cell = row.createCell(0, CellType.NUMERIC);
                 cell.setCellValue(i + 1);
 
                 cell = row.createCell(1, CellType.NUMERIC);
-                cell.setCellValue(tblThongTin.getValueAt(i, 0).toString());
+                cell.setCellValue(tbKH.getValueAt(i, 0).toString());
 
                 cell = row.createCell(2, CellType.NUMERIC);
-                cell.setCellValue(tblThongTin.getValueAt(i, 1).toString());
+                cell.setCellValue(tbKH.getValueAt(i, 1).toString());
 
                 cell = row.createCell(3, CellType.NUMERIC);
-                cell.setCellValue(tblThongTin.getValueAt(i, 2).toString());
+                cell.setCellValue(tbKH.getValueAt(i, 2).toString());
 
                 cell = row.createCell(4, CellType.NUMERIC);
-                cell.setCellValue(tblThongTin.getValueAt(i, 3).toString());
+                cell.setCellValue(tbKH.getValueAt(i, 3).toString());
 
                 cell = row.createCell(5, CellType.NUMERIC);
-                cell.setCellValue(tblThongTin.getValueAt(i, 4).toString());
+                cell.setCellValue(tbKH.getValueAt(i, 4).toString());
 
                 cell = row.createCell(6, CellType.NUMERIC);
-                cell.setCellValue(tblThongTin.getValueAt(i, 5).toString());
+                cell.setCellValue(tbKH.getValueAt(i, 5).toString());
 
                 cell = row.createCell(7, CellType.NUMERIC);
-                cell.setCellValue(tblThongTin.getValueAt(i, 6).toString());
+                cell.setCellValue(tbKH.getValueAt(i, 6).toString());
 
             }
 
@@ -767,27 +767,15 @@ public class FormKhachHang extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnLamMoi1;
-    private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThem1;
     private javax.swing.JButton btnXuat;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbRank;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -795,54 +783,26 @@ public class FormKhachHang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
-    private com.toedter.calendar.JDateChooser jdcNgaySinh;
-    private com.toedter.calendar.JDateChooser jdcNgaySinh1;
     private com.toedter.calendar.JDateChooser jdcNgaySinh2;
-    private javax.swing.JPanel lbRank;
-    private javax.swing.JLabel lbRank1;
-    private javax.swing.JLabel lbRank2;
-    private javax.swing.JPanel lbRank3;
     private javax.swing.JLabel lbRank4;
     private javax.swing.JPanel lbRank5;
     private javax.swing.JRadioButton rdNam;
     private javax.swing.JRadioButton rdNu;
     private javax.swing.JTable tbKH;
     private javax.swing.JTable tblLichSu;
-    private javax.swing.JTable tblThongTin;
-    private javax.swing.JTextField txtMaKH;
-    private javax.swing.JTextField txtMaKH1;
     private javax.swing.JTextField txtMaKH2;
-    private javax.swing.JTextField txtSdt;
-    private javax.swing.JTextField txtSdt1;
     private javax.swing.JTextField txtSdt2;
-    private javax.swing.JTextField txtTenKH;
-    private javax.swing.JTextField txtTenKH1;
     private javax.swing.JTextField txtTenKH2;
     private javax.swing.JTextField txtTimKiem;
-    private javax.swing.JTextArea txtaDiaCHi;
-    private javax.swing.JTextArea txtaDiaCHi1;
     private javax.swing.JTextArea txtaDiaCHi2;
     // End of variables declaration//GEN-END:variables
 }

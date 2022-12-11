@@ -31,6 +31,7 @@ public class ChiTietSpResponse implements Serializable {
     private String nsx;
     private String thanhPhan;
     private String loaiSP;
+    private BigDecimal giaMoi;
 
     public ChiTietSpResponse() {
     }
@@ -46,14 +47,24 @@ public class ChiTietSpResponse implements Serializable {
         this.soLuongTon = ctsp.getSoLuongTon();
         this.donGia = ctsp.getDonGia();
         this.idCTSP = ctsp.getId();
-        this.maVach = ctsp.getMaVach();
+        if (ctsp.getMaVach() == null) {
+            this.maVach = maVach;
+        } else {
+            this.maVach = ctsp.getMaVach();
+        }
         this.nsx = ctsp.getNsx().getTen();
         if (ctsp.getLoaiSP() == null) {
             this.loaiSP = loaiSP;
         } else {
             this.loaiSP = ctsp.getLoaiSP().getTen();
         }
-        this.thanhPhan = ctsp.getLoaiSP().getThanhPhan().getTen();
+         if (ctsp.getLoaiSP() == null) {
+            this.thanhPhan = thanhPhan;
+        } else {
+           this.thanhPhan = ctsp.getLoaiSP().getThanhPhan().getTen();
+        }
+        
+      
     }
 
 }
