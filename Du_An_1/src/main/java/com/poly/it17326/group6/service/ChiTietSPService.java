@@ -4,8 +4,9 @@
  */
 package com.poly.it17326.group6.service;
 
-import com.poly.it17326.group6.domainmodel.Anh;
+import com.poly.it17326.group6.domainmodel.KhoiLuong;
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
+import com.poly.it17326.group6.domainmodel.DonViTinh;
 import com.poly.it17326.group6.domainmodel.LoaiSP;
 import com.poly.it17326.group6.domainmodel.NSX;
 import com.poly.it17326.group6.domainmodel.SanPham;
@@ -30,13 +31,13 @@ public interface ChiTietSPService {
 
     public ChiTietSpResponse_2 updateSP(ChiTietSpResponse_2 ctsp);
 
-    public List<SanPham> getListSp();
+    public List<DonViTinh> getListSp();
 
     public List<NSX> getListNsx();
 
     public List<LoaiSP> getListLSp();
 
-    public List<Anh> getListA();
+    public List<KhoiLuong> getListA();
 
     public List<ChiTietSpResponse_2> getAllFSP();
 

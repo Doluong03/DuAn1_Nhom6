@@ -153,6 +153,55 @@ ALTER TABLE ChiTietSP  ADD  FOREIGN KEY(IdAnh) REFERENCES Anh(Id)
 -- ChiTietSP - LoaiSP
 ALTER TABLE ChiTietSP  ADD FOREIGN KEY(IdLoaiSP) REFERENCES LoaiSP(Id)
 
+CREATE TABLE KhoiLuong(
+Id INT IDENTITY(1,1) PRIMARY KEY,
+Ma VARCHAR(20) UNIQUE,
+Ten NVARCHAR(30),
+
+)
+
+GO
+CREATE TABLE DonViTinh(
+Id INT IDENTITY(1,1) PRIMARY KEY,
+Ma VARCHAR(20) UNIQUE,
+Ten NVARCHAR(30),
+)
+GO
+
+alter table chiTietSP add created_at date 
+alter table chiTietSP add idDV int 
+alter table chiTietSP add  Create_at DATE DEFAULT NULL
+alter table chiTietSP add Update_at DATE DEFAULT NULL
+alter table chiTietSP add Deleted bit default 0
+
+alter table chitietSP drop column idAnh
+
+
+select * from ChiTietSP
+select * from ctsp_khuyenmai
+select * from SanPham
+select * from khuyenmai
+select * from DonViTinh
+
+
+select * from HoaDonChiTiet
+
+alter table HoaDonChiTiet add giaBan numeric
+
+delete khuyenmai
+ delete ctsp_khuyenmai
+  delete SanPham where id between 413 and 10000 
+ delete ChiTietSP where id =  500 between 415 and 10000 
+
+ update HoaDonChiTiet set giaBan = DonGia
+
+ update chiTietSP set IdLoaiSP = 1 where id = 437
+ -- ChiTietSP - Anh
+ALTER TABLE ChiTietSP  ADD  FOREIGN KEY(idKL) REFERENCES KhoiLuong(Id)
+-- ChiTietSP - LoaiSP
+ALTER TABLE ChiTietSP  ADD FOREIGN KEY(IdDV) REFERENCES DonViTinh(Id)
+
+select * from don
 
 
 select * from SanPham
@@ -193,8 +242,13 @@ insert into LoaiSP(Ma,Ten,IdTP) values
 
 
 
+go 
 
-
+select hd.Create_at as ngay,count(hd.Ma) as hoadon,SUM(TongTien) as tongtien,count(SoLuong) as SoluongSp from hoadon hd 
+              join HoaDonChiTiet hdct on hd.Id = hdct.IdHoaDon 
+                join ChiTietSP ctsp on hdct.IdChiTietSP = ctsp.Id 
+              
+                group by hd.Create_at
 
 
 
@@ -202,6 +256,8 @@ insert into LoaiSP(Ma,Ten,IdTP) values
  (1,1,1,1,'2023-11-20',20,350000),
  (2,2,2,2,'2023-11-20',30,360000),
  (3,3,3,3,'2022-11-20',24,350000)
+
+
 
 select * from TaiKhoan
 insert into ChucVu(Ma,Ten) values ('CV1','NhanVien1')
@@ -216,4 +272,7 @@ select * from HoaDonChiTiet
 select * from HoaDon
 
 delete from HoaDonChiTiet
+delete TaiKhoan where id =20
 
+
+select * from 

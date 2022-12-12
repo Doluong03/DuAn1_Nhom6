@@ -4,9 +4,9 @@
  */
 package com.poly.it17326.group6.service.impl;
 
-import com.poly.it17326.group6.domainmodel.Anh;
+import com.poly.it17326.group6.domainmodel.KhoiLuong;
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
-import com.poly.it17326.group6.response.AnhResponse;
+import com.poly.it17326.group6.response.KhoiLuongResponse;
 import com.poly.it17326.group6.service.AnhService;
 import java.util.List;
 import com.poly.it17326.group6.repository.AnhRepository;
@@ -22,18 +22,18 @@ public class AnhServiceImpl implements AnhService {
     private AnhRepository anhRepository = new AnhRepository();
 
     @Override
-    public List<AnhResponse> getAll() {
-        List<Anh> listA = anhRepository.getAll();
-        List<AnhResponse> listARP = new ArrayList<>();
-        for (Anh anh : listA) {
-            AnhResponse anhResponse = new AnhResponse(anh);
+    public List<KhoiLuongResponse> getAll() {
+        List<KhoiLuong> listA = anhRepository.getAll();
+        List<KhoiLuongResponse> listARP = new ArrayList<>();
+        for (KhoiLuong anh : listA) {
+            KhoiLuongResponse anhResponse = new KhoiLuongResponse(anh);
             listARP.add(anhResponse);
         }
         return listARP;
     }
 
     @Override
-    public boolean Them(Anh anh) {
+    public boolean Them(KhoiLuong anh) {
         return anhRepository.addAnh(anh);
     }
 

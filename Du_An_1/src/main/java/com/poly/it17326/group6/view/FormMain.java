@@ -446,7 +446,7 @@ public class FormMain extends javax.swing.JFrame {
         lbFormNhanVien.setForeground(Color.GREEN);
         tpBanHang.removeAll();
         pnBanHang = new FormNhanVien();
-        tpBanHang.addTab("Quản lý sản phẩm", pnBanHang);
+        tpBanHang.addTab("Quản lý tài khoản", pnBanHang);
         tpBanHang.setSelectedComponent(pnBanHang);
         webcam.close();
     }//GEN-LAST:event_lbFormNhanVienMouseClicked

@@ -131,4 +131,11 @@ public class HoaDonServecieIplm implements HoaDonService {
         }
         return listHDRespon;
     }
+    
+    public static void main(String[] args) {
+        HoaDonServecieIplm x= new HoaDonServecieIplm();
+        for (HoaDonresponse hoaDon : x.getListsHD()) {
+            System.out.println(hoaDon);
+        }
+    }
 }

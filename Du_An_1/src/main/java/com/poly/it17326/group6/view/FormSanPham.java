@@ -4,8 +4,9 @@
  */
 package com.poly.it17326.group6.view;
 
-import com.poly.it17326.group6.domainmodel.Anh;
+import com.poly.it17326.group6.domainmodel.KhoiLuong;
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
+import com.poly.it17326.group6.domainmodel.DonViTinh;
 import com.poly.it17326.group6.domainmodel.LoaiSP;
 import com.poly.it17326.group6.domainmodel.NSX;
 import com.poly.it17326.group6.domainmodel.SanPham;
@@ -77,10 +78,10 @@ public class FormSanPham extends javax.swing.JPanel {
     private void loadSP(List<ChiTietSpResponse_2> listS) {
         DefaultTableModel model = (DefaultTableModel) tbSanPham.getModel();
         model.setRowCount(0);
-        model.setColumnIdentifiers(new String[]{"Mã SP", "Tên SP", "NSX", "Loại SP", "HSD", "Số lượng tồn", "Đơn giá", "Mã Vạch", "Ảnh"});
+        model.setColumnIdentifiers(new String[]{"Mã SP", "Tên SP", "NSX", "Loại SP", "HSD", "Số lượng tồn", "Đơn giá", "Mã Vạch", "Khối lượng", "Đơn vị tính"});
         int i = 1;
         for (ChiTietSpResponse_2 chiTietSpResponse : listS) {
-            model.addRow(new Object[]{chiTietSpResponse.getMa(), chiTietSpResponse.getTen(), chiTietSpResponse.getNsx(), chiTietSpResponse.getLoaiSP(), doiNgay(chiTietSpResponse.getHsd()), chiTietSpResponse.getSoLuongTon(), chiTietSpResponse.getDonGia(), chiTietSpResponse.getMaVach(), chiTietSpResponse.getAnh()});
+            model.addRow(new Object[]{chiTietSpResponse.getMa(), chiTietSpResponse.getTen(), chiTietSpResponse.getNsx(), chiTietSpResponse.getLoaiSP(), doiNgay(chiTietSpResponse.getHsd()), chiTietSpResponse.getSoLuongTon(), chiTietSpResponse.getDonGia(), chiTietSpResponse.getMaVach(), chiTietSpResponse.getAnh(), chiTietSpResponse.getDonVi()});
             System.out.println(chiTietSpResponse);
         }
 
@@ -114,29 +115,39 @@ public class FormSanPham extends javax.swing.JPanel {
 
     private void loadCbA() {
         cbAnh.removeAllItems();
-        for (Anh A : chiTietSPService.getListA()) {
+        for (KhoiLuong A : chiTietSPService.getListA()) {
             cbAnh.addItem(A.getTen());
         }
     }
+
 //
-//    private void loadCbSp() {
-//        cbSanPham.removeAllItems();
-//        for (SanPham sp : chiTietSPService.getListSp()) {
-//            cbSanPham.addItem(sp.getTen());
-//        }
-//    }
+    private void loadCbSp() {
+        cbDonVi.removeAllItems();
+        for (DonViTinh sp : chiTietSPService.getListSp()) {
+            cbDonVi.addItem(sp.getTen());
+        }
+    }
 
     private ChiTietSpResponse_2 getCtr() throws ParseException {
         ChiTietSpResponse_2 ctr = new ChiTietSpResponse_2();
-        //   ctr.setTen(cbSanPham.getSelectedItem().toString());
+        ctr.setTen(txtTenSP.getText());
         ctr.setAnh(cbAnh.getSelectedItem().toString());
         Double gia = Double.parseDouble(txtDonGia.getText());
         ctr.setDonGia(BigDecimal.valueOf(gia));
         Date hsd = jdcHSD.getDate();
         ctr.setHsd(hsd);
-        ctr.setLoaiSP(cbLoaiSP.getSelectedItem().toString());
         ctr.setSoLuongTon(Integer.parseInt(txtSoLuong.getText()));
         ctr.setNsx(cbNsx.getSelectedItem().toString());
+        for (LoaiSP lsp2 : chiTietSPService.getListLSp()) {
+            if (lsp2.getId() == (cbDonVi.getSelectedIndex() + 1)) {
+                ctr.setLoaiSP(lsp2.getTen());
+            }
+        }
+        for (DonViTinh dv : chiTietSPService.getListSp()) {
+            if (dv.getId() == (cbDonVi.getSelectedIndex() + 1)) {
+                ctr.setDonVi(dv.getTen());
+            }
+        }
         return ctr;
     }
 
@@ -144,20 +155,21 @@ public class FormSanPham extends javax.swing.JPanel {
         loadCbA();
         loadCbLSP();
         loadCbNsx();
-//        loadCbSp();
+        loadCbSp();
     }
 
     private void loadTF(int i) {
         for (ChiTietSP ct : chiTietSpRepository.getAll()) {
             if (ct.getSanPham().getMa().equals(tbSanPham.getValueAt(i, 0))) {
-//                cbSanPham.setSelectedItem(ct.getSanPham().getTen());
+//              cbSanPham.setSelectedItem(ct.getSanPham().getTen());
+                txtTenSP.setText(tbSanPham.getValueAt(i, 1).toString());
                 cbLoaiSP.setSelectedItem(ct.getLoaiSP().getTen());
                 cbNsx.setSelectedItem(ct.getNsx().getTen());
-                //  cbAnh.setSelectedItem(ct.getAnh().getTen());
+                cbAnh.setSelectedItem(ct.getKhoiLuong().getTen());
+                cbDonVi.setSelectedItem(ct.getDonViTinh().getTen());
                 txtDonGia.setText(ct.getDonGia().toString());
                 jdcHSD.setDate(ct.getHsd());
                 txtSoLuong.setText(String.valueOf(ct.getSoLuongTon()));
-                lbAnhSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\SanPham\\" + ct.getAnh().getLink()));
             }
         }
     }
@@ -176,6 +188,7 @@ public class FormSanPham extends javax.swing.JPanel {
     private void loadIcon() {
         btnThemSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\add_form.png"));
         btnThemAnh.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\add_form.png"));
+        btnThemAnh1.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\add_form.png"));
         btnThemLSP.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\add_form.png"));
         btnThemNsx.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\add_form.png"));
         btnThem.setIcon(new ImageIcon("D:\\Nhom6_PRO1041\\Anh\\add_form.png"));
@@ -221,6 +234,9 @@ public class FormSanPham extends javax.swing.JPanel {
         jdcHSD = new com.toedter.calendar.JDateChooser();
         btnXoa = new javax.swing.JButton();
         txtTenSP = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        cbDonVi = new javax.swing.JComboBox<>();
+        btnThemAnh1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbSanPham = new javax.swing.JTable();
@@ -246,34 +262,34 @@ public class FormSanPham extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 102, 153));
         jLabel4.setText("Loại sản phẩm:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 147, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 147, -1));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 102, 153));
         jLabel5.setText("Nhà sản xuất:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 150, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 80, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 102, 153));
         jLabel6.setText("Đơn giá:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 102, 153));
         jLabel7.setText("Hạn sử dụng:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 102, 153));
         jLabel8.setText("Số lượng:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 270, -1, -1));
-        jPanel1.add(txtSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 270, 230, -1));
-        jPanel1.add(txtDonGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 222, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 230, -1, -1));
+        jPanel1.add(txtSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 230, 230, -1));
+        jPanel1.add(txtDonGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 222, -1));
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel11.setText("Ảnh:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 210, 50, -1));
+        jLabel11.setText("Khối lượng:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, 100, -1));
 
         btnThem.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnThem.setForeground(new java.awt.Color(0, 102, 153));
@@ -283,7 +299,7 @@ public class FormSanPham extends javax.swing.JPanel {
                 btnThemActionPerformed(evt);
             }
         });
-        jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 140, 147, -1));
+        jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 80, 147, -1));
 
         btnUpdate.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnUpdate.setForeground(new java.awt.Color(0, 102, 153));
@@ -293,55 +309,55 @@ public class FormSanPham extends javax.swing.JPanel {
                 btnUpdateActionPerformed(evt);
             }
         });
-        jPanel1.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 200, 147, -1));
+        jPanel1.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 140, 147, -1));
 
         jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 102, 153));
         jLabel12.setText("Sản phẩm:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         cbNsx.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         cbNsx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(cbNsx, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 150, 225, -1));
+        jPanel1.add(cbNsx, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 80, 225, -1));
 
         cbAnh.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         cbAnh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(cbAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 210, 230, -1));
+        jPanel1.add(cbAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 130, 230, -1));
 
         cbLoaiSP.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         cbLoaiSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(cbLoaiSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 225, -1));
+        jPanel1.add(cbLoaiSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 225, -1));
 
         btnThemSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemSPActionPerformed(evt);
             }
         });
-        jPanel1.add(btnThemSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, 47, 38));
+        jPanel1.add(btnThemSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, 47, 38));
 
         btnThemNsx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemNsxActionPerformed(evt);
             }
         });
-        jPanel1.add(btnThemNsx, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 150, 47, 38));
+        jPanel1.add(btnThemNsx, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 70, 47, 38));
 
         btnThemLSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemLSPActionPerformed(evt);
             }
         });
-        jPanel1.add(btnThemLSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 47, 38));
+        jPanel1.add(btnThemLSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, 47, 38));
 
         btnThemAnh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemAnhActionPerformed(evt);
             }
         });
-        jPanel1.add(btnThemAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 200, 47, 38));
+        jPanel1.add(btnThemAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 120, 47, 38));
 
         jdcHSD.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(jdcHSD, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 225, -1));
+        jPanel1.add(jdcHSD, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 225, -1));
 
         btnXoa.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnXoa.setForeground(new java.awt.Color(0, 102, 103));
@@ -351,8 +367,24 @@ public class FormSanPham extends javax.swing.JPanel {
                 btnXoaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 260, 147, 29));
-        jPanel1.add(txtTenSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 230, -1));
+        jPanel1.add(btnXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 200, 147, 29));
+        jPanel1.add(txtTenSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 230, -1));
+
+        jLabel13.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel13.setText("Đơn vị tính:");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, 100, -1));
+
+        cbDonVi.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        cbDonVi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(cbDonVi, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 180, 230, -1));
+
+        btnThemAnh1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemAnh1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnThemAnh1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 170, 47, 38));
 
         jPanel2.setBackground(new java.awt.Color(226, 215, 214));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
@@ -522,26 +554,38 @@ public class FormSanPham extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        int i=120;
+        int code = (int) Math.floor(((Math.random() * 899) + 1000));
         if (validateform()) {
             try {
                 SanPham sanPham = new SanPham();
-                sanPham.setMa("SP" + tbSanPham.getRowCount() + i++);
+                sanPham.setMa("SP" + (chiTietSPService.getAllFSP().size() + 3));
                 sanPham.setTen(txtTenSP.getText());
                 sanPham.setCreateAt(new Date());
                 ChiTietSP chiTietSP = new ChiTietSP();
-                LoaiSP lsp = new LoaiSP();
-                lsp.setId(1);
-                chiTietSP.setLoaiSP(lsp);
-                chiTietSP.setMaVach("9836");
+                for (LoaiSP lsp : chiTietSPService.getListLSp()) {
+                    if (lsp.getId() == (cbLoaiSP.getSelectedIndex())-1) {
+                        chiTietSP.setLoaiSP(lsp);
+                    }
+                }
+                for (DonViTinh dv : chiTietSPService.getListSp()) {
+                    if (dv.getId() == (cbDonVi.getSelectedIndex() + 1)) {
+                        chiTietSP.setDonViTinh(dv);
+                    }
+                }
+                chiTietSP.setMaVach(String.valueOf(code));
                 for (NSX nsx : chiTietSPService.getListNsx()) {
                     if (nsx.getTen().equals(cbNsx.getSelectedItem().toString())) {
                         chiTietSP.setNsx(nsx);
                     }
                 }
-                for (Anh a : chiTietSPService.getListA()) {
+                for (KhoiLuong a : chiTietSPService.getListA()) {
                     if (a.getTen().equals(cbAnh.getSelectedItem().toString())) {
-                        chiTietSP.setAnh(a);
+                        chiTietSP.setKhoiLuong(a);
+                    }
+                }
+                for (DonViTinh a : chiTietSPService.getListSp()) {
+                    if (a.getTen().equals(cbAnh.getSelectedItem().toString())) {
+                        chiTietSP.setDonViTinh(a);
                     }
                 }
                 chiTietSP.setHsd(jdcHSD.getDate());
@@ -598,21 +642,67 @@ public class FormSanPham extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        ChiTietSpResponse_2 updatedProduct;
+        int code = (int) Math.floor(((Math.random() * 899) + 1000));
+        ChiTietSpResponse_2 updatedProduct = new ChiTietSpResponse_2();
+        int updatedProductId = getSPIdFromSelectedRow();
+        updatedProduct.setId(updatedProductId);
         try {
-            updatedProduct = getCtr();
-
-            int updatedProductId = getSPIdFromSelectedRow();
-            updatedProduct.setId(updatedProductId);
-            if (chiTietSPService.updateSP(updatedProduct) != null) {
-                JOptionPane.showMessageDialog(this, "Thành công");
-                loadSP(chiTietSPService.getAllFSP());
-            } else {
-                JOptionPane.showMessageDialog(this, "Thất bại");
+            SanPham sanPham = new SanPham();
+            sanPham.setId(updatedProductId);
+            sanPham.setMa("SP" + (chiTietSPService.getAllFSP().size() + 3));
+            sanPham.setTen(txtTenSP.getText());
+            sanPham.setCreateAt(new Date());
+            ChiTietSP chiTietSP = new ChiTietSP();
+            for (LoaiSP lsp : chiTietSPService.getListLSp()) {
+                if (lsp.getId() == (cbLoaiSP.getSelectedIndex())-1) {
+                    chiTietSP.setLoaiSP(lsp);
+                }
             }
-        } catch (ParseException ex) {
-            Logger.getLogger(FormSanPham.class.getName()).log(Level.SEVERE, null, ex);
+            for (DonViTinh dv : chiTietSPService.getListSp()) {
+                if (dv.getId() == (cbDonVi.getSelectedIndex() + 1)) {
+                    chiTietSP.setDonViTinh(dv);
+                }
+            }
+            chiTietSP.setMaVach(String.valueOf(code));
+            for (NSX nsx : chiTietSPService.getListNsx()) {
+                if (nsx.getTen().equals(cbNsx.getSelectedItem().toString())) {
+                    chiTietSP.setNsx(nsx);
+                }
+            }
+            for (KhoiLuong a : chiTietSPService.getListA()) {
+                if (a.getTen().equals(cbAnh.getSelectedItem().toString())) {
+                    chiTietSP.setKhoiLuong(a);
+                }
+            }
+            for (DonViTinh a : chiTietSPService.getListSp()) {
+                if (a.getTen().equals(cbAnh.getSelectedItem().toString())) {
+                    chiTietSP.setDonViTinh(a);
+                }
+            }
+            chiTietSP.setHsd(jdcHSD.getDate());
+            double db = Double.parseDouble(txtSoLuong.getText());
+            chiTietSP.setSoLuongTon((int) db);
+            chiTietSP.setDonGia(new BigDecimal(txtDonGia.getText()));
+            sanPham.setChiTietSPs(Arrays.asList(chiTietSP));
+            chiTietSP.setSanPham(sanPham);
+            List<SanPham> list = sanPhamService.getAll();
+//            for (SanPham sanPham1 : list) {
+//                if (sanPham.getMa().equals(sanPham1.getMa())) {
+//                    System.out.println("trùng mã sp ");
+//                    return;
+//                }
+//            }
+            updatedProduct = new ChiTietSpResponse_2(chiTietSP);
+            if (chiTietSPService.updateSP( updatedProduct)!= null) {
+                loadSP(chiTietSPService.getAllFSP());
+                JOptionPane.showMessageDialog(this, "Suscess");
+            } else {
+                JOptionPane.showMessageDialog(this, "Fail");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
@@ -682,7 +772,8 @@ public class FormSanPham extends javax.swing.JPanel {
                     XSSFCell cellDonGia = xSSFRow.getCell(6);
                     XSSFCell cellMaVach = xSSFRow.getCell(7);
                     XSSFCell cellAnh = xSSFRow.getCell(8);
-                    model1.addRow(new Object[]{cellMaSP, cellTenSP, cellNsx, cellLoaiSP, cellHSD, cellSoLuong, cellDonGia, cellMaVach, cellAnh});
+                    XSSFCell cellDv = xSSFRow.getCell(9);
+                    model1.addRow(new Object[]{cellMaSP, cellTenSP, cellNsx, cellLoaiSP, cellHSD, cellSoLuong, cellDonGia, cellMaVach, cellAnh, cellDv});
                 }
                 for (int i = 11; i < tbSanPham.getRowCount(); i++) {
                     SanPham sanPham = new SanPham();
@@ -709,9 +800,14 @@ public class FormSanPham extends javax.swing.JPanel {
                     chiTietSP.setSoLuongTon((int) db);
                     chiTietSP.setDonGia(new BigDecimal(tbSanPham.getValueAt(i, 6).toString()));
                     chiTietSP.setMaVach(tbSanPham.getValueAt(i, 7).toString());
-                     for (Anh anh : chiTietSPService.getListA()) {
-                        if (anh.getLink().equals(tbSanPham.getValueAt(i, 8).toString())) {
-                            chiTietSP.setAnh(anh);
+                    for (KhoiLuong anh : chiTietSPService.getListA()) {
+                        if (anh.getMa().equals(tbSanPham.getValueAt(i, 8).toString())) {
+                            chiTietSP.setKhoiLuong(anh);
+                        }
+                    }
+                    for (DonViTinh ma : chiTietSPService.getListSp()) {
+                        if (ma.getMa().equals(tbSanPham.getValueAt(i, 9).toString())) {
+                            chiTietSP.setDonViTinh(ma);
                         }
                     }
                     sanPham.setChiTietSPs(Arrays.asList(chiTietSP));
@@ -770,6 +866,14 @@ public class FormSanPham extends javax.swing.JPanel {
         tranghientai = 0;
         loadTableChiTietSP(chiTietSPService.getAllFSP());
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnThemAnh1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemAnh1ActionPerformed
+        // TODO add your handling code here:
+        Window wd = SwingUtilities.windowForComponent(this);
+        DialogDonViTinh dialogNsx = new DialogDonViTinh((Frame) wd, true);
+        dialogNsx.setVisible(true);
+        loadCB();
+    }//GEN-LAST:event_btnThemAnh1ActionPerformed
     public void loadTableChiTietSP(List<ChiTietSpResponse_2> lstChiTietSp) {
         DefaultTableModel dtm1 = (DefaultTableModel) tbSanPham.getModel();
         dtm1.setRowCount(0);
@@ -791,7 +895,8 @@ public class FormSanPham extends javax.swing.JPanel {
                     lstChiTietSp.get(i).getSoLuongTon(),
                     lstChiTietSp.get(i).getDonGia(),
                     lstChiTietSp.get(i).getMaVach(),
-                    lstChiTietSp.get(i).getAnh(),});
+                    lstChiTietSp.get(i).getAnh(),
+                    lstChiTietSp.get(i).getDonVi(),});
             }
 
         } else {
@@ -806,7 +911,8 @@ public class FormSanPham extends javax.swing.JPanel {
                         lstChiTietSp.get(i).getSoLuongTon(),
                         lstChiTietSp.get(i).getDonGia(),
                         lstChiTietSp.get(i).getMaVach(),
-                        lstChiTietSp.get(i).getAnh(),});
+                        lstChiTietSp.get(i).getAnh(),
+                        lstChiTietSp.get(i).getDonVi(),});
                 }
             } else {
                 for (int i = n; i < m; i++) {
@@ -818,7 +924,8 @@ public class FormSanPham extends javax.swing.JPanel {
                         lstChiTietSp.get(i).getSoLuongTon(),
                         lstChiTietSp.get(i).getDonGia(),
                         lstChiTietSp.get(i).getMaVach(),
-                        lstChiTietSp.get(i).getAnh(),});
+                        lstChiTietSp.get(i).getAnh(),
+                        lstChiTietSp.get(i).getDonVi(),});
                 }
             }
         }
@@ -828,12 +935,14 @@ public class FormSanPham extends javax.swing.JPanel {
     private javax.swing.JButton btnImport;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThemAnh;
+    private javax.swing.JButton btnThemAnh1;
     private javax.swing.JButton btnThemLSP;
     private javax.swing.JButton btnThemNsx;
     private javax.swing.JButton btnThemSP;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cbAnh;
+    private javax.swing.JComboBox<String> cbDonVi;
     private javax.swing.JComboBox<String> cbLoaiSP;
     private javax.swing.JComboBox<String> cbNsx;
     private javax.swing.JComboBox<String> cbTimKiemLSP;
@@ -845,6 +954,7 @@ public class FormSanPham extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

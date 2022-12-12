@@ -32,6 +32,7 @@ public class HoaDonCTResponse {
     private int idChiTietSP;
     private String maSP;
     private BigDecimal tongTien;//du dA đi qua nơi này
+    private BigDecimal ThanhTien;
     private BigDecimal giaBan;
     private float giaKhuyenMai;
     private String loaiSanPham;
@@ -48,7 +49,8 @@ public class HoaDonCTResponse {
         this.idChiTietSP = hdct.getIdChiTietSP().getId();
         this.maSP = hdct.getIdChiTietSP().getSanPham().getMa();
         this.tongTien = hdct.getIdHoaDon().getTongTien();
-        this.giaBan = getThanhTien();
+        this.ThanhTien = getThanhTien();
+        this.giaBan = hdct.getGiaBan();
         if (hdct.getIdHoaDon().getVoucher() == null) {
             this.giaKhuyenMai = giaKhuyenMai;
         } else {
@@ -58,8 +60,14 @@ public class HoaDonCTResponse {
     }
 
     public BigDecimal getThanhTien() {
-        BigDecimal sl = new BigDecimal(soLuong);
-        return donGia.multiply(sl);
+        if (this.giaBan == null) {
+            BigDecimal sl = new BigDecimal(soLuong);
+            return donGia.multiply(sl);
+        }else{
+            BigDecimal sl = new BigDecimal(soLuong);
+            return giaBan.multiply(sl);
+        }
+
     }
 
 }

@@ -5,11 +5,12 @@
 package com.poly.it17326.group6.repository;
 
 import com.poly.it17326.group6.config.HibernateConfig;
-import com.poly.it17326.group6.domainmodel.Anh;
+import com.poly.it17326.group6.domainmodel.KhoiLuong;
 
 import com.poly.it17326.group6.domainmodel.SanPham;
 
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
+import com.poly.it17326.group6.domainmodel.DonViTinh;
 import com.poly.it17326.group6.domainmodel.LoaiSP;
 import com.poly.it17326.group6.domainmodel.NSX;
 
@@ -28,14 +29,23 @@ public class ChiTietSpRepository {
 
     public List<ChiTietSP> getAll() {
         Session session = HibernateConfig.getFACTORY().openSession();
-        String sql = "select ct from ChiTietSP as ct join ct.sanPham sp order by cast (SUBSTRING(sp.ma,3,3) as int) asc";
+        String sql = "select ct from ChiTietSP as ct join ct.sanPham sp order by cast (SUBSTRING(sp.ma,3,3) as int) desc";
         Query q = session.createQuery(sql);
         List<ChiTietSP> listCTSP = q.getResultList();
         session.close();
         return listCTSP;
     }
 
+    public List<ChiTietSP> getAll_2() {
+        Session session = HibernateConfig.getFACTORY().openSession();
+        String sql = "select ct from ChiTietSP as ct join ct.sanPham sp order by cast (SUBSTRING(sp.ma,3,3) as int) asc";
+        Query q = session.createQuery(sql);
+        List<ChiTietSP> listCTSP = q.getResultList();
+        session.close();
+        return listCTSP;
+    }
 //    
+
     public static void main(String[] args) {
         ChiTietSpRepository s = new ChiTietSpRepository();
         for (LoaiSP loaiSP : s.getListLSP()) {
@@ -85,10 +95,10 @@ public class ChiTietSpRepository {
         return ctsp;
     }
 
-    public ArrayList<SanPham> getListSP() {
+    public ArrayList<DonViTinh> getListSP() {
         Session session = HibernateConfig.getFACTORY().openSession();
-        Query q = session.createQuery("from SanPham");
-        ArrayList<SanPham> listSp = (ArrayList<SanPham>) q.getResultList();
+        Query q = session.createQuery("from DonViTinh");
+        ArrayList<DonViTinh> listSp = (ArrayList<DonViTinh>) q.getResultList();
         session.close();
         return listSp;
     }
@@ -109,10 +119,10 @@ public class ChiTietSpRepository {
         return listNsx;
     }
 
-    public ArrayList<Anh> getListAnh() {
+    public ArrayList<KhoiLuong> getListAnh() {
         Session session = HibernateConfig.getFACTORY().openSession();
-        Query q = session.createQuery("from Anh");
-        ArrayList<Anh> listA = (ArrayList<Anh>) q.getResultList();
+        Query q = session.createQuery("from KhoiLuong");
+        ArrayList<KhoiLuong> listA = (ArrayList<KhoiLuong>) q.getResultList();
         session.close();
         return listA;
     }

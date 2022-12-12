@@ -5,7 +5,7 @@
 package com.poly.it17326.group6.view;
 
 import com.poly.it17326.group6.domainmodel.KhachHang;
-import com.poly.it17326.group6.response.AnhResponse;
+import com.poly.it17326.group6.response.KhoiLuongResponse;
 import com.poly.it17326.group6.response.ChiTietSpResponse;
 import com.poly.it17326.group6.response.HoaDonresponse;
 import com.poly.it17326.group6.service.HoaDonService;

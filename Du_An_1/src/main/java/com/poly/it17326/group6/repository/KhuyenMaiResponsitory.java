@@ -124,6 +124,22 @@ public class KhuyenMaiResponsitory {
         return false;
     }
    
+   public boolean DeleteCTKM(khuyenmai ma) {
+        Transaction transaction = null;
+        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
+            transaction = session.beginTransaction();
+            String sql = "Delete ChitietKhuyenMai km  where km.khuyenmai =:id";           
+            javax.persistence.Query query = session.createQuery(sql);
+            query.setParameter("id", ma);
+            query.executeUpdate();
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+   
     public static void main(String[] args) {
         KhuyenMaiResponsitory s = new KhuyenMaiResponsitory();
         for (khuyenmai object : s.FindKM("KMTest")) {

@@ -4,7 +4,6 @@
  */
 package com.poly.it17326.group6.domainmodel;
 
-import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,14 +24,13 @@ import lombok.ToString;
  * @author 123
  */
 @Entity
-@Table(name = "Anh")
+@Table(name = "DonViTinh")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class Anh implements Serializable {
-
+public class DonViTinh {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
@@ -41,11 +39,6 @@ public class Anh implements Serializable {
     private String ma;
     @Column(name = "Ten")
     private String ten;
-    @Column(name = "Cover")
-    private boolean cover;
-    @Column(name = "link")
-    private String link;
-    @OneToMany(mappedBy = "anh", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "donViTinh", cascade = CascadeType.ALL)
     public List<ChiTietSP> chiTietSPs;
-
 }
