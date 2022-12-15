@@ -510,6 +510,8 @@ public class FormMain extends javax.swing.JFrame {
         lbFormSanPham.setForeground(Color.WHITE);
         lbFormNhanVien.setForeground(Color.white);
         lbFormThongke.setForeground(Color.WHITE);
+        lbFormHD.setForeground(Color.WHITE);
+        lbFormKH.setForeground(Color.WHITE);
         lbFormKhuyenMai1.setForeground(Color.GREEN);
         tpBanHang.removeAll();
         pnBanHang = new FormKhuyenMai();

@@ -563,7 +563,7 @@ public class FormSanPham extends javax.swing.JPanel {
                 sanPham.setCreateAt(new Date());
                 ChiTietSP chiTietSP = new ChiTietSP();
                 for (LoaiSP lsp : chiTietSPService.getListLSp()) {
-                    if (lsp.getId() == (cbLoaiSP.getSelectedIndex())-1) {
+                    if (lsp.getId() == (cbLoaiSP.getSelectedIndex()+1)) {
                         chiTietSP.setLoaiSP(lsp);
                     }
                 }

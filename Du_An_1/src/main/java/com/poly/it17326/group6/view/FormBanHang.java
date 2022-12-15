@@ -495,7 +495,7 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
                 jlbGIAMGIA1.setText("10");
             }
             idTK = tk.getId();
-            loadGH(listGh);
+          //  loadGH(listGh);
         }
     }
 
@@ -2341,7 +2341,6 @@ public class FormBanHang extends javax.swing.JPanel implements Runnable, ThreadF
             }
         }
         if (check == 0) {
-            JOptionPane.showMessageDialog(this, "Hóa đơn đã được treo");
             updateSL();
             rdChoTTActionPerformed(evt);
             btnLamMoiHDActionPerformed(evt);
