@@ -31,22 +31,27 @@ public class ChiTietSpResponse_2 implements Serializable {
     private String Nsx;
     private int id;
     private String maVach;
+    private String donVi;
 
     public ChiTietSpResponse_2() {
     }
 
     public ChiTietSpResponse_2(ChiTietSP ctsp) {
-        if (ctsp.getAnh() == null) {
+        if (ctsp.getKhoiLuong() == null) {
             this.anh = anh;
         } else {
-            this.anh = ctsp.getAnh().getLink();
+            this.anh = ctsp.getKhoiLuong().getTen();
         }
         if (ctsp.getSanPham() == null) {
             this.ma = ma;
         } else {
             this.ma = ctsp.getSanPham().getMa();
         }
-        this.ten = ctsp.getSanPham().getTen();
+        if (ctsp.getSanPham() == null) {
+            this.ten = ten;
+        } else {
+            this.ten = ctsp.getSanPham().getTen();
+        }
         this.soLuongTon = ctsp.getSoLuongTon();
         this.donGia = ctsp.getDonGia();
         if (ctsp.getLoaiSP() == null) {
@@ -58,6 +63,12 @@ public class ChiTietSpResponse_2 implements Serializable {
         this.Nsx = ctsp.getNsx().getTen();
         this.id = ctsp.getId();
         this.maVach = ctsp.getMaVach();
+        if (ctsp.getDonViTinh()== null) {
+            this.donVi = donVi;
+        } else {
+             this.donVi = ctsp.getDonViTinh().getTen();
+        }
+       
     }
 
 }

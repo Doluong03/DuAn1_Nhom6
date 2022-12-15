@@ -50,9 +50,10 @@ public class KhachHangRepository {
 
     public ArrayList<KhachHang> CheckUser(String email) {
         Session session = HibernateConfig.getFACTORY().openSession();
-        Query query = session.createQuery("from KhachHang where ma = :ma or ten =:ten");
+        Query query = session.createQuery("from KhachHang where sdt = :sdt or ten =:ten or ma =: ma");
         query.setParameter("ma", email);
         query.setParameter("ten", email);
+        query.setParameter("sdt", email);
         ArrayList<KhachHang> listTK = (ArrayList<KhachHang>) query.getResultList();
         session.close();
         return listTK;

@@ -43,6 +43,11 @@ public class HOaDonChiTietServiceIplm implements HoaDonChiTietService {
         return deleteSP(ma);
     }
 
-    
+    public static void main(String[] args) {
+        HOaDonChiTietServiceIplm s = new HOaDonChiTietServiceIplm();
+        for (HoaDonCTResponse hoaDonCTResponse : s.getListHDCT()) {
+            System.out.println(hoaDonCTResponse.toString());
+        }
+    }
 
 }

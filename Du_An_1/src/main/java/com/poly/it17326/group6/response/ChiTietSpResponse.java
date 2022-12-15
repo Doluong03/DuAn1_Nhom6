@@ -5,6 +5,7 @@
 package com.poly.it17326.group6.response;
 
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
+import com.poly.it17326.group6.domainmodel.ChitietKhuyenMai;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.Getter;
@@ -32,15 +33,16 @@ public class ChiTietSpResponse implements Serializable {
     private String thanhPhan;
     private String loaiSP;
     private BigDecimal giaMoi;
+    private String donViTinh;
 
     public ChiTietSpResponse() {
     }
 
     public ChiTietSpResponse(ChiTietSP ctsp) {
-        if (ctsp.getAnh() == null) {
+        if (ctsp.getKhoiLuong() == null) {
             this.anh = anh;
         } else {
-            this.anh = ctsp.getAnh().getTen();
+            this.anh = ctsp.getKhoiLuong().getTen();
         }
         this.ma = ctsp.getSanPham().getMa();
         this.ten = ctsp.getSanPham().getTen();
@@ -58,13 +60,25 @@ public class ChiTietSpResponse implements Serializable {
         } else {
             this.loaiSP = ctsp.getLoaiSP().getTen();
         }
-         if (ctsp.getLoaiSP() == null) {
+        if (ctsp.getLoaiSP() == null) {
             this.thanhPhan = thanhPhan;
         } else {
-           this.thanhPhan = ctsp.getLoaiSP().getThanhPhan().getTen();
+            this.thanhPhan = ctsp.getLoaiSP().getThanhPhan().getTen();
         }
-        
-      
+        this.donViTinh = ctsp.getDonViTinh().getTen();
+        this.giaMoi= ctsp.getDonGia();
+        if (ctsp.getChitietKhuyenMais() == null) {
+            this.giaMoi = ctsp.getDonGia();
+        } else {
+            for (ChitietKhuyenMai chitietKhuyenMai : ctsp.getChitietKhuyenMais()) {
+                if (chitietKhuyenMai.getDonGiaConLai() == null) {
+                    this.giaMoi = ctsp.getDonGia();
+                } else {
+                    this.giaMoi = chitietKhuyenMai.getDonGiaConLai();
+                }
+            }
+        }
+
     }
 
 }

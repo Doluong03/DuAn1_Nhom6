@@ -4,7 +4,7 @@
  */
 package com.poly.it17326.group6.service.impl;
 
-import com.poly.it17326.group6.domainmodel.Anh;
+import com.poly.it17326.group6.domainmodel.KhoiLuong;
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.LoaiSP;
 import com.poly.it17326.group6.domainmodel.NSX;
@@ -62,9 +62,9 @@ public class SanPhamServiceIplm implements SanPhamService {
                 ct.setNsx(nsx);
             }
         }
-        for (Anh a : chiTietSpRepository.getListAnh()) {
+        for (KhoiLuong a : chiTietSpRepository.getListAnh()) {
             if (a.getTen().equals(ctsp.getAnh())) {
-                ct.setAnh(a);
+                ct.setKhoiLuong(a);
             }
         }
         ct.setHsd(ctsp.getHsd());

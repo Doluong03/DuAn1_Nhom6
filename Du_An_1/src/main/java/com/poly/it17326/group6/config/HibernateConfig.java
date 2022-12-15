@@ -1,9 +1,10 @@
 package com.poly.it17326.group6.config;
 
-import com.poly.it17326.group6.domainmodel.Anh;
+import com.poly.it17326.group6.domainmodel.KhoiLuong;
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
 import com.poly.it17326.group6.domainmodel.ChitietKhuyenMai;
 import com.poly.it17326.group6.domainmodel.ChucVu;
+import com.poly.it17326.group6.domainmodel.DonViTinh;
 import com.poly.it17326.group6.domainmodel.HoaDon;
 import com.poly.it17326.group6.domainmodel.HoaDonChiTiet;
 import com.poly.it17326.group6.domainmodel.KhachHang;
@@ -44,7 +45,7 @@ public class HibernateConfig {
         conf.setProperties(properties);
         conf.addAnnotatedClass(TaiKhoan.class);
         conf.addAnnotatedClass(ChucVu.class);
-        conf.addAnnotatedClass(Anh.class);
+        conf.addAnnotatedClass(KhoiLuong.class);
         conf.addAnnotatedClass(ChiTietSP.class);
         conf.addAnnotatedClass(LoaiSP.class);
         conf.addAnnotatedClass(NSX.class);
@@ -57,7 +58,7 @@ public class HibernateConfig {
         conf.addAnnotatedClass(KhachHang.class);
         conf.addAnnotatedClass(khuyenmai.class);
         conf.addAnnotatedClass(ChitietKhuyenMai.class);
-
+        conf.addAnnotatedClass(DonViTinh.class);
         conf.addAnnotatedClass(SanPham.class);
         conf.addAnnotatedClass(HoaDon.class);
 

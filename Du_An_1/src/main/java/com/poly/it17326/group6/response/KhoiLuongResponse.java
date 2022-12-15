@@ -4,7 +4,7 @@
  */
 package com.poly.it17326.group6.response;
 
-import com.poly.it17326.group6.domainmodel.Anh;
+import com.poly.it17326.group6.domainmodel.KhoiLuong;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,21 +16,19 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class AnhResponse {
+public class KhoiLuongResponse {
 
     private int id;
     private String ma;
     private String ten;
-    private String link;
 
-    public AnhResponse() {
+    public KhoiLuongResponse() {
     }
 
-    public AnhResponse(Anh anh) {
+    public KhoiLuongResponse(KhoiLuong anh) {
         this.id = anh.getId();
         this.ma = anh.getMa();
         this.ten = anh.getTen();
-        this.link = anh.getLink();
     }
 
 }

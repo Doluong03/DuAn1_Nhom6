@@ -21,10 +21,10 @@ public class HaodonchitietRespontory {
 
     public List<HaoDonChitietdomain> getlistALLHDCT() {
         List<HaoDonChitietdomain> list = new ArrayList<>();
-        String sql = "select Create_at as ngay,count(hd.Ma) as hoadon,SUM(TongTien) as tongtien,count(SoLuong) as SoluongSp from hoadon hd \n"
+        String sql = "select hd.Create_at as ngay,count(hd.Ma) as hoadon,SUM(TongTien) as tongtien,count(SoLuong) as SoluongSp from hoadon hd \n"
                 + "join HoaDonChiTiet hdct on hd.Id = hdct.IdHoaDon \n"
                 + "join ChiTietSP ctsp on hdct.IdChiTietSP = ctsp.Id \n"
-                + "group by Create_at";
+                + "group by hd.Create_at";
 
         try ( Connection con = ConectionRespon.getConnection();  PreparedStatement ps = con.prepareStatement(sql);) {
             ResultSet rs = ps.executeQuery();
@@ -45,11 +45,11 @@ public class HaodonchitietRespontory {
 
     public List<HaoDonChitietdomain> getlistTehongay(String bd, String end) {
         List<HaoDonChitietdomain> list = new ArrayList<>();
-        String sql = "select Create_at as ngay,count(hd.Ma) as hoadon,SUM(TongTien) as tongtien,count(SoLuong) as SoluongSp from hoadon hd \n"
+        String sql = "select hd.Create_at as ngay,count(hd.Ma) as hoadon,SUM(TongTien) as tongtien,count(SoLuong) as SoluongSp from hoadon hd \n"
                 + "join HoaDonChiTiet hdct on hd.Id = hdct.IdHoaDon \n"
                 + "join ChiTietSP ctsp on hdct.IdChiTietSP = ctsp.Id \n"
-                + "where Create_at between  '" + bd + "' and '" + end + "' \n"
-                + "group by Create_at";
+                + "where hd.Create_at between  '" + bd + "' and '" + end + "' \n"
+                + "group by hd.Create_at";
 
         try ( Connection con = ConectionRespon.getConnection();  PreparedStatement ps = con.prepareStatement(sql);) {
             ResultSet rs = ps.executeQuery();

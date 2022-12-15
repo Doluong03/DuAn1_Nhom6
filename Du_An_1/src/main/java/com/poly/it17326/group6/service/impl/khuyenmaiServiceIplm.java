@@ -72,4 +72,9 @@ public class khuyenmaiServiceIplm implements khuyenmaiService {
         return khuyenmaiRP.UpdateTT(id);
     }
 
+    @Override
+    public boolean DeleteCtKm(khuyenmai ma) {
+        return khuyenmaiRP.DeleteCTKM(ma);
+    }
+
 }

@@ -5,6 +5,7 @@
 package com.poly.it17326.group6.repository;
 
 import com.poly.it17326.group6.config.HibernateConfig;
+import com.poly.it17326.group6.domainmodel.DonViTinh;
 import com.poly.it17326.group6.domainmodel.KhoiLuong;
 import java.util.List;
 import javax.persistence.Query;
@@ -13,20 +14,19 @@ import org.hibernate.Transaction;
 
 /**
  *
- * @author OS
+ * @author 123
  */
-public class AnhRepository {
-
-    public List<KhoiLuong> getAll() {
+public class DonViTinhRepository {
+     public List<DonViTinh> getAll() {
         Session session = HibernateConfig.getFACTORY().openSession();
-        String sql = "from KhoiLuong a order by cast (SUBSTRING(a.ma,3,3) as int) desc";
+        String sql = "from DonViTinh a order by cast (SUBSTRING(a.ma,3,3) as int) desc";
         Query query = session.createQuery(sql);
-        List<KhoiLuong> listA = (List<KhoiLuong>) query.getResultList();
+        List<DonViTinh> listA = (List<DonViTinh>) query.getResultList();
         session.close();
         return listA;
     }
 
-    public boolean addAnh(KhoiLuong anh) {
+    public boolean addAnh(DonViTinh anh) {
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.save(anh);
@@ -43,7 +43,7 @@ public class AnhRepository {
 
         try (Session session = HibernateConfig.getFACTORY().openSession();) {
             tran = session.beginTransaction();
-            String sql = "update KhoiLuong set Ten = : Ten where Ma = :Ma";
+            String sql = "update DonViTinh set Ten = : Ten where Ma = :Ma";
             Query query = session.createQuery(sql);
             query.setParameter("Ten", Ten);
             query.setParameter("Ma", Ma);
@@ -61,7 +61,7 @@ public class AnhRepository {
 
         try (Session session = HibernateConfig.getFACTORY().openSession();) {
             tran = session.beginTransaction();
-            String sql = "  delete from KhoiLuong where Ma = :Ma";
+            String sql = "  delete from DonViTinh where Ma = :Ma";
             Query query = session.createQuery(sql);
             query.setParameter("Ma", ma);
             query.executeUpdate();
@@ -71,11 +71,5 @@ public class AnhRepository {
             e.printStackTrace();
         }
         return false;
-
-    }
-
-//    public static void main(String[] args) {
-//        AnhRepository anhRepository = new AnhRepository();
-//        anhRepository.updateAnh("A001", "Canxiproo_950g");
-//    }
+}
 }

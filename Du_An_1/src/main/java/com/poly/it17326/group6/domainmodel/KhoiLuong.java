@@ -5,16 +5,14 @@
 package com.poly.it17326.group6.domainmodel;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,41 +20,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ *
+ * @author 123
+ */
 @Entity
-@Table(name = "ctsp_khuyenmai")
+@Table(name = "KhoiLuong")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class ChitietKhuyenMai implements Serializable {
-
+public class KhoiLuong implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "Id")
     private int id;
-
-    @Column(name = "create_at")
-    private Date create_at;
-
-    @Column(name = "don_gia")
-    private BigDecimal donGia;
-
-    @Column(name = "don_gia_con_lai")
-    private BigDecimal donGiaConLai;
-    
-     @Column(name = "ma_sp")
-    private String maSP;
-     
-      @Column(name = "ten_sp")
-    private String tenSP;
-
-    @ManyToOne()
-    @JoinColumn(name = "id_ctsp")
-    private ChiTietSP chiTietSP;
-
-    @ManyToOne()
-    @JoinColumn(name = "id_km")
-    private khuyenmai khuyenmai;
+    @Column(name = "Ma")
+    private String ma;
+    @Column(name = "Ten")
+    private String ten;
+    @OneToMany(mappedBy = "khoiLuong", cascade = CascadeType.ALL)
+    public List<ChiTietSP> chiTietSPs;
 
 }

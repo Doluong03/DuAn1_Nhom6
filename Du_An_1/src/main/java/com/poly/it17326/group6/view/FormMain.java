@@ -446,7 +446,7 @@ public class FormMain extends javax.swing.JFrame {
         lbFormNhanVien.setForeground(Color.GREEN);
         tpBanHang.removeAll();
         pnBanHang = new FormNhanVien();
-        tpBanHang.addTab("Quản lý sản phẩm", pnBanHang);
+        tpBanHang.addTab("Quản lý tài khoản", pnBanHang);
         tpBanHang.setSelectedComponent(pnBanHang);
         webcam.close();
     }//GEN-LAST:event_lbFormNhanVienMouseClicked
@@ -510,6 +510,8 @@ public class FormMain extends javax.swing.JFrame {
         lbFormSanPham.setForeground(Color.WHITE);
         lbFormNhanVien.setForeground(Color.white);
         lbFormThongke.setForeground(Color.WHITE);
+        lbFormHD.setForeground(Color.WHITE);
+        lbFormKH.setForeground(Color.WHITE);
         lbFormKhuyenMai1.setForeground(Color.GREEN);
         tpBanHang.removeAll();
         pnBanHang = new FormKhuyenMai();

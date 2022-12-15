@@ -34,6 +34,8 @@ public interface khuyenmaiService {
     public boolean AddCTKM(ChitietKhuyenMai ctkm);
 
     public boolean UpdateTT(int id);
+    
+     public boolean DeleteCtKm(khuyenmai ma);
 
     
 }

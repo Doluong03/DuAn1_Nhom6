@@ -4,8 +4,9 @@
  */
 package com.poly.it17326.group6.service.impl;
 
-import com.poly.it17326.group6.domainmodel.Anh;
+import com.poly.it17326.group6.domainmodel.KhoiLuong;
 import com.poly.it17326.group6.domainmodel.ChiTietSP;
+import com.poly.it17326.group6.domainmodel.DonViTinh;
 import com.poly.it17326.group6.domainmodel.LoaiSP;
 import com.poly.it17326.group6.domainmodel.NSX;
 import com.poly.it17326.group6.domainmodel.SanPham;
@@ -26,7 +27,7 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
 
     @Override
     public List<ChiTietSpResponse> getAll() {
-        List<ChiTietSP> listCt = chiTietSpRepository.getAll();
+        List<ChiTietSP> listCt = chiTietSpRepository.getAll_2();
         List<ChiTietSpResponse> listCTR = new ArrayList<>();
         for (ChiTietSP chiTietSP : listCt) {
             ChiTietSpResponse ctr = new ChiTietSpResponse(chiTietSP);
@@ -82,7 +83,7 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
     }
 
     @Override
-    public List<SanPham> getListSp() {
+    public List<DonViTinh> getListSp() {
         return chiTietSpRepository.getListSP();
     }
 
@@ -91,9 +92,9 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
         ctsp.setId(0);
         int check = 0;
         ChiTietSP ct = new ChiTietSP();
-        for (SanPham sanPham : chiTietSpRepository.getListSP()) {
+        for (DonViTinh sanPham : chiTietSpRepository.getListSP()) {
             if (sanPham.getTen().equals(ctsp.getTen())) {
-                ct.setSanPham(sanPham);
+                ct.setDonViTinh(sanPham);
             }
         }
         for (LoaiSP lsp : chiTietSpRepository.getListLSP()) {
@@ -106,9 +107,9 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
                 ct.setNsx(nsx);
             }
         }
-        for (Anh a : chiTietSpRepository.getListAnh()) {
+        for (KhoiLuong a : chiTietSpRepository.getListAnh()) {
             if (a.getTen().equals(ctsp.getAnh())) {
-                ct.setAnh(a);
+                ct.setKhoiLuong(a);
             }
         }
         ct.setHsd(ctsp.getHsd());
@@ -131,16 +132,16 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
     }
 
     @Override
-    public List<Anh> getListA() {
+    public List<KhoiLuong> getListA() {
         return chiTietSpRepository.getListAnh();
     }
 
     @Override
     public ChiTietSpResponse_2 updateSP(ChiTietSpResponse_2 ctsp) {
         ChiTietSP ct = new ChiTietSP();
-        for (SanPham sanPham : chiTietSpRepository.getListSP()) {
+        for (DonViTinh sanPham : chiTietSpRepository.getListSP()) {
             if (sanPham.getTen().equals(ctsp.getTen())) {
-                ct.setSanPham(sanPham);
+                ct.setDonViTinh(sanPham);
             }
         }
         for (LoaiSP lsp : chiTietSpRepository.getListLSP()) {
@@ -153,9 +154,9 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
                 ct.setNsx(nsx);
             }
         }
-        for (Anh a : chiTietSpRepository.getListAnh()) {
+        for (KhoiLuong a : chiTietSpRepository.getListAnh()) {
             if (a.getTen().equals(ctsp.getAnh())) {
-                ct.setAnh(a);
+                ct.setKhoiLuong(a);
             }
         }
         ct.setHsd(ctsp.getHsd());

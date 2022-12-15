@@ -4,19 +4,20 @@
  */
 package com.poly.it17326.group6.service;
 
+import com.poly.it17326.group6.domainmodel.DonViTinh;
 import com.poly.it17326.group6.domainmodel.KhoiLuong;
 import com.poly.it17326.group6.response.KhoiLuongResponse;
 import java.util.List;
 
 /**
  *
- * @author OS
+ * @author 123
  */
-public interface AnhService {
+public interface DonViTinhService {
 
-    public List<KhoiLuongResponse> getAll();
+    public List<DonViTinh> getAll();
 
-    public boolean Them(KhoiLuong anh);
+    public boolean Them(DonViTinh anh);
 
     public boolean xoa(String Ma);
 
